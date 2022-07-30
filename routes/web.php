@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,13 +21,17 @@ Route::get('/', function () {
 Route::view('/', 'pages.dashboard')->name('dashboard');
 Route::view('/pegawai', 'pages.employee.index')->name('employee.index');
 Route::view('/penilai', 'pages.penilai.index')->name('penilai.index');
-Route::view('/jabatan', 'pages.position.index')->name('position.index');
+
+Route::get('/jabatan', [JabatanController::class, 'index'])->name('position.index');
+Route::delete('/jabatan/{id}', [JabatanController::class, 'destroy'])->name('position.destroy');
+
 Route::view('/kegiatan', 'pages.activity.index')->name('activity.index');
-Route::view('/jabatan', 'pages.job.index')->name('job.index');
 Route::view('/kriteria', 'pages.criteria.index')->name('criteria.index');
 Route::view('/struktur-penilai', 'pages.struktur.index')->name('struktur.index');
+
 Route::get('/manajemen-user', [UserController::class, 'index'])->name('user.index');
-Route::delete('/manajemen-user', [UserController::class, 'destroy'])->name('user.destroy');
+Route::delete('/manajemen-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
 Route::view('/laporan', 'pages.laporan.index')->name('laporan.index');
 
 Auth::routes([

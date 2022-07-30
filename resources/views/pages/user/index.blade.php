@@ -6,7 +6,6 @@
 @endpush
 
 @section('content')
-@include('pages.user.modal-delete')
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -36,7 +35,11 @@
                                     <td>{{ $user->role }}</td>
                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                                        <button onclick="console.log({{ $user->id }})" class="btn btn-danger"><i class="fa fa-trash" data-toggle="modal" data-target="#modalDelete"></i></button>
+                                        <form method="post" action="{{ route('user.destroy',['id' => $user->id]) }}" style="display: inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger"><i class="fa fa-trash" data-toggle="modal" data-target="#modalDelete"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Position;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class JabatanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all(); 
-        return view('pages.user.index', compact('users'));
+        $data = Position::all();
+        return view('pages.position.index', compact('data'));
     }
 
     /**
@@ -82,10 +82,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        // cari user berdasarkan id
-        $user = User::find($id);
-        // hapus user
-        $user->delete();
+        $jabatan = Position::find($id);
+        $jabatan->delete();
 
         return back();
     }

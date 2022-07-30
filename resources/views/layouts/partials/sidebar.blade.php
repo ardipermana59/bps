@@ -34,7 +34,7 @@
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ route('employee.index') }}"><i class="fa fa-circle"></i> <span>Pegawai</span></a></li>
             <li class="active"><a href="{{ route('penilai.index') }}"><i class="fa fa-circle"></i> <span>Penilai</span></a></li>
-            <li class="active"><a href="{{ route('job.index') }}"><i class="fa fa-circle"></i> <span>Jabatan</span></a></li>
+            <li class="active"><a href="{{ route('position.index') }}"><i class="fa fa-circle"></i> <span>Jabatan</span></a></li>
             <li class="active"><a href="{{ route('activity.index') }}"><i class="fa fa-circle"></i> <span>Kegiatan</span></a></li>
             <li class="active"><a href="{{ route('criteria.index') }}"><i class="fa fa-circle"></i> <span>Kriteria</span></a></li>
             <li class="active"><a href="{{ route('struktur.index') }}"><i class="fa fa-circle"></i> <span>Struktur</span></a></li>

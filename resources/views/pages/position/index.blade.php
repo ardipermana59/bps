@@ -8,7 +8,6 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12">
-            @include('pages.position.add')
 
             <div class="box">
                 <div class="box-header">
@@ -19,38 +18,34 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
-                                <th>CSS grade</th>
+                                <th>No</th>
+                                <th>Nama Jabatan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @for ($i = 0; $i < 30; $i++)
+                            @forelse ($data as $i => $jabatan)
                                 <tr>
-                                    <td>Trident</td>
-                                    <td>Internet
-                                        Explorer 4.0
+                                    <td>{{ ++$i }}</td>
+                                    <td>{{ $jabatan->name }}</td>
                                     </td>
-                                    <td>Win 95+</td>
-                                    <td> 4</td>
-                                    <td>X</td>
-                                    <td style="width: 10%" class="text-center">
+                                    <td>
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        <form method="post" action="{{ route('position.destroy',['id' => $jabatan->id]) }}" style="display: inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger"><i class="fa fa-trash" data-toggle="modal" data-target="#modalDelete"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
-                            @endfor
+                            @empty
+                            @endforelse
+
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
-                                <th>CSS grade</th>
+                                <th>No</th>
+                                <th>Nama Jabatan</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>
