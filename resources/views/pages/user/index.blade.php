@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@push('title')
+Manajemen User
+@endpush
+
+@push('breadcrumb')
+Manajemen User
+@endpush
+
 @push('style')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">

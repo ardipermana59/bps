@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Starter</title>
+    <title>{{ config('app.name') }}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="{{ asset('assets/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
@@ -26,6 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         .swal2-popup {
             font-size: 1.6rem !important;
         }
+        
     </style>
 
     @stack('style')
@@ -63,42 +64,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <img src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class="user-image"
                                     alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <span class="hidden-xs">{{ auth()->user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
                                     <img src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class="img-circle"
                                         alt="User Image">
-
                                     <p>
-                                        Alexander Pierce - Web Developer
-                                        <small>Member since Nov. 2012</small>
+                                        {{ auth()->user()->name }}
                                     </p>
-                                </li>
-                                <!-- Menu Body -->
-                                <li class="user-body">
-                                    <div class="row">
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Followers</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Sales</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Friends</a>
-                                        </div>
-                                    </div>
-                                    <!-- /.row -->
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                                    </div>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                        <button type="submit" class="btn btn-default btn-block">Sign Out</button>
+                                    </form>
                                 </li>
                             </ul>
                         </li>
@@ -115,11 +97,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Page Header
+                    @stack('title','Page Header')
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                    <li class="active">Here</li>
+                    <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                    <li class="active">@stack('breadcrumb','Here')</li>
                 </ol>
             </section>
 
@@ -135,12 +117,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Main Footer -->
         <footer class="main-footer">
-            <!-- To the right -->
-            <div class="pull-right hidden-xs">
-                Anything you want
-            </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2022 <a href="{{ route('dashboard') }}">Company</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; 2022 <a href="{{ route('dashboard') }}">Universitas Mandiri Fakultas Teknik</a>.</strong> All rights reserved.
         </footer>
 
         <!-- Add the sidebar's background. This div must be placed

@@ -15,25 +15,29 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
+
+
+Route::middleware(['auth','isAdmin:admin'])->group(function () {
+    Route::view('/', 'pages.dashboard')->name('dashboard');
+    Route::view('/pegawai', 'pages.employee.index')->name('employee.index');
+    Route::view('/penilai', 'pages.penilai.index')->name('penilai.index');
+
+    Route::get('/jabatan', [JabatanController::class, 'index'])->name('position.index');
+    Route::delete('/jabatan/{id}', [JabatanController::class, 'destroy'])->name('position.destroy');
+
+    Route::view('/kegiatan', 'pages.activity.index')->name('activity.index');
+    Route::view('/kriteria', 'pages.criteria.index')->name('criteria.index');
+    Route::view('/struktur-penilai', 'pages.struktur.index')->name('struktur.index');
+
+    Route::get('/manajemen-user', [UserController::class, 'index'])->name('user.index');
+    Route::delete('/manajemen-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+    Route::view('/laporan', 'pages.laporan.index')->name('laporan.index');
 });
-Route::view('/', 'pages.dashboard')->name('dashboard');
-Route::view('/pegawai', 'pages.employee.index')->name('employee.index');
-Route::view('/penilai', 'pages.penilai.index')->name('penilai.index');
 
-Route::get('/jabatan', [JabatanController::class, 'index'])->name('position.index');
-Route::delete('/jabatan/{id}', [JabatanController::class, 'destroy'])->name('position.destroy');
-
-Route::view('/kegiatan', 'pages.activity.index')->name('activity.index');
-Route::view('/kriteria', 'pages.criteria.index')->name('criteria.index');
-Route::view('/struktur-penilai', 'pages.struktur.index')->name('struktur.index');
-
-Route::get('/manajemen-user', [UserController::class, 'index'])->name('user.index');
-Route::delete('/manajemen-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-
-Route::view('/laporan', 'pages.laporan.index')->name('laporan.index');
-
+Route::middleware(['auth','isAdmin:staff'])->group(function () {
+   // route buat staff
+});
 Auth::routes([
     'register' => false,
     'reset' => false,
