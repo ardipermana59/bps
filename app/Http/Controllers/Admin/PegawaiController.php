@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
@@ -14,7 +15,8 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        //
+        $pegawai = Employee::all();
+        return view('pages.employee.index', compact('pegawai'));
     }
 
     /**
@@ -80,6 +82,9 @@ class PegawaiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = employee::find($id);
+        $employee ->delete();
+
+        return back();
     }
 }

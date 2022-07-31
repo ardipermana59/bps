@@ -3306,7 +3306,10 @@ table.text-center th {
 .login-page,
 .register-page {
   height: auto;
-  background: #d2d6de;
+  background-color: #FF3CAC;
+background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+
+
 }
 .login-box,
 .register-box {

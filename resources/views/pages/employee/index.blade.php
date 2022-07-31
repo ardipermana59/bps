@@ -26,22 +26,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $faker = Faker\Factory::create();
-                            @endphp
-                            @for ($i = 1; $i < 30; $i++)
+                                @forelse ($pegawai as $i => $employee)
                                 <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>{{ rand(10000000,99999999)}}</td>
-                                    <td>{{ $faker->name}}</td>
-                                    <td>{{ $faker->jobTitle}}</td>
-                                    <td>{{ $faker->email}}</td>
+                                    <td>{{ ++$i }}</td>
+                                    <td>{{ $employee->nip}}</td>
+                                    <td>{{ $employee->name}}</td>
+                                    <td>{{ $employee->name}}</td>
                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
-                            @endfor
+                            @empty
+                            @endforelse
                         </tbody>
                         <tfoot>
                             <tr>

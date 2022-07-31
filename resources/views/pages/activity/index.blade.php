@@ -23,23 +23,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $faker = Faker\Factory::create();
-                            @endphp
-                            @for ($i = 1; $i < 30; $i++)
+                           @forelse ($kegiatan as $i => $Activity)
                                 <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>{{ $faker->words(5,true)}}</td>
-                                    <td style="width: 10%" class="text-center">
+                                    <td>{{ ++$i }}</td>
+                                    <td>{{ $Activity->name }}</td>
+                                     <td>
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        <form method="post" action="{{ route('position.destroy',['id' => $Activity->id]) }}" style="display: inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger"><i class="fa fa-trash" data-toggle="modal" data-target="#modalDelete"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
-                            @endfor
+                            @empty
+                            @endforelse
+
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th style="width: 1%" class="text-center">No</th>
                                 <th class="text-center">Nama Kegiatan</th>
                                 <th class="text-center">Aksi</th>
                             </tr>

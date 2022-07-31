@@ -82,9 +82,16 @@ class JabatanController extends Controller
      */
     public function destroy($id)
     {
+        // cari user berdasarkan id
         $jabatan = Position::find($id);
-        $jabatan->delete();
 
-        return back();
+        // cek user ada tidak
+        if($jabatan == null) {
+            return redirect()->back()->with('error', 'jabatan tidak ditemukan');
+        }
+
+        // // hapus user
+        $user->delete();
+        return redirect()->route('position.index')->with('success', 'kegiatan berhasil dihapus');
     }
 }

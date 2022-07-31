@@ -14,7 +14,7 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/Ionicons/css/ionicons.min.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('assets/dist/css/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/AdminLTE.css') }}">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/iCheck/square/blue.css') }}">
 
@@ -26,11 +26,13 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <img src="{{ asset('assets/img/logo.png') }}" alt="logo">
+            <p align="center">
+            <img src="{{ asset('assets/img/bps.png') }}" alt="logo" width="100%">
+            </p>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg"> CKP Badan Pusat Statistika Subang</p>
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf

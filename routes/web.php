@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\KegiatanController;
+use App\Http\Controllers\Admin\PenilaiController;
+use App\Http\Controllers\Admin\PegawaiController;
 use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -19,14 +22,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth','isAdmin:admin'])->group(function () {
     Route::view('/', 'pages.dashboard')->name('dashboard');
-    Route::view('/pegawai', 'pages.employee.index')->name('employee.index');
-    Route::view('/penilai', 'pages.penilai.index')->name('penilai.index');
+
+    Route::get('/pegawai', [PegawaiController::class, 'index'])->name('employee.index');
+    Route::delete('/pegawai', [PegawaiController::class, 'destroy'])->name('employee.destroy');
+
+
+    Route::get('/penilai', [PenilaiController::class, 'index'])->name('penilai.index');
+    Route::delete('/penilai', [PenilaiController::class, 'destroy'])->name('penilai.destroy');
 
     Route::get('/jabatan', [JabatanController::class, 'index'])->name('position.index');
     Route::delete('/jabatan/{id}', [JabatanController::class, 'destroy'])->name('position.destroy');
 
-    Route::view('/kegiatan', 'pages.activity.index')->name('activity.index');
+    Route::get('/kegiatan', [KegiatanController::class, 'index'])->name('activity.index');
+    Route::delete('/kegiatan/{id}', [KegiatanController::class, 'destroy'])->name('activity.destroy');
+
     Route::view('/kriteria', 'pages.criteria.index')->name('criteria.index');
+
     Route::view('/struktur-penilai', 'pages.struktur.index')->name('struktur.index');
 
     Route::get('/manajemen-user', [UserController::class, 'index'])->name('user.index');

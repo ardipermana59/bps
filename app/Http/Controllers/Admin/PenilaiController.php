@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Penilai;
 use Illuminate\Http\Request;
 
 class PenilaiController extends Controller
@@ -14,7 +15,8 @@ class PenilaiController extends Controller
      */
     public function index()
     {
-        //
+        $data = Penilai::all();
+        return view('pages.penilai.index', compact('data'));
     }
 
     /**
@@ -80,6 +82,9 @@ class PenilaiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $penilai = Penilai::find($id);
+        $penilai->delete();
+
+        return back();
     }
 }

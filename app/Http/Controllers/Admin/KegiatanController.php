@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 
 class KegiatanController extends Controller
@@ -14,7 +15,8 @@ class KegiatanController extends Controller
      */
     public function index()
     {
-        //
+        $kegiatan = Activity::all();
+        return view('pages.Activity.index', compact('kegiatan'));
     }
 
     /**
@@ -80,6 +82,18 @@ class KegiatanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //cari kegiatan berdasarkan id
+        $kegiatan = Activity::find($id);
+
+        //cek kegiatan ada tidak
+        if($Activity == null){
+            return redirect()->back()->with('error','Kegiatan tidak ditemukan');
+        }
+
+        // //hapus kegiatan
+        $kegiatan->delete();
+        return redirect()->route('activity.index')->with('success','kegiatan berhasil dihapus');
+
+        return back();
     }
 }

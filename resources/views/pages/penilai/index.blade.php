@@ -10,7 +10,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Data Pegawai</h3>
+                    <h3 class="box-title">Data Penilaian</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -24,20 +24,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $faker = Faker\Factory::create();
-                            @endphp
-                            @for ($i = 1; $i < 30; $i++)
+                           @forelse ($data as $i => $penilai)
                                 <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>{{ rand(100000000,99999999999)}}</td>
-                                    <td>{{ $faker->name}}</td>
+                                    <td>{{ ++$i }}</td>
+                                    <td>{{ $employee->nip}}</td>
+                                    <td>{{ $user->name}}</td>
                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
-                            @endfor
+                            @empty
+                            @endforelse
                         </tbody>
                         <tfoot>
                             <tr>
