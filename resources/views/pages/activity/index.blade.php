@@ -1,5 +1,11 @@
 @extends('layouts.app')
+@push('title')
+    Data Kegiatan
+@endpush
 
+@push('breadcrumb')
+    Data Kegiatan
+@endpush
 @push('style')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
@@ -25,7 +31,7 @@
                         <tbody>
                            @forelse ($kegiatan as $i => $Activity)
                                 <tr>
-                                    <td>{{ ++$i }}</td>
+                                    <td class="text-center">{{ ++$i }}</td>
                                     <td>{{ $Activity->name }}</td>
                                      <td style="width: 10%">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>

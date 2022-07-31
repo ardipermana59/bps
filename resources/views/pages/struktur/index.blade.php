@@ -1,5 +1,11 @@
 @extends('layouts.app')
+@push('title')
+    Data Penilai Pegawai
+@endpush
 
+@push('breadcrumb')
+    Data Penilai Pegawai
+@endpush
 @push('style')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
@@ -10,7 +16,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Data Pegawai</h3>
+                    <h3 class="box-title">Data Penilai Pegawai</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -18,32 +24,29 @@
                         <thead>
                             <tr>
                                 <th style="width: 1%" class="text-center">No</th>
-                                <th class="text-center">Nama Pegawai</th>
                                 <th class="text-center">Nama Penilai</th>
+                                <th class="text-center">Nama Pegawai</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $faker = Faker\Factory::create();
-                            @endphp
-                            @for ($i = 1; $i < 30; $i++)
+                            @foreach ($data as $i => $item)
                                 <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>{{ $faker->name }}</td>
-                                    <td>{{ $faker->name }}</td>
+                                    <td class="text-center">{{ ++$i }}</td>
+                                    <td>{{ $item->evaluator_name }} ({{ $item->evaluator_position }}) </td>
+                                    <td>{{ $item->employee_name }}</td>
                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
-                            @endfor
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th style="width: 1%" class="text-center">No</th>
-                                <th class="text-center">Nama Pegawai</th>
                                 <th class="text-center">Nama Penilai</th>
+                                <th class="text-center">Nama Pegawai</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </tfoot>

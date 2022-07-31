@@ -29,15 +29,15 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Nama Jabatan</th>
-                                <th>Aksi</th>
+                                <th class="text-center">No</th>
+                                <th class="text-center">Nama Jabatan</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($data as $i => $jabatan)
                                 <tr>
-                                    <td>{{ ++$i }}</td>
+                                    <td class="text-center">{{ ++$i }}</td>
                                     <td>{{ $jabatan->name }}</td>
                                     </td>
                                      <td style="width: 10%" class="text-center">

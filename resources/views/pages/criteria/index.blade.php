@@ -1,5 +1,11 @@
 @extends('layouts.app')
+@push('title')
+    Data Kriteria Penilai
+@endpush
 
+@push('breadcrumb')
+    Data Kriteria Penilai
+@endpush
 
 @push('style')
     <!-- DataTables -->
@@ -26,7 +32,7 @@
                         <tbody>
                            @forelse ($criteria as $i => $item)
                                 <tr>
-                                    <td>{{ ++$i }}</td>
+                                    <td class="text-center">{{ ++$i }}</td>
                                     <td>{{ $item->name}}</td>
                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
