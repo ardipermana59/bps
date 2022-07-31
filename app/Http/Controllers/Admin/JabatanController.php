@@ -91,7 +91,12 @@ class JabatanController extends Controller
         }
 
         // // hapus user
+<<<<<<< HEAD
         $user->delete();
         return redirect()->route('position.index')->with('success', 'jabatan berhasil dihapus');
+=======
+        $jabatan->delete();
+        return redirect()->route('position.index')->with('success', 'Jabatan berhasil dihapus');
+>>>>>>> cb3e2653d8f97a34e6575e0f47d6500f74a6b509
     }
 }

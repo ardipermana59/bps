@@ -86,7 +86,7 @@ class KegiatanController extends Controller
         $kegiatan = Activity::find($id);
 
         //cek kegiatan ada tidak
-        if($Activity == null){
+        if($kegiatan == null){
             return redirect()->back()->with('error','Kegiatan tidak ditemukan');
         }
 
