@@ -16,7 +16,7 @@ class KegiatanController extends Controller
     public function index()
     {
         $kegiatan = Activity::all();
-        return view('pages.Activity.index', compact('kegiatan'));
+        return view('pages.admin.activity.index', compact('kegiatan'));
     }
 
     /**

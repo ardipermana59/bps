@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PegawaiController;
 use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\PenilaiPegawaiController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Penilai\NilaiPegawaiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -35,7 +36,7 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
 
     // Halaman Jabatan
     Route::get('/jabatan', [JabatanController::class, 'index'])->name('position.index');
-    Route::get('/jabatan/{id}', [JabatanController::class, 'edit'])->name('position.edit');
+    Route::get('/jabatan/edit/{id}', [JabatanController::class, 'edit'])->name('position.edit');
     Route::put('/jabatan/{id}', [JabatanController::class, 'update'])->name('position.update');
     Route::get('/jabatan/tambah-jabatan', [JabatanController::class, 'create'])->name('position.create');
     Route::post('/jabatan', [JabatanController::class, 'store'])->name('position.store');
@@ -59,8 +60,10 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
     Route::delete('/manajemen-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
     // Halaman Laporan
-    Route::view('/laporan', 'pages.laporan.index')->name('laporan.index');
+    Route::view('/laporan', 'pages.admin.laporan.index')->name('laporan.index');
 });
+
+Route::get('/nilai/pegawai', [NilaiPegawaiController::class, 'index'])->name('nilai.index');
 
 Route::middleware(['auth','isAdmin:staff'])->group(function () {
    // route buat staff
@@ -70,5 +73,3 @@ Auth::routes([
     'reset' => false,
     'confirm' => false,
 ]);
-
-// Route::get('/home', 'HomeController@index')->name('home');

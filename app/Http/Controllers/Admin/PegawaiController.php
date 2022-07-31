@@ -19,7 +19,7 @@ class PegawaiController extends Controller
             ->join('users', 'employees.user_id', '=', 'users.id')
             ->select('employees.*', 'positions.name as position', 'users.email as email')
             ->get();
-        return view('pages.employee.index', compact('pegawai'));
+        return view('pages.admin.employee.index', compact('pegawai'));
     }
 
     /**

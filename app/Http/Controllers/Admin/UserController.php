@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all(); 
-        return view('pages.user.index', compact('users'));
+        return view('pages.admin.user.index', compact('users'));
     }
 
     /**
@@ -30,7 +30,7 @@ class UserController extends Controller
     public function create()
     {
         $jabatan = Position::all();
-        return view('pages.user.add', compact('jabatan'));
+        return view('pages.admin.user.add', compact('jabatan'));
     }
 
     /**

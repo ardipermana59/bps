@@ -16,7 +16,7 @@ class JabatanController extends Controller
     public function index()
     {
         $data = Position::all();
-        return view('pages.position.index', compact('data'));
+        return view('pages.admin.position.index', compact('data'));
     }
 
     /**
@@ -26,8 +26,7 @@ class JabatanController extends Controller
      */
     public function create()
     {
-        
-        return view('pages.position.add');
+        return view('pages.admin.position.add');
     }
 
     /**
@@ -71,7 +70,7 @@ class JabatanController extends Controller
     public function edit($id)
     {
         $data = Position::find($id);
-        return view('pages.position.edit', compact('data'));
+        return view('pages.admin.position.edit', compact('data'));
     }
 
     /**

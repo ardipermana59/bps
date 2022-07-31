@@ -19,7 +19,7 @@ class PenilaiController extends Controller
             ->join('positions', 'employees.position_id', '=', 'positions.id')
             ->select('employees.*', 'evaluators.id as id_evaluator','positions.name as position')
             ->get();
-        return view('pages.penilai.index', compact('data'));
+        return view('pages.admin.penilai.index', compact('data'));
     }
 
     /**

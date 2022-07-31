@@ -22,7 +22,7 @@ class PenilaiPegawaiController extends Controller
         ->select('employees.full_name as employee_name', 'positions.name as evaluator_position', 'penilai.full_name as evaluator_name')
         ->orderBy('evaluator_name')
         ->get();
-        return view('pages.struktur.index', compact('data'));
+        return view('pages.admin.struktur.index', compact('data'));
     }
 
     /**

@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @push('title')
-    Data Pegawai
+    Data Kriteria Penilai
 @endpush
 
 @push('breadcrumb')
-    Data Pegawai
+    Data Kriteria Penilai
 @endpush
+
 @push('style')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
@@ -20,31 +21,19 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="criteriaTable" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th style="width: 1%" class="text-center">No</th>
-                                <th class="text-center">NIP</th>
-                                <th class="text-center">Nama Lengkap</th>
-                                <th class="text-center">Jabatan</th>
-                                <th class="text-center">Email</th>
-                                <th class="text-center">Jenis Kelamin</th>
-                                <th class="text-center">No Hp</th>
-                                <th class="text-center">Alamat</th>
+                                <th class="text-center">Nama Kriteria</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($pegawai as $i => $employee)
+                           @forelse ($criteria as $item)
                                 <tr>
-                                    <td class="text-center">{{ ++$i }}</td>
-                                    <td class="text-center">{{ $employee->nip ?? '-' }}</td>
-                                    <td>{{ $employee->full_name ?? '-' }}</td>
-                                    <td class="text-center">{{ $employee->position ?? '-' }}</td>
-                                    <td class="text-center">{{ $employee->email ?? '-' }}</td>
-                                    <td class="text-center">{{ $employee->gender ?? '-' }}</td>
-                                    <td class="text-center">{{ $employee->hp ?? '-' }}</td>
-                                    <td class="text-center">{{ $employee->address ?? '-' }}</td>
+                                    <td class="text-center"></td>
+                                    <td>{{ $item->name}}</td>
                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
@@ -56,13 +45,7 @@
                         <tfoot>
                             <tr>
                                 <th style="width: 1%" class="text-center">No</th>
-                                <th class="text-center">NIP</th>
-                                <th class="text-center">Nama Lengkap</th>
-                                <th class="text-center">Jabatan</th>
-                                <th class="text-center">Email</th>
-                                <th class="text-center">Jenis Kelamin</th>
-                                <th class="text-center">No Hp</th>
-                                <th class="text-center">Alamat</th>
+                                <th class="text-center">Nama Kriteria</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </tfoot>
@@ -83,15 +66,17 @@
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(function() {
-            $('#example1').DataTable()
-            $('#example2').DataTable({
-                'paging': true,
-                'lengthChange': false,
-                'searching': false,
-                'ordering': true,
-                'info': true,
-                'autoWidth': false
-            })
+          var t =  $('#criteriaTable').DataTable()
+           // create dynamic row number for table
+           t.on('order.dt search.dt', function() {
+                let i = 1;
+                t.cells(null, 0, {
+                    search: 'applied',
+                    order: 'applied'
+                }).every(function(cell) {
+                    this.data(i++);
+                });
+            }).draw();
         })
     </script>
 @endpush

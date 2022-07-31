@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @push('title')
-    Data Penilai Pegawai
+    Data Laporan
 @endpush
 
 @push('breadcrumb')
-    Data Penilai Pegawai
+    Data Laporan
 @endpush
 @push('style')
     <!-- DataTables -->
@@ -16,37 +16,50 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Data Penilai Pegawai</h3>
+                    <h3 class="box-title">Data Pegawai</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="laporanTable" class="table table-bordered table-striped">
                         <thead>
+                            <tr class="align-middle">
+                                <th style="width: 1%; text-align: center; justify-content: center;align-content: center;margin: auto"
+                                    class="text-center" rowspan="2">No</th>
+                                <th class="text-center" rowspan="2">Nama Penilai</th>
+                                <th class="text-center" rowspan="2">Nama Pegawai</th>
+                                <th class="text-center" rowspan="2">Nama Kegiatan</th>
+                                <th class="text-center" colspan="4">Kriteria</th>
+                                <th class="text-center" rowspan="2">Hasil</th>
+                            </tr>
                             <tr>
-                                <th style="width: 1%" class="text-center">No</th>
-                                <th class="text-center">Nama Penilai</th>
-                                <th class="text-center">Nama Pegawai</th>
                                 <th class="text-center">Aksi</th>
+                                <th class="text-center">Aksi</th>
+                                <th class="text-center">Aksi</th>
+                                <th class="text-center">Aksi</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $i => $item)
+                            @php
+                                $faker = Faker\Factory::create();
+                            @endphp
+                            @for ($i = 1; $i < 30; $i++)
                                 <tr>
-                                    <td class="text-center">{{ ++$i }}</td>
-                                    <td>{{ $item->evaluator_name }} ({{ $item->evaluator_position }}) </td>
-                                    <td>{{ $item->employee_name }}</td>
+                                    <td></td>
+                                    <td>{{ $faker->jobTitle }}</td>
                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @endfor
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th style="width: 1%" class="text-center">No</th>
                                 <th class="text-center">Nama Penilai</th>
                                 <th class="text-center">Nama Pegawai</th>
+                                <th class="text-center">Nama Kegiatan</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </tfoot>
@@ -67,15 +80,18 @@
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(function() {
-            $('#example1').DataTable()
-            $('#example2').DataTable({
-                'paging': true,
-                'lengthChange': false,
-                'searching': false,
-                'ordering': true,
-                'info': true,
-                'autoWidth': false
-            })
+            var t = $('#laporanTable').DataTable()
+
+            // create dynamic row number for table
+            t.on('order.dt search.dt', function() {
+                let i = 1;
+                t.cells(null, 0, {
+                    search: 'applied',
+                    order: 'applied'
+                }).every(function(cell) {
+                    this.data(i++);
+                });
+            }).draw();
         })
     </script>
 @endpush

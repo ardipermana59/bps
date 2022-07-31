@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Penilai;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class StrukturPenilaiController extends Controller
+class NilaiPegawaiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class StrukturPenilaiController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.penilai.pegawai.index');
     }
 
     /**
