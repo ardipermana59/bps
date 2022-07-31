@@ -16,7 +16,7 @@ class CreatePenilaiPegawaisTable extends Migration
         Schema::create('penilai_pegawais', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('penilai_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('evaluator_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
