@@ -32,6 +32,8 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
     Route::delete('/penilai', [PenilaiController::class, 'destroy'])->name('penilai.destroy');
 
     Route::get('/jabatan', [JabatanController::class, 'index'])->name('position.index');
+    Route::get('/jabatan/tambah-jabatan', [JabatanController::class, 'create'])->name('position.create');
+    Route::post('/jabatan', [JabatanController::class, 'store'])->name('position.store');
     Route::delete('/jabatan/{id}', [JabatanController::class, 'destroy'])->name('position.destroy');
 
     Route::get('/kegiatan', [KegiatanController::class, 'index'])->name('activity.index');

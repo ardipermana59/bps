@@ -1,14 +1,25 @@
 @extends('layouts.app')
 
+@push('title')
+    Jabatan
+@endpush
+
+@push('breadcrumb')
+    Jabatan
+@endpush
+
 @push('style')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 @endpush
 
 @section('content')
+    @include('pages.position.modal-delete')
     <div class="row">
         <div class="col-xs-12">
-
+            <a href="{{ route('position.create') }}"> 
+                <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Jabatan</button>
+            </a>
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Jabatan Kepegawaian</h3>
@@ -29,12 +40,13 @@
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $jabatan->name }}</td>
                                     </td>
-                                    <td>
+                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                                        <form method="post" action="{{ route('position.destroy',['id' => $jabatan->id]) }}" style="display: inline">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger"><i class="fa fa-trash" data-toggle="modal" data-target="#modalDelete"></i></button>
+
+                                        <button onclick="confirmDelete('{{ route('position.destroy', ['id' => $jabatan->id]) }}')"
+                                            class="btn btn-danger" data-toggle="modal" data-target="#modalDelete"><i
+                                                class="fa fa-trash"
+                                                data-target="#modalDelete"></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -44,9 +56,9 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>No</th>
-                                <th>Nama Jabatan</th>
-                                <th>Aksi</th>
+                                <th style="width: 1%" class="text-center">No</th>
+                                <th class="text-center">Nama jabatan</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -62,19 +74,17 @@
 @endsection
 
 @push('scripts')
+    <script>
+        function confirmDelete(url) {
+            $('#deleteForm').attr('action', url)
+        }
+    </script>
+    
     <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(function() {
             $('#example1').DataTable()
-            $('#example2').DataTable({
-                'paging': true,
-                'lengthChange': false,
-                'searching': false,
-                'ordering': true,
-                'info': true,
-                'autoWidth': false
-            })
         })
     </script>
 @endpush

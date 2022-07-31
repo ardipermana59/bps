@@ -26,7 +26,8 @@ class JabatanController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('pages.position.add');
     }
 
     /**
@@ -37,7 +38,17 @@ class JabatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+        ]);
+
+       $position = Position::create([
+            'name' => $request->name,
+
+        ]);
+       
+        return redirect()->route('position.index')->with('success', 'Data berhasil ditambahkan');
+        
     }
 
     /**
@@ -88,15 +99,12 @@ class JabatanController extends Controller
         // cek user ada tidak
         if($jabatan == null) {
             return redirect()->back()->with('error', 'jabatan tidak ditemukan');
+
+            return back();
         }
 
         // // hapus user
-<<<<<<< HEAD
-        $user->delete();
-        return redirect()->route('position.index')->with('success', 'jabatan berhasil dihapus');
-=======
         $jabatan->delete();
         return redirect()->route('position.index')->with('success', 'Jabatan berhasil dihapus');
->>>>>>> cb3e2653d8f97a34e6575e0f47d6500f74a6b509
     }
 }
