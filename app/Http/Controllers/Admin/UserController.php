@@ -84,9 +84,14 @@ class UserController extends Controller
     {
         // cari user berdasarkan id
         $user = User::find($id);
-        // hapus user
-        $user->delete();
 
-        return back();
+        // cek user ada tidak
+        if($user == null) {
+            return redirect()->back()->with('error', 'User tidak ditemukan');
+        }
+
+        // // hapus user
+        $user->delete();
+        return redirect()->route('user.index')->with('success', 'User berhasil dihapus');
     }
 }

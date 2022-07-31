@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @push('title')
-Manajemen User
+    Manajemen User
 @endpush
 
 @push('breadcrumb')
-Manajemen User
+    Manajemen User
 @endpush
 
 @push('style')
@@ -14,6 +14,7 @@ Manajemen User
 @endpush
 
 @section('content')
+    @include('pages.user.modal-delete')
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -39,15 +40,14 @@ Manajemen User
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->username }}</td>
-                                    <td>{{ ($user->status == 'active') ? 'Aktif' : 'Tidak Aktif' }}</td>
+                                    <td>{{ $user->status == 'active' ? 'Aktif' : 'Tidak Aktif' }}</td>
                                     <td>{{ $user->role }}</td>
                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                                        <form method="post" action="{{ route('user.destroy',['id' => $user->id]) }}" style="display: inline">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger"><i class="fa fa-trash" data-toggle="modal" data-target="#modalDelete"></i></button>
-                                        </form>
+
+                                        <button onclick="confirmDelete()" class="btn btn-danger" data-toggle="modal"
+                                            data-target="#modalDelete"><i class="fa fa-trash" data-toggle="modal"
+                                                data-target="#modalDelete"></i></button>
                                     </td>
                                 </tr>
                             @empty
@@ -77,6 +77,12 @@ Manajemen User
 @endsection
 
 @push('scripts')
+    <script>
+        function confirmDelete(url) {
+            $('#deleteForm').attr('action', url)
+        }
+    </script>
+
     <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
