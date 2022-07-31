@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @push('style')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
@@ -23,19 +24,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $faker = Faker\Factory::create();
-                            @endphp
-                            @for ($i = 1; $i < 30; $i++)
+                           @forelse ($kriteria as $i => $criteria)
                                 <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>{{ $faker->words(5,true)}}</td>
+                                    <td>{{ ++$i }}</td>
+                                    <td>{{ $criteria->Nama Kriteria}}</td>
                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
-                            @endfor
+                            @empty
+                            @endforelse
                         </tbody>
                         <tfoot>
                             <tr>

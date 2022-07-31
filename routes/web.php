@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\KriteriaController;
 use App\Http\Controllers\Admin\KegiatanController;
 use App\Http\Controllers\Admin\PenilaiController;
 use App\Http\Controllers\Admin\PegawaiController;
@@ -36,7 +37,8 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
     Route::get('/kegiatan', [KegiatanController::class, 'index'])->name('activity.index');
     Route::delete('/kegiatan/{id}', [KegiatanController::class, 'destroy'])->name('activity.destroy');
 
-    Route::view('/kriteria', 'pages.criteria.index')->name('criteria.index');
+    Route::get('/kriteria', [KriteriaController::class, 'index'])->name('criteria.index');
+    Route::delete('/kriteria/{id}', [KriteriaController::class, 'destroy'])->name('criteria.destroy');
 
     Route::view('/struktur-penilai', 'pages.struktur.index')->name('struktur.index');
 

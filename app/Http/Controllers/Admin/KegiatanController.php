@@ -92,7 +92,7 @@ class KegiatanController extends Controller
 
         // //hapus kegiatan
         $kegiatan->delete();
-        return redirect()->route('activity.index')->with('success','kegiatan berhasil dihapus');
+        return redirect()->route('Activity.index')->with('success','kegiatan berhasil dihapus');
 
         return back();
     }
