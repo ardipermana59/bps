@@ -22,6 +22,16 @@ class ActivitySeeder extends Seeder
                 'name' => 'Fotokopi Document',
                 'description' => 'Fotokopi 50',
                 'satuan' => 'lembar',
+            ], 
+            [
+                'name' => 'Jilid Document',
+                'description' => 'Jilid Document',
+                'satuan' => 'lembar',
+            ],
+            [
+                'name' => 'Input Data Penduduk',
+                'description' => 'Input Data Penduduk',
+                'satuan' => 'lembar',
             ],
         ];
 

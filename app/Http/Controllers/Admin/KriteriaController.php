@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Kriteria;
+use App\Models\Criteria;
 use Illuminate\Http\Request;
 
 class KriteriaController extends Controller
@@ -15,8 +15,8 @@ class KriteriaController extends Controller
      */
     public function index()
     {
-        $kriteria = Kriteria::all();
-        return view('pages.criteria.index', compact('Kriteria'));
+        $criteria = Criteria::all();
+        return view('pages.criteria.index', compact('criteria'));
     }
 
     /**
@@ -83,15 +83,15 @@ class KriteriaController extends Controller
     public function destroy($id)
     {
         // cari kriteria berdasarkan id
-        $criteria = Kriteria::find($id);
+        $criteria = Criteria::find($id);
 
         // cek kriteria ada tidak
-        if($criteria == nul){
-            return redirect()->back()->with('error, Kriteria tidak ditemukan');
+        if($criteria == null){
+            return redirect()->back()->with('error', 'Kriteria tidak ditemukan');
         }
 
         // hapus kriteria
         $criteria->delete();
-        return redirect()->route('Kriteria.index')->with('success', 'Kriteria berhasil dihapus');
+        return redirect()->route('criteria.index')->with('success', 'Kriteria berhasil dihapus');
     }
 }

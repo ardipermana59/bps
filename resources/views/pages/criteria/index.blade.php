@@ -24,10 +24,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                           @forelse ($kriteria as $i => $criteria)
+                           @forelse ($criteria as $i => $item)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td>{{ $criteria->Nama Kriteria}}</td>
+                                    <td>{{ $item->name}}</td>
                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>

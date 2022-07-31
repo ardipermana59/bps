@@ -22,6 +22,9 @@ class CriteriaSeeder extends Seeder
             [
                 'name' => 'Kualitas',
             ],
+            [
+                'name' => 'Waktu',
+            ],
         ];
 
         foreach ($criterias as $criteria) {

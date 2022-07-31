@@ -8,6 +8,6 @@ class PenilaiPegawai extends Model
 {
     protected $fillable = [
         'employee_id',
-        'penilai_id',
+        'evaluator_id',
     ];
 }
