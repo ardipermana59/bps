@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
+use App\Models\Position;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -26,7 +29,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $jabatan = Position::all();
+        return view('pages.user.add', compact('jabatan'));
     }
 
     /**
@@ -36,8 +40,34 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {  
+        $this->validate($request, [
+            'username' => 'required|string|max:255|unique:users',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string',
+            'role' => 'required|string',
+            'jabatan' => 'required|string',
+            'nip' => 'required|string',
+        ]);
+
+       $user = User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'role' => $request->role,
+            'password' => Hash::make($request->password),
+        ]);
+
+        Employee::create([
+            'user_id' => $user->id,
+            'position_id' => $request->jabatan,
+            'nip' => $request->nip,
+            'full_name' => $request->name,
+        ]);
+
+        return redirect()->route('user.index')->with('success', 'Data berhasil ditambahkan');
+        
     }
 
     /**

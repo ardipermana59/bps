@@ -17,6 +17,9 @@
     @include('pages.user.modal-delete')
     <div class="row">
         <div class="col-xs-12">
+            <a href="{{ route('user.create') }}"> 
+                <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah User</button>
+            </a>
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Data User</h3>
@@ -47,7 +50,7 @@
 
                                         <button onclick="confirmDelete('{{ route('user.destroy', ['id' => $user->id]) }}')"
                                             class="btn btn-danger" data-toggle="modal" data-target="#modalDelete"><i
-                                                class="fa fa-trash" data-toggle="modal"
+                                                class="fa fa-trash"
                                                 data-target="#modalDelete"></i></button>
                                     </td>
                                 </tr>
@@ -75,6 +78,7 @@
     </div>
     <!-- /.row -->
     <!-- /.content -->
+    
 @endsection
 
 @push('scripts')
@@ -89,14 +93,6 @@
     <script>
         $(function() {
             $('#example1').DataTable()
-            $('#example2').DataTable({
-                'paging': true,
-                'lengthChange': false,
-                'searching': false,
-                'ordering': true,
-                'info': true,
-                'autoWidth': false
-            })
         })
     </script>
 @endpush

@@ -41,6 +41,8 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
     Route::view('/struktur-penilai', 'pages.struktur.index')->name('struktur.index');
 
     Route::get('/manajemen-user', [UserController::class, 'index'])->name('user.index');
+    Route::get('/manajemen-user/tambah-user', [UserController::class, 'create'])->name('user.create');
+    Route::post('/manajemen-user', [UserController::class, 'store'])->name('user.store');
     Route::delete('/manajemen-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
     Route::view('/laporan', 'pages.laporan.index')->name('laporan.index');

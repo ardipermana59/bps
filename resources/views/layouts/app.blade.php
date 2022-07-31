@@ -25,8 +25,10 @@
         .swal2-popup {
             font-size: 1.6rem !important;
         }
+        .invalid-feedback {
+            color: red !important;
+        }
     </style>
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Styles -->
     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     @stack('style')

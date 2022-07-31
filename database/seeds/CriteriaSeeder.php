@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Criteria;
 use Illuminate\Database\Seeder;
 
 class CriteriaSeeder extends Seeder
@@ -11,6 +12,22 @@ class CriteriaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $criterias = [
+            [
+                'name' => 'Kecepatan',
+            ],
+            [
+                'name' => 'Ketepatan',
+            ],
+            [
+                'name' => 'Kualitas',
+            ],
+        ];
+
+        foreach ($criterias as $criteria) {
+            Criteria::create([
+                'name' => $criteria['name'],
+            ]);
+        }
     }
 }

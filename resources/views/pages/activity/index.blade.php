@@ -27,7 +27,7 @@
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $Activity->name }}</td>
-                                     <td>
+                                     <td style="width: 10%">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
                                         <form method="post" action="{{ route('position.destroy',['id' => $Activity->id]) }}" style="display: inline">
                                             @csrf
@@ -42,6 +42,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th style="width: 1%" class="text-center">No</th>
                                 <th class="text-center">Nama Kegiatan</th>
                                 <th class="text-center">Aksi</th>
                             </tr>

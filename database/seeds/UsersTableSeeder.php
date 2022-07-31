@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class StrukturSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,5 +11,6 @@ class StrukturSeeder extends Seeder
      */
     public function run()
     {
+        
     }
 }
