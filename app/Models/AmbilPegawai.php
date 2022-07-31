@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PenilaiPegawai extends Model
+class AmbilPegawai extends Model
 {
     protected $fillable = [
         'employee_id',
-        'penilai_id',
+        'activity_id',
+        'criteria_id',
+        'target',
+        'nilai',
     ];
 }
