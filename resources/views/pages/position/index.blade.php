@@ -41,7 +41,9 @@
                                     <td>{{ $jabatan->name }}</td>
                                     </td>
                                      <td style="width: 10%" class="text-center">
-                                        <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                                        <a href="{{ route('position.edit', ['id' => $jabatan->id]) }}">
+                                            <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                                        </a>
 
                                         <button onclick="confirmDelete('{{ route('position.destroy', ['id' => $jabatan->id]) }}')"
                                             class="btn btn-danger" data-toggle="modal" data-target="#modalDelete"><i
