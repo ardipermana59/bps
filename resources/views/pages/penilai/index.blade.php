@@ -1,5 +1,11 @@
 @extends('layouts.app')
+@push('title')
+    Data Penilai
+@endpush
 
+@push('breadcrumb')
+    Data Penilai
+@endpush
 @push('style')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
@@ -10,7 +16,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Data Penilaian</h3>
+                    <h3 class="box-title">Data Penilai</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -20,15 +26,17 @@
                                 <th style="width: 1%" class="text-center">No</th>
                                 <th class="text-center">NIP</th>
                                 <th class="text-center">Nama Lengkap</th>
+                                <th class="text-center">Jabatan</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                            @forelse ($data as $i => $penilai)
                                 <tr>
-                                    <td>{{ ++$i }}</td>
-                                    <td>{{ $employee->nip}}</td>
-                                    <td>{{ $user->name}}</td>
+                                    <td class="text-center">{{ ++$i }}</td>
+                                    <td class="text-center">{{ $penilai->nip}}</td>
+                                    <td>{{ $penilai->full_name}}</td>
+                                    <td class="text-center">{{ $penilai->position}}</td>
                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
@@ -42,6 +50,7 @@
                                 <th style="width: 1%" class="text-center">No</th>
                                 <th class="text-center">NIP</th>
                                 <th class="text-center">Nama Lengkap</th>
+                                <th class="text-center">Jabatan</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </tfoot>
