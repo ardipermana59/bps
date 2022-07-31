@@ -45,8 +45,9 @@
                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
 
-                                        <button onclick="confirmDelete()" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#modalDelete"><i class="fa fa-trash" data-toggle="modal"
+                                        <button onclick="confirmDelete('{{ route('user.destroy', ['id' => $user->id]) }}')"
+                                            class="btn btn-danger" data-toggle="modal" data-target="#modalDelete"><i
+                                                class="fa fa-trash" data-toggle="modal"
                                                 data-target="#modalDelete"></i></button>
                                     </td>
                                 </tr>
@@ -82,7 +83,7 @@
             $('#deleteForm').attr('action', url)
         }
     </script>
-
+    
     <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
