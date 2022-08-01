@@ -16,7 +16,7 @@ class JabatanController extends Controller
     public function index()
     {
         $data = Position::all();
-        return view('pages.position.index', compact('data'));
+        return view('pages.admin.position.index', compact('data'));
     }
 
     /**
@@ -26,8 +26,7 @@ class JabatanController extends Controller
      */
     public function create()
     {
-        
-        return view('pages.position.add');
+        return view('pages.admin.position.add');
     }
 
     /**
@@ -70,7 +69,8 @@ class JabatanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Position::find($id);
+        return view('pages.admin.position.edit', compact('data'));
     }
 
     /**
@@ -82,7 +82,20 @@ class JabatanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+        ]);
+
+        $position = Position::find($id);
+
+        if($position == null) {
+            return redirect()->back()->with('error', 'Jabatan tidak ditemukan');
+        }
+
+        $position->name = $request->name;
+        $position->save();
+        
+        return redirect()->route('position.index')->with('success', 'Jabatan berhasil disimpan.');
     }
 
     /**
@@ -99,8 +112,6 @@ class JabatanController extends Controller
         // cek user ada tidak
         if($jabatan == null) {
             return redirect()->back()->with('error', 'jabatan tidak ditemukan');
-
-            return back();
         }
 
         // // hapus user

@@ -50,15 +50,9 @@ class EmployeeSeeder extends Seeder
             ],
         ];
 
-        $positions = ['Ketua BPS','Wakil Ketua','Sekretaris','Bendahara','Anggota'];
+        $nip = 100000001;
+        $faker = Faker\Factory::create('id_ID');
 
-        foreach ($positions as $position) {
-            Position::create([
-                'name' => $position,
-            ]);
-
-        }
-        $faker = Faker\Factory::create();
         // insert data admin dan penilai
         foreach ($users as $user) {
            $user = User::create([
@@ -72,11 +66,11 @@ class EmployeeSeeder extends Seeder
 
             Employee::create([
                 'user_id' => $user->id,
-                'position_id' => rand(1,5),
-                'nip' => rand(100000000,999999999),
+                'position_id' => rand(1, 4),
+                'nip' => $nip,
                 'full_name' => $faker->name,
             ]);
-
+            $nip++;
         }
 
         for ($i = 0; $i < 15; $i++) {
@@ -91,10 +85,11 @@ class EmployeeSeeder extends Seeder
 
             Employee::create([
                 'user_id' => $user->id,
-                'position_id' => rand(1,5),
-                'nip' => rand(100000000,999999999),
+                'position_id' => 4,
+                'nip' => $nip,
                 'full_name' => $faker->name,
             ]);
+            $nip++;
         }
     }
 }

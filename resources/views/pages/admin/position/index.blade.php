@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @push('title')
-    Manajemen User
+    Jabatan
 @endpush
 
 @push('breadcrumb')
-    Manajemen User
+    Jabatan
 @endpush
 
 @push('style')
@@ -14,44 +14,42 @@
 @endpush
 
 @section('content')
-    @include('pages.user.modal-delete')
+    @include('pages.admin.position.modal-delete')
     <div class="row">
         <div class="col-xs-12">
-            <a href="{{ route('user.create') }}"> 
-                <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah User</button>
+            <a href="{{ route('position.create') }}"> 
+                <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Jabatan</button>
             </a>
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Data User</h3>
+                    <h3 class="box-title">Jabatan Kepegawaian</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="positionTable" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th style="width: 1%" class="text-center">No</th>
-                                <th class="text-center">Nama Lengkap</th>
-                                <th class="text-center">Username</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Level</th>
+                                <th class="text-center">No</th>
+                                <th class="text-center">Nama Jabatan</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($users as $i => $user)
+                            @forelse ($data as  $jabatan)
                                 <tr>
-                                    <td>{{ ++$i }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->username }}</td>
-                                    <td>{{ $user->status == 'active' ? 'Aktif' : 'Tidak Aktif' }}</td>
-                                    <td>{{ $user->role }}</td>
-                                    <td style="width: 10%" class="text-center">
-                                        <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                                    <td class="text-center"></td>
+                                    <td>{{ $jabatan->name }}</td>
+                                    </td>
+                                     <td style="width: 10%" class="text-center">
+                                        <a href="{{ route('position.edit', ['id' => $jabatan->id]) }}">
+                                            <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                                        </a>
 
-                                        <button onclick="confirmDelete('{{ route('user.destroy', ['id' => $user->id]) }}')"
+                                        <button onclick="confirmDelete('{{ route('position.destroy', ['id' => $jabatan->id]) }}')"
                                             class="btn btn-danger" data-toggle="modal" data-target="#modalDelete"><i
                                                 class="fa fa-trash"
                                                 data-target="#modalDelete"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty
@@ -61,10 +59,7 @@
                         <tfoot>
                             <tr>
                                 <th style="width: 1%" class="text-center">No</th>
-                                <th class="text-center">Nama Lengkap</th>
-                                <th class="text-center">Username</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Level</th>
+                                <th class="text-center">Nama jabatan</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </tfoot>
@@ -78,7 +73,6 @@
     </div>
     <!-- /.row -->
     <!-- /.content -->
-    
 @endsection
 
 @push('scripts')
@@ -92,7 +86,17 @@
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(function() {
-            $('#example1').DataTable()
+           var t = $('#positionTable').DataTable()
+           // create dynamic row number for table
+           t.on('order.dt search.dt', function() {
+                let i = 1;
+                t.cells(null, 0, {
+                    search: 'applied',
+                    order: 'applied'
+                }).every(function(cell) {
+                    this.data(i++);
+                });
+            }).draw();
         })
     </script>
 @endpush

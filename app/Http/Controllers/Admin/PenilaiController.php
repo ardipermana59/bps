@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Penilai;
+use App\Models\Evaluator;
 use Illuminate\Http\Request;
 
 class PenilaiController extends Controller
@@ -15,8 +15,11 @@ class PenilaiController extends Controller
      */
     public function index()
     {
-        $data = Penilai::all();
-        return view('pages.penilai.index', compact('data'));
+        $data = Evaluator::join('employees', 'employees.id', '=', 'evaluators.employee_id')
+            ->join('positions', 'employees.position_id', '=', 'positions.id')
+            ->select('employees.*', 'evaluators.id as id_evaluator','positions.name as position')
+            ->get();
+        return view('pages.admin.penilai.index', compact('data'));
     }
 
     /**
@@ -82,7 +85,7 @@ class PenilaiController extends Controller
      */
     public function destroy($id)
     {
-        $penilai = Penilai::find($id);
+        $penilai = Evaluator::find($id);
         $penilai->delete();
 
         return back();

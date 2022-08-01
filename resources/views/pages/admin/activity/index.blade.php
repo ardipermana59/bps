@@ -1,6 +1,11 @@
 @extends('layouts.app')
+@push('title')
+    Data Kegiatan
+@endpush
 
-
+@push('breadcrumb')
+    Data Kegiatan
+@endpush
 @push('style')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
@@ -15,31 +20,36 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="activityTable" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th style="width: 1%" class="text-center">No</th>
-                                <th class="text-center">Nama Kriteria</th>
+                                <th class="text-center">Nama Kegiatan</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                           @forelse ($kriteria as $i => $criteria)
+                           @forelse ($kegiatan as $Activity)
                                 <tr>
-                                    <td>{{ ++$i }}</td>
-                                    <td>{{ $criteria->Nama Kriteria}}</td>
-                                    <td style="width: 10%" class="text-center">
+                                    <td class="text-center"></td>
+                                    <td>{{ $Activity->name }}</td>
+                                     <td style="width: 10%">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        <form method="post" action="{{ route('position.destroy',['id' => $Activity->id]) }}" style="display: inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger"><i class="fa fa-trash" data-toggle="modal" data-target="#modalDelete"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty
                             @endforelse
+
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th style="width: 1%" class="text-center">No</th>
-                                <th class="text-center">Nama Kriteria</th>
+                                <th class="text-center">Nama Kegiatan</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </tfoot>
@@ -60,15 +70,17 @@
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(function() {
-            $('#example1').DataTable()
-            $('#example2').DataTable({
-                'paging': true,
-                'lengthChange': false,
-                'searching': false,
-                'ordering': true,
-                'info': true,
-                'autoWidth': false
-            })
+            var t =     $('#activityTable').DataTable()
+           // create dynamic row number for table
+           t.on('order.dt search.dt', function() {
+                let i = 1;
+                t.cells(null, 0, {
+                    search: 'applied',
+                    order: 'applied'
+                }).every(function(cell) {
+                    this.data(i++);
+                });
+            }).draw();
         })
     </script>
 @endpush

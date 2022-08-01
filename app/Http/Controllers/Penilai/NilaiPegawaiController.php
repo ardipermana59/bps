@@ -1,16 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Penilai;
 
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
-use App\Models\criteria;
-=======
-use App\Models\Criteria;
->>>>>>> 6ad18d53b3bf00b67dc2e66fd154d335e9c295df
 use Illuminate\Http\Request;
 
-class KriteriaController extends Controller
+class NilaiPegawaiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,13 +14,7 @@ class KriteriaController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        $kriteria = criteria::all();
-        return view('pages.criteria.index', compact('Kriteria'));
-=======
-        $criteria = Criteria::all();
-        return view('pages.admin.criteria.index', compact('criteria'));
->>>>>>> 6ad18d53b3bf00b67dc2e66fd154d335e9c295df
+        return view('pages.penilai.pegawai.index');
     }
 
     /**
@@ -91,16 +80,6 @@ class KriteriaController extends Controller
      */
     public function destroy($id)
     {
-        // cari kriteria berdasarkan id
-        $criteria = Criteria::find($id);
-
-        // cek kriteria ada tidak
-        if($criteria == null){
-            return redirect()->back()->with('error', 'Kriteria tidak ditemukan');
-        }
-
-        // hapus kriteria
-        $criteria->delete();
-        return redirect()->route('criteria.index')->with('success', 'Kriteria berhasil dihapus');
+        //
     }
 }

@@ -1,5 +1,11 @@
 @extends('layouts.app')
+@push('title')
+    Data Penilai
+@endpush
 
+@push('breadcrumb')
+    Data Penilai
+@endpush
 @push('style')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
@@ -10,40 +16,41 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Data Pegawai</h3>
+                    <h3 class="box-title">Data Penilai</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="penilaiTable" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th style="width: 1%" class="text-center">No</th>
-                                <th class="text-center">Nama Kegiatan</th>
+                                <th class="text-center">NIP</th>
+                                <th class="text-center">Nama Lengkap</th>
+                                <th class="text-center">Jabatan</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                           @forelse ($kegiatan as $i => $Activity)
+                            @forelse ($data as $penilai)
                                 <tr>
-                                    <td>{{ ++$i }}</td>
-                                    <td>{{ $Activity->name }}</td>
-                                     <td style="width: 10%">
+                                    <td class="text-center"></td>
+                                    <td class="text-center">{{ $penilai->nip }}</td>
+                                    <td>{{ $penilai->full_name }}</td>
+                                    <td class="text-center">{{ $penilai->position }}</td>
+                                    <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                                        <form method="post" action="{{ route('position.destroy',['id' => $Activity->id]) }}" style="display: inline">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger"><i class="fa fa-trash" data-toggle="modal" data-target="#modalDelete"></i></button>
-                                        </form>
+                                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                             @empty
                             @endforelse
-
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th style="width: 1%" class="text-center">No</th>
-                                <th class="text-center">Nama Kegiatan</th>
+                                <th class="text-center">NIP</th>
+                                <th class="text-center">Nama Lengkap</th>
+                                <th class="text-center">Jabatan</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </tfoot>
@@ -64,15 +71,17 @@
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(function() {
-            $('#example1').DataTable()
-            $('#example2').DataTable({
-                'paging': true,
-                'lengthChange': false,
-                'searching': false,
-                'ordering': true,
-                'info': true,
-                'autoWidth': false
-            })
+            var t = $('#penilaiTable').DataTable()
+            // create dynamic row number for table
+            t.on('order.dt search.dt', function() {
+                let i = 1;
+                t.cells(null, 0, {
+                    search: 'applied',
+                    order: 'applied'
+                }).every(function(cell) {
+                    this.data(i++);
+                });
+            }).draw();
         })
     </script>
 @endpush

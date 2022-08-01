@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\PenilaiPegawai;
 use Illuminate\Http\Request;
 
-class StrukturPenilaiController extends Controller
+class PenilaiPegawaiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,14 @@ class StrukturPenilaiController extends Controller
      */
     public function index()
     {
-        //
+        $data = PenilaiPegawai::join('employees', 'penilai_pegawais.employee_id', '=', 'employees.id')
+        ->join('evaluators', 'penilai_pegawais.evaluator_id', '=', 'evaluators.id')
+        ->join('employees as penilai', 'evaluators.employee_id', '=', 'penilai.id')
+        ->join('positions', 'positions.id', '=', 'penilai.position_id')
+        ->select('employees.full_name as employee_name', 'positions.name as evaluator_position', 'penilai.full_name as evaluator_name')
+        ->orderBy('evaluator_name')
+        ->get();
+        return view('pages.admin.struktur.index', compact('data'));
     }
 
     /**

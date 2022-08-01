@@ -15,8 +15,11 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawai = Employee::all();
-        return view('pages.employee.index', compact('pegawai'));
+        $pegawai = Employee::join('positions', 'employees.position_id', '=', 'positions.id')
+            ->join('users', 'employees.user_id', '=', 'users.id')
+            ->select('employees.*', 'positions.name as position', 'users.email as email')
+            ->get();
+        return view('pages.admin.employee.index', compact('pegawai'));
     }
 
     /**
@@ -83,7 +86,7 @@ class PegawaiController extends Controller
     public function destroy($id)
     {
         $employee = employee::find($id);
-        $employee ->delete();
+        $employee->delete();
 
         return back();
     }
