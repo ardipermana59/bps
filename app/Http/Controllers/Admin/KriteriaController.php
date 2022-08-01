@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Kriteria;
+use App\Models\criteria;
 use Illuminate\Http\Request;
 
 class KriteriaController extends Controller
@@ -15,7 +15,7 @@ class KriteriaController extends Controller
      */
     public function index()
     {
-        $kriteria = Kriteria::all();
+        $kriteria = criteria::all();
         return view('pages.criteria.index', compact('Kriteria'));
     }
 
