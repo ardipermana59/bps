@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @push('title')
     Data Kegiatan
 @endpush
@@ -12,8 +13,12 @@
 @endpush
 
 @section('content')
+    @include('pages.admin.activity.modal-delete')
     <div class="row">
         <div class="col-xs-12">
+            <a href="{{ route('activity.create') }}"> 
+                <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Kegiatan</button>
+            </a>
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Data Pegawai</h3>
@@ -29,16 +34,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                           @forelse ($kegiatan as $Activity)
+                           @forelse ($data as $kegiatan)
                                 <tr>
                                     <td class="text-center"></td>
-                                    <td>{{ $Activity->name }}</td>
+                                    <td>{{ $kegiatan->name }}</td>
                                      <td style="width: 10%">
-                                        <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                                        <form method="post" action="{{ route('position.destroy',['id' => $Activity->id]) }}" style="display: inline">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger"><i class="fa fa-trash" data-toggle="modal" data-target="#modalDelete"></i></button>
+                                         <a href="{{ route('activity.edit', ['id' => $kegiatan->id]) }}">
+                                            <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                                        </a>
+
+                                        <button onclick="confirmDelete('{{ route('activity.destroy', ['id' => $kegiatan->id]) }}')"
+                                            class="btn btn-danger" data-toggle="modal" data-target="#modalDelete"><i
+                                                class="fa fa-trash"
+                                                data-target="#modalDelete"></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -66,11 +74,17 @@
 @endsection
 
 @push('scripts')
+    <script>
+        function confirmDelete(url) {
+            $('#deleteForm').attr('action', url)
+        }
+    </script>
+    
     <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(function() {
-            var t =     $('#activityTable').DataTable()
+           var t = $('#activityTable').DataTable()
            // create dynamic row number for table
            t.on('order.dt search.dt', function() {
                 let i = 1;
