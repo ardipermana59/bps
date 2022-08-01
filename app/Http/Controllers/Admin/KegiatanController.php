@@ -15,8 +15,8 @@ class KegiatanController extends Controller
      */
     public function index()
     {
-        $kegiatan = Activity::all();
-        return view('pages.admin.activity.index', compact('kegiatan'));
+        $data = Activity::all();
+        return view('pages.admin.activity.index', compact('data'));
     }
 
     /**
@@ -26,7 +26,7 @@ class KegiatanController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.activity.add');
     }
 
     /**
@@ -37,7 +37,16 @@ class KegiatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $this->validate($request, [
+            'name' => 'required|string|max:255',
+        ]);
+
+       $activity = Activity::create([
+            'name' => $request->name,
+        ]);
+       
+        return redirect()->route('activity.index')->with('success', 'Data berhasil ditambahkan');
+        
     }
 
     /**
@@ -59,8 +68,10 @@ class KegiatanController extends Controller
      */
     public function edit($id)
     {
-        //
+       $data = Activity::find($id);
+        return view('pages.admin.activity.edit', compact('data'));
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -69,9 +80,22 @@ class KegiatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+        ]);
+
+        $activity = Activity::find($id);
+
+        if($activity == null) {
+            return redirect()->back()->with('error', 'kegiatan tidak ditemukan');
+        }
+
+        $activity->name = $request->name;
+        $activity->save();
+        
+        return redirect()->route('activity.index')->with('success', 'Kegiatan berhasil disimpan.');
     }
 
     /**
@@ -82,18 +106,16 @@ class KegiatanController extends Controller
      */
     public function destroy($id)
     {
-        //cari kegiatan berdasarkan id
+        // cari user berdasarkan id
         $kegiatan = Activity::find($id);
 
-        //cek kegiatan ada tidak
-        if($kegiatan == null){
-            return redirect()->back()->with('error','Kegiatan tidak ditemukan');
+        // cek user ada tidak
+        if($kegiatan == null) {
+            return redirect()->back()->with('error', 'kegiatan tidak ditemukan');
         }
 
-        // //hapus kegiatan
+        // // hapus user
         $kegiatan->delete();
-        return redirect()->route('Activity.index')->with('success','kegiatan berhasil dihapus');
-
-        return back();
+        return redirect()->route('activity.index')->with('success', 'kegiatan berhasil dihapus');
     }
 }

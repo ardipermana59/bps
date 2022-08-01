@@ -44,6 +44,10 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
 
     // Halaman Kegiatan
     Route::get('/kegiatan', [KegiatanController::class, 'index'])->name('activity.index');
+    Route::get('/kegiatan/edit/{id}', [KegiatanController::class, 'edit'])->name('activity.edit');
+    Route::put('/kegiatan/{id}', [KegiatanController::class, 'update'])->name('activity.update');
+    Route::get('/kegiatan/tambah-kegiatan', [KegiatanController::class, 'create'])->name('activity.create');
+    Route::post('/kegiatan', [KegiatanController::class, 'store'])->name('activity.store');
     Route::delete('/kegiatan/{id}', [KegiatanController::class, 'destroy'])->name('activity.destroy');
 
     // Halaman Kriteria Penilaian

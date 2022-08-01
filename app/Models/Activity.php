@@ -7,11 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Activity extends Model
 {
     protected $fillable = [
-        'employee_id',
-        'activity',
-        'description',
-        'target',
-        'satuan',
+        'name',
     ];
 
     public function employee()
