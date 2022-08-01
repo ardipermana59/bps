@@ -8,8 +8,6 @@ class Activity extends Model
 {
     protected $fillable = [
         'name',
-        'description',
-        'satuan',
     ];
 
     public function employee()

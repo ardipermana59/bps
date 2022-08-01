@@ -43,7 +43,6 @@ class KegiatanController extends Controller
 
        $activity = Activity::create([
             'name' => $request->name,
-
         ]);
        
         return redirect()->route('activity.index')->with('success', 'Data berhasil ditambahkan');
