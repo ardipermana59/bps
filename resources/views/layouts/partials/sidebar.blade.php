@@ -40,7 +40,7 @@
                         href="{{ route('penilai.index') }}"><i class="fa fa-circle"></i>
                         <span>Penilai</span></a></li>
                 <li class="{{ request()->url() == route('position.index') ? 'active' : '' }}"><a
-                        href="{{ route('position.index') }}"><i class="fa fa-circle"></i>
+                        href="{{ route('position.index') }}"><i class="fa-solid fa-user-doctor"></i>
                         <span>Jabatan</span></a></li>
                 <li class="{{ request()->url() == route('activity.index') ? 'active' : '' }}"><a
                         href="{{ route('activity.index') }}"><i class="fa fa-circle"></i>
@@ -49,7 +49,7 @@
                         href="{{ route('criteria.index') }}"><i class="fa fa-circle"></i>
                         <span>Kriteria</span></a></li>
                 <li class="{{ request()->url() == route('struktur.index') ? 'active' : '' }}"><a
-                        href="{{ route('struktur.index') }}"><i class="fa fa-circle"></i>
+                        href="{{ route('struktur.index') }}"><i class="fa-solid fa-people-line"></i>
                         <span>Struktur</span></a></li>
                 <li class="{{ request()->url() == route('user.index') ? 'active' : '' }}"><a
                         href="{{ route('user.index') }}"><i class="fa fa-circle"></i> <span>Manajemen

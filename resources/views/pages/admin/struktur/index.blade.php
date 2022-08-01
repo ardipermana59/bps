@@ -1,13 +1,23 @@
 @extends('layouts.app')
+@push('title')
+    Data Strukur Penilai & Pegawai
+@endpush
 
+@push('breadcrumb')
+    Data Strukur Penilai & Pegawai
+@endpush
 @push('style')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 @endpush
 
 @section('content')
+    @include('pages.admin.struktur.modal-delete')
     <div class="row">
         <div class="col-xs-12">
+            <a href="{{ route('struktur.create') }}"> 
+                <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Struktur</button>
+            </a>
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Data Penilai Pegawai</h3>
@@ -30,14 +40,13 @@
                                     <td>{{ $item->evaluator_name }} ({{ $item->evaluator_position }}) </td>
                                     <td>{{ $item->employee_name }}</td>
                                     <td style="width: 10%" class="text-center">
-                                        <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                                        <form method="post" action="{{ route('stuktur.destroy', ['id' => $item->id]) }}"
-                                            style="display: inline">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger"><i class="fa fa-trash" data-toggle="modal"
-                                                    data-target="#modalDelete"></i></button>
-                                            <form>
+                                        <a href="{{ route('struktur.edit', ['id' => $item->id]) }}">
+                                            <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                                        </a>
+                                        <button
+                                            onclick="confirmDelete('{{ route('struktur.destroy', ['id' => $item->id]) }}')"
+                                            class="btn btn-danger"><i class="fa fa-trash" data-toggle="modal"
+                                                data-target="#modalDelete"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -63,6 +72,11 @@
 @endsection
 
 @push('scripts')
+    <script>
+        function confirmDelete(url) {
+            $('#deleteForm').attr('action', url)
+        }
+    </script>
     <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>

@@ -12,7 +12,8 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="{{ asset('assets/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('assets/bower_components/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bower_components/font-awesome/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bower_components/font-awesome/css/solid.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/Ionicons/css/ionicons.min.css') }}">
     <!-- Theme style -->
@@ -22,6 +23,9 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <style>
+        .main-header .sidebar-toggle:before{
+            content: '';
+        }
         .swal2-popup {
             font-size: 1.6rem !important;
         }
@@ -30,7 +34,6 @@
         }
     </style>
     <!-- Styles -->
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     @stack('style')
 </head>
 
@@ -52,7 +55,7 @@
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa-solid fa-bars"></i>
                 </a>
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">

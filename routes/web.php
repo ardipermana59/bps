@@ -56,11 +56,11 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
 
     // Halaman struktur penilai pegawai
     Route::get('/struktur-penilai', [PenilaiPegawaiController::class, 'index'])->name('struktur.index');
-    Route::get('/stuktur/edit/{id}', [PenilaiPegawaiController::class, 'edit'])->name('stuktur.edit');
-    Route::put('/stuktur/{id}', [PenilaiPegawaiController::class, 'update'])->name('stuktur.update');
-    Route::get('/stuktur/tambah-stuktur', [PenilaiPegawaiController::class, 'create'])->name('stuktur.create');
-    Route::post('/stuktur', [PenilaiPegawaiController::class, 'store'])->name('stuktur.store');
-    Route::delete('/stuktur/{id}', [PenilaiPegawaiController::class, 'destroy'])->name('stuktur.destroy');
+    Route::get('/struktur/edit/{id}', [PenilaiPegawaiController::class, 'edit'])->name('struktur.edit');
+    Route::put('/struktur/{id}', [PenilaiPegawaiController::class, 'update'])->name('struktur.update');
+    Route::get('/struktur/tambah-struktur', [PenilaiPegawaiController::class, 'create'])->name('struktur.create');
+    Route::post('/struktur', [PenilaiPegawaiController::class, 'store'])->name('struktur.store');
+    Route::delete('/struktur/{id}', [PenilaiPegawaiController::class, 'destroy'])->name('struktur.destroy');
 
     // Halaman Manajemen User
     Route::get('/manajemen-user', [UserController::class, 'index'])->name('user.index');
