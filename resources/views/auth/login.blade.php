@@ -21,13 +21,19 @@
     <!-- Google Font -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
+
+        <style>
+            .invalid-feedback {
+            color: red !important;
+        }
+        </style>
+    </head>
 
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <p align="center">
-            <img src="{{ asset('assets/img/bps.png') }}" alt="logo" width="100%">
+            <p>
+            <img src="{{ asset('assets/img/bps.png') }}" alt="logo" width="50%">
             </p>
         </div>
         <!-- /.login-logo -->
@@ -42,7 +48,7 @@
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     @error('username')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                           {{ $message }}
                         </span>
                     @enderror
                 </div>
@@ -54,7 +60,7 @@
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     @error('password')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                           {{ $message }}
                         </span>
                     @enderror
                 </div>
@@ -63,7 +69,7 @@
                         <div class="checkbox icheck">
                             <label>
                                 <input type="checkbox" name="remember" id="remember"
-                                    {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                    {{ old('remember') ? 'checked' : '' }}> Ingat saya
                             </label>
                         </div>
                     </div>

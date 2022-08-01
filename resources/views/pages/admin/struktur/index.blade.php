@@ -24,21 +24,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($data as $i => $item)
+                            @foreach ($data as $item)
                                 <tr>
-                                    <td class={{ ++$i }}></td>
+                                    <td class="text-center"></td>
                                     <td>{{ $item->evaluator_name }} ({{ $item->evaluator_position }}) </td>
                                     <td>{{ $item->employee_name }}</td>
                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                                        <from method="post" action="{{route('stuktur.destroy',['id' => $stuktur->id]) }}" style="display: inline">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger"><i class="fa fa-trash" data-toggle="modal" data-target="#modalDelete"></i></button>
-                                        <from>    
+                                        <form method="post" action="{{ route('stuktur.destroy', ['id' => $item->id]) }}"
+                                            style="display: inline">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger"><i class="fa fa-trash" data-toggle="modal"
+                                                    data-target="#modalDelete"></i></button>
+                                            <form>
                                     </td>
                                 </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>

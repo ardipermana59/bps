@@ -19,7 +19,7 @@ class PenilaiPegawaiController extends Controller
         ->join('evaluators', 'penilai_pegawais.evaluator_id', '=', 'evaluators.id')
         ->join('employees as penilai', 'evaluators.employee_id', '=', 'penilai.id')
         ->join('positions', 'positions.id', '=', 'penilai.position_id')
-        ->select('employees.full_name as employee_name', 'positions.name as evaluator_position', 'penilai.full_name as evaluator_name')
+        ->select('penilai_pegawais.id','employees.full_name as employee_name', 'positions.name as evaluator_position', 'penilai.full_name as evaluator_name')
         ->orderBy('evaluator_name')
         ->get();
         return view('pages.admin.struktur.index', compact('data'));
