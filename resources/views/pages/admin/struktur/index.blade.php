@@ -1,11 +1,5 @@
 @extends('layouts.app')
-@push('title')
-    Data Penilai Pegawai
-@endpush
 
-@push('breadcrumb')
-    Data Penilai Pegawai
-@endpush
 @push('style')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
@@ -30,17 +24,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $item)
+                            @forelse ($data as $i => $item)
                                 <tr>
-                                    <td class="text-center"></td>
+                                    <td class={{ ++$i }}></td>
                                     <td>{{ $item->evaluator_name }} ({{ $item->evaluator_position }}) </td>
                                     <td>{{ $item->employee_name }}</td>
                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        <from method="post" action="{{route('stuktur.destroy',['id' => $stuktur->id]) }}" style="display: inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-danger"><i class="fa fa-trash" data-toggle="modal" data-target="#modalDelete"></i></button>
+                                        <from>    
                                     </td>
                                 </tr>
-                            @endforeach
+                            @endforelse
                         </tbody>
                         <tfoot>
                             <tr>

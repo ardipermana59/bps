@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\KegiatanController;
 use App\Http\Controllers\Admin\PenilaiController;
 use App\Http\Controllers\Admin\PegawaiController;
 use App\Http\Controllers\Admin\JabatanController;
-use App\Http\Controllers\Admin\PenilaiPegawaiController;
+use App\Http\Controllers\Admin\StrukturPenilaiController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Penilai\NilaiPegawaiController;
 use Illuminate\Support\Facades\Auth;
@@ -51,7 +51,12 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
     Route::delete('/kriteria/{id}', [KriteriaController::class, 'destroy'])->name('criteria.destroy');
 
     // Halaman struktur penilai pegawai
-    Route::get('/struktur-penilai', [PenilaiPegawaiController::class, 'index'])->name('struktur.index');
+    Route::get('/struktur-penilai', [StrukturPenilaiController::class, 'index'])->name('struktur.index');
+    Route::get('/stuktur/edit/{id}', [StrukturPenilaiController::class, 'edit'])->name('stuktur.edit');
+    Route::put('/stuktur/{id}', [StrukturPenilaiController::class, 'update'])->name('stuktur.update');
+    Route::get('/stuktur/tambah-stuktur', [StrukturPenilaiController::class, 'create'])->name('stuktur.create');
+    Route::post('/stuktur', [StrukturPenilaiController::class, 'store'])->name('stuktur.store');
+    Route::delete('/stuktur/{id}', [StrukturPenilaiController::class, 'destroy'])->name('stuktur.destroy');
 
     // Halaman Manajemen User
     Route::get('/manajemen-user', [UserController::class, 'index'])->name('user.index');
