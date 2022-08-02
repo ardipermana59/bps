@@ -15,8 +15,8 @@ class KriteriaController extends Controller
      */
     public function index()
     {
-        $criteria = Criteria::all();
-        return view('pages.admin.criteria.index', compact('criteria'));
+        $data = Criteria::all();
+        return view('pages.admin.criteria.index', compact('data'));
     }
 
     /**
@@ -26,7 +26,7 @@ class KriteriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.criteria.add');
     }
 
     /**
@@ -37,7 +37,7 @@ class KriteriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      //
     }
 
     /**
@@ -59,7 +59,8 @@ class KriteriaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Criteria::find($id);
+        return view('pages.admin.criteria.edit', compact('data'));
     }
 
     /**
@@ -71,7 +72,20 @@ class KriteriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+        ]);
+
+        $criteria = Criteria::find($id);
+
+        if($criteria == null) {
+            return redirect()->back()->with('error', 'Kriteria tidak ditemukan');
+        }
+
+        $criteria->name = $request->name;
+        $criteria->save();
+        
+        return redirect()->route('criteria.index')->with('success', 'Kriteria berhasil disimpan.');
     }
 
     /**
@@ -82,16 +96,6 @@ class KriteriaController extends Controller
      */
     public function destroy($id)
     {
-        // cari kriteria berdasarkan id
-        $criteria = Criteria::find($id);
-
-        // cek kriteria ada tidak
-        if($criteria == null){
-            return redirect()->back()->with('error', 'Kriteria tidak ditemukan');
-        }
-
-        // hapus kriteria
-        $criteria->delete();
-        return redirect()->route('criteria.index')->with('success', 'Kriteria berhasil dihapus');
+        //
     }
 }

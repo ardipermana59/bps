@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Evaluator extends Model
 {
     protected $fillable = [
-        'employee_id',
+        'nip',
+        'employee_name',
+        'position-name',
+
 ];
 }

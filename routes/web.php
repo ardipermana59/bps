@@ -32,7 +32,11 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
 
     // Halaman Penilai
     Route::get('/penilai', [PenilaiController::class, 'index'])->name('penilai.index');
-    Route::delete('/penilai', [PenilaiController::class, 'destroy'])->name('penilai.destroy');
+    Route::get('/penilai/edit/{id}', [PenilaiController::class, 'edit'])->name('penilai.edit');
+    Route::put('/penilai/{id}', [PenilaiController::class, 'update'])->name('penilai.update');
+    Route::get('/penilai/tambah-kegiatan', [PenilaiController::class, 'create'])->name('penilai.create');
+    Route::post('/penilai', [PenilaiController::class, 'store'])->name('penilai.store');
+    Route::delete('/penilai/{id}', [PenilaiController::class, 'destroy'])->name('penilai.destroy');
 
     // Halaman Jabatan
     Route::get('/jabatan', [JabatanController::class, 'index'])->name('position.index');
@@ -52,6 +56,8 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
 
     // Halaman Kriteria Penilaian
     Route::get('/kriteria', [KriteriaController::class, 'index'])->name('criteria.index');
+    Route::get('/kriteria/edit/{id}', [KriteriaController::class, 'edit'])->name('criteria.edit');
+    Route::post('/kriteria', [KriteriaController::class, 'store'])->name('criteria.store');
     Route::delete('/kriteria/{id}', [KriteriaController::class, 'destroy'])->name('criteria.destroy');
 
     // Halaman struktur penilai pegawai

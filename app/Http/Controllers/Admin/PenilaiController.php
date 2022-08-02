@@ -29,7 +29,7 @@ class PenilaiController extends Controller
      */
     public function create()
     {
-        //
+       return view('pages.admin.penilai.add');
     }
 
     /**
@@ -40,7 +40,16 @@ class PenilaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+        ]);
+
+    //    $activity = Activity::create([
+    //         'name' => $request->name,
+    //     ]);
+       
+        return redirect()->route('penilai.index')->with('success', 'Data berhasil ditambahkan');
+        
     }
 
     /**
@@ -62,7 +71,8 @@ class PenilaiController extends Controller
      */
     public function edit($id)
     {
-        //
+       $data = Evaluator::find($id);
+        return view('pages.admin.penilai.edit', compact('data'));
     }
 
     /**
@@ -74,7 +84,20 @@ class PenilaiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+        ]);
+
+        $penilai = Evaluator::find($id);
+
+        if($penilai == null) {
+            return redirect()->back()->with('error', 'kegiatan tidak ditemukan');
+        }
+
+        $penilai->name = $request->name;
+        $penilai->save();
+        
+        return redirect()->route('activity.index')->with('success', 'Kegiatan berhasil disimpan.');
     }
 
     /**
@@ -85,9 +108,16 @@ class PenilaiController extends Controller
      */
     public function destroy($id)
     {
+        // cari user berdasarkan id
         $penilai = Evaluator::find($id);
-        $penilai->delete();
 
-        return back();
+        // cek user ada tidak
+        if($penilai == null) {
+            return redirect()->back()->with('error', 'penilai tidak ditemukan');
+        }
+
+        // // hapus user
+        $penilai->delete();
+        return redirect()->route('penilai.index')->with('success', 'penilai berhasil dihapus');
     }
 }

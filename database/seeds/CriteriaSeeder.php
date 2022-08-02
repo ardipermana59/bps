@@ -14,16 +14,16 @@ class CriteriaSeeder extends Seeder
     {
         $criterias = [
             [
-                'name' => 'Kecepatan',
+                'name' => 'Target dan Realisasi',
             ],
             [
-                'name' => 'Ketepatan',
+                'name' => 'Kerjasama',
+            ],
+            [
+                'name' => 'Ketepatan Waktu',
             ],
             [
                 'name' => 'Kualitas',
-            ],
-            [
-                'name' => 'Waktu',
             ],
         ];
 
