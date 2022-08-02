@@ -44,11 +44,9 @@
                                     <td>{{ $penilai->full_name }}</td>
                                     <td class="text-center">{{ $penilai->position }}</td>
                                     <td style="width: 10%" class="text-center">
-                                        <a href="{{ route('penilai.edit', ['id' => $penilai->id]) }}">
-                                            <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                                        </a>
+                               
 
-                                        <button onclick="confirmDelete('{{ route('penilai.destroy', ['id' => $penilai->id]) }}')"
+                                        <button onclick="confirmDelete('{{ route('penilai.destroy', ['id' => $penilai->id_evaluator]) }}')"
                                             class="btn btn-danger" data-toggle="modal" data-target="#modalDelete"><i
                                                 class="fa fa-trash"
                                                 data-target="#modalDelete"></i></button>
@@ -81,7 +79,7 @@
 @push('scripts')
      <script>
         function confirmDelete(url) {
-            $('#deleteForm').attr('penilai', url)
+            $('#deleteForm').attr('action', url)
         }
     </script>
     

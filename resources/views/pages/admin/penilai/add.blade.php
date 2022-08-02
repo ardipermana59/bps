@@ -23,13 +23,18 @@
                 <form role="form" action="{{ route('penilai.store') }}" method="post">
                     @csrf
                     <div class="box-body">
-                        <div class="form-group">
+                    <div class="form-group">
                             <label for="name">Nama Penilai</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                value="{{ old('name') }}" id="name" name="name" placeholder="Nama Penilai">
-                            @error('name')
+                            <select class="form-control select2" name="penilai" style="width: 100%;">
+                                <option value="">Pilih Penilai</option>
+                                @foreach ($employees as $employee)
+                                    <option value="{{ $employee->id }}" {{ old('penilai') ? 'selected' : '' }}>
+                                        {{ $employee->full_name }} - ({{ $employee->position }})</option>
+                                @endforeach
+                            </select>
+                            @error('penilai')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    {{ $message }}
                                 </span>
                             @enderror
                         </div>

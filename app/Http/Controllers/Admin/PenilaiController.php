@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
 use App\Models\Evaluator;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,10 @@ class PenilaiController extends Controller
      */
     public function create()
     {
-       return view('pages.admin.penilai.add');
+        $employees= Employee::join('positions', 'employees.position_id', '=', 'positions.id')
+        ->select('employees.*', 'positions.name as position')
+        ->get();
+        return view('pages.admin.penilai.add', compact('employees'));
     }
 
     /**
@@ -41,12 +45,12 @@ class PenilaiController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:255',
+            'penilai' => 'required|exists:employees,id',
         ]);
 
-    //    $activity = Activity::create([
-    //         'name' => $request->name,
-    //     ]);
+       $activity = Evaluator::create([
+            'employee_id' => $request->penilai,
+        ]);
        
         return redirect()->route('penilai.index')->with('success', 'Data berhasil ditambahkan');
         
