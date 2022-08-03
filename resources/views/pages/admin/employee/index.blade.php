@@ -12,6 +12,8 @@
 @endpush
 
 @section('content')
+    @include('layouts.modals.modal-delete')
+
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -83,8 +85,8 @@
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(function() {
-           var t = $('#employeeTable').DataTable()
-           // create dynamic row number for table
+            var t = $('#employeeTable').DataTable()
+            // create dynamic row number for table
             t.on('order.dt search.dt', function() {
                 let i = 1;
                 t.cells(null, 0, {

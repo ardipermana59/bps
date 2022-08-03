@@ -1,14 +1,14 @@
 <!-- Modal -->
 <div class="modal fade" id="modalDelete">
     <div class="modal-dialog" style="width: 500px !important">
-        <form id="deleteForm" method="post"  style="display: inline">
+        <form id="deleteForm" method="post" style="display: inline">
             @csrf
             @method('delete')
             <div class="modal-content">
                 <!-- header-->
                 <div class="modal-header">
                     <button class="close" data-dismiss="modal"><span>&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Hapus Struktur</h4>
+                    <h4 class="modal-title" id="myModalLabel">Hapus Data</h4>
                 </div>
                 <!--body-->
                 <div class="modal-body">

@@ -14,10 +14,11 @@
 @endpush
 
 @section('content')
-    @include('pages.admin.position.modal-delete')
+    @include('layouts.modals.modal-delete')
+
     <div class="row">
         <div class="col-xs-12">
-            <a href="{{ route('position.create') }}"> 
+            <a href="{{ route('position.create') }}">
                 <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Jabatan</button>
             </a>
             <div class="box">
@@ -40,15 +41,15 @@
                                     <td class="text-center"></td>
                                     <td>{{ $jabatan->name }}</td>
                                     </td>
-                                     <td style="width: 10%" class="text-center">
+                                    <td style="width: 10%" class="text-center">
                                         <a href="{{ route('position.edit', ['id' => $jabatan->id]) }}">
                                             <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
                                         </a>
 
-                                        <button onclick="confirmDelete('{{ route('position.destroy', ['id' => $jabatan->id]) }}')"
+                                        <button
+                                            onclick="confirmDelete('{{ route('position.destroy', ['id' => $jabatan->id]) }}')"
                                             class="btn btn-danger" data-toggle="modal" data-target="#modalDelete"><i
-                                                class="fa fa-trash"
-                                                data-target="#modalDelete"></i></button>
+                                                class="fa fa-trash" data-target="#modalDelete"></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -81,14 +82,14 @@
             $('#deleteForm').attr('action', url)
         }
     </script>
-    
+
     <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(function() {
-           var t = $('#positionTable').DataTable()
-           // create dynamic row number for table
-           t.on('order.dt search.dt', function() {
+            var t = $('#positionTable').DataTable()
+            // create dynamic row number for table
+            t.on('order.dt search.dt', function() {
                 let i = 1;
                 t.cells(null, 0, {
                     search: 'applied',

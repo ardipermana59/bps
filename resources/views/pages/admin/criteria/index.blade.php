@@ -14,12 +14,13 @@
 @endpush
 
 @section('content')
-   @include('pages.admin.criteria.modal-delete')
+    @include('layouts.modals.modal-delete')
+
     <div class="row">
         <div class="col-xs-12">
-             <a href="{{ route('criteria.create') }}"> 
+            <a href="{{ route('criteria.create') }}">
                 <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Kriteria</button>
-             </a>
+            </a>
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Data Kriteria</h3>
@@ -35,19 +36,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                           @forelse ($data as $kriteria)
+                            @forelse ($data as $kriteria)
                                 <tr>
                                     <td class="text-center"></td>
                                     <td>{{ $kriteria->name }}</td>
-                                     <td style="width: 10%">
-                                         <a href="{{ route('criteria.edit', ['id' => $kriteria->id]) }}">
+                                    <td style="width: 10%">
+                                        <a href="{{ route('criteria.edit', ['id' => $kriteria->id]) }}">
                                             <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
                                         </a>
 
-                                        <button onclick="confirmDelete('{{ route('criteria.destroy', ['id' => $kriteria->id]) }}')"
+                                        <button
+                                            onclick="confirmDelete('{{ route('criteria.destroy', ['id' => $kriteria->id]) }}')"
                                             class="btn btn-danger" data-toggle="modal" data-target="#modalDelete"><i
-                                                class="fa fa-trash"
-                                                data-target="#modalDelete"></i></button>
+                                                class="fa fa-trash" data-target="#modalDelete"></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -74,19 +75,19 @@
 @endsection
 
 @push('scripts')
-     <script>
+    <script>
         function confirmDelete(url) {
             $('#deleteForm').attr('action', url)
         }
     </script>
-    
+
     <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(function() {
-           var t = $('#criteriaTable').DataTable()
-           // create dynamic row number for table
-           t.on('order.dt search.dt', function() {
+            var t = $('#criteriaTable').DataTable()
+            // create dynamic row number for table
+            t.on('order.dt search.dt', function() {
                 let i = 1;
                 t.cells(null, 0, {
                     search: 'applied',
@@ -97,5 +98,4 @@
             }).draw();
         })
     </script>
-    
 @endpush

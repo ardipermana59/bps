@@ -12,10 +12,11 @@
 @endpush
 
 @section('content')
-    @include('pages.admin.struktur.modal-delete')
+    @include('layouts.modals.modal-delete')
+
     <div class="row">
         <div class="col-xs-12">
-            <a href="{{ route('struktur.create') }}"> 
+            <a href="{{ route('struktur.create') }}">
                 <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Struktur</button>
             </a>
             <div class="box">

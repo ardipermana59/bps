@@ -14,7 +14,8 @@
 @endpush
 
 @section('content')
-    @include('pages.admin.user.modal-delete')
+    @include('layouts.modals.modal-delete')
+
     <div class="row">
         <div class="col-xs-12">
             <a href="{{ route('user.create') }}">
@@ -46,7 +47,7 @@
                                     <td>{{ $user->status == 'active' ? 'Aktif' : 'Tidak Aktif' }}</td>
                                     <td>{{ $user->role }}</td>
                                     <td style="width: 10%" class="text-center">
-                                     <a href="{{ route('user.edit', ['id' => $user->id]) }}">
+                                        <a href="{{ route('user.edit', ['id' => $user->id]) }}">
                                             <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
                                         </a>
                                         <button onclick="confirmDelete('{{ route('user.destroy', ['id' => $user->id]) }}')"

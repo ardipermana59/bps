@@ -13,7 +13,7 @@
 @endpush
 
 @section('content')
-    @include('pages.admin.activity.modal-delete')
+    @include('layouts.modals.modal-delete')
     <div class="row">
         <div class="col-xs-12">
             <a href="{{ route('activity.create') }}"> 

@@ -14,10 +14,11 @@
 @endpush
 
 @section('content')
-    @include('pages.admin.penilai.modal-delete')
+    @include('layouts.modals.modal-delete')
+
     <div class="row">
         <div class="col-xs-12">
-            <a href="{{ route('penilai.create') }}"> 
+            <a href="{{ route('penilai.create') }}">
                 <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Penilai</button>
             </a>
             <div class="box">
@@ -39,17 +40,17 @@
                         <tbody>
                             @forelse ($data as $penilai)
                                 <tr>
-                                <td class="text-center"></td>
+                                    <td class="text-center"></td>
                                     <td class="text-center">{{ $penilai->nip }}</td>
                                     <td>{{ $penilai->full_name }}</td>
                                     <td class="text-center">{{ $penilai->position }}</td>
                                     <td style="width: 10%" class="text-center">
-                               
 
-                                        <button onclick="confirmDelete('{{ route('penilai.destroy', ['id' => $penilai->id_evaluator]) }}')"
+
+                                        <button
+                                            onclick="confirmDelete('{{ route('penilai.destroy', ['id' => $penilai->id_evaluator]) }}')"
                                             class="btn btn-danger" data-toggle="modal" data-target="#modalDelete"><i
-                                                class="fa fa-trash"
-                                                data-target="#modalDelete"></i></button>
+                                                class="fa fa-trash" data-target="#modalDelete"></i></button>
                                     </td>
                                 </tr>
                             @empty
@@ -77,19 +78,19 @@
 @endsection
 
 @push('scripts')
-     <script>
+    <script>
         function confirmDelete(url) {
             $('#deleteForm').attr('action', url)
         }
     </script>
-    
+
     <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(function() {
-           var t = $('#penilaiTable').DataTable()
-           // create dynamic row number for table
-           t.on('order.dt search.dt', function() {
+            var t = $('#penilaiTable').DataTable()
+            // create dynamic row number for table
+            t.on('order.dt search.dt', function() {
                 let i = 1;
                 t.cells(null, 0, {
                     search: 'applied',
