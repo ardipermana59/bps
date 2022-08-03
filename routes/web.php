@@ -28,7 +28,10 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
     
     // Halaman Pegawai
     Route::get('/pegawai', [PegawaiController::class, 'index'])->name('employee.index');
-    Route::delete('/pegawai', [PegawaiController::class, 'destroy'])->name('employee.destroy');
+    Route::get('/pegawai/tambah-pegawai', [PegawaiController::class, 'create'])->name('employee.create');
+    Route::get('/pegawai/edit/{id}', [PegawaiController::class, 'edit'])->name('employee.edit');
+    Route::put('/pegawai/{id}', [PegawaiController::class, 'update'])->name('employee.update');
+    Route::delete('/pegawai/{id}', [PegawaiController::class, 'destroy'])->name('employee.destroy');
 
     // Halaman Penilai
     Route::get('/penilai', [PenilaiController::class, 'index'])->name('penilai.index');

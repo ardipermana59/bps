@@ -47,7 +47,7 @@ class PenilaiController extends Controller
         $this->validate($request, [
             'penilai' => 'required|exists:employees,id',
         ]);
-
+        
        $activity = Evaluator::create([
             'employee_id' => $request->penilai,
         ]);

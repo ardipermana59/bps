@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
+use App\Models\Position;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PegawaiController extends Controller
@@ -29,7 +31,7 @@ class PegawaiController extends Controller
      */
     public function create()
     {
-        //
+        return redirect()->route('user.create');
     }
 
     /**
@@ -62,7 +64,19 @@ class PegawaiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Employee::find($id);
+
+        // cek pegawai ada tidak
+        if ($data == null) {
+            return redirect()->back()->with('error', 'Pegawai tidak ditemukan');
+        }
+
+        $jabatan = Position::all();
+
+        if ($jabatan == null) {
+            return redirect()->route('position.index')->with('error', 'Harap tambahkan jabatan terlebih dahulu');
+        }
+        return view('pages.admin.employee.edit', compact('data', 'jabatan'));
     }
 
     /**
@@ -74,7 +88,27 @@ class PegawaiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'jabatan' => 'required|exists:positions,id',
+            'full_name' => 'required|string|max:255',
+            'gender' => 'in:Perempuan,Laki-laki',
+            'hp' => 'max:20',
+            'address' => 'max:255',
+        ]);
+        $employee = Employee::find($id);
+
+        if ($employee == null) {
+            return redirect()->back()->with('error', 'Data Pegawai Tidak Ditemukan');
+        }
+
+        $employee->position_id = $request->jabatan;
+        $employee->full_name = $request->full_name;
+        $employee->gender = $request->gender;
+        $employee->hp = $request->hp;
+        $employee->address = $request->address;
+        $employee->save();
+
+        return redirect()->route('employee.index')->with('success', 'Data Pegawai Berhasil Disimpan.');
     }
 
     /**
@@ -85,9 +119,16 @@ class PegawaiController extends Controller
      */
     public function destroy($id)
     {
-        $employee = employee::find($id);
-        $employee->delete();
+        // cari pegawai berdasarkan id
+        $employee = Employee::find($id);
 
-        return back();
+        // cek pegawai ada tidak
+        if ($employee == null) {
+            return redirect()->back()->with('error', 'Pegawai tidak ditemukan');
+        }
+
+        // // hapus user sekaligus pegawai 
+        User::find($employee->user_id)->delete();
+        return redirect()->route('employee.index')->with('success', 'Pegawai berhasil dihapus');
     }
 }

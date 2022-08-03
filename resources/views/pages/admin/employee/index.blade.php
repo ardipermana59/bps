@@ -16,6 +16,9 @@
 
     <div class="row">
         <div class="col-xs-12">
+            <a href="{{ route('employee.create') }}">
+                <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Pegawai</button>
+            </a>
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Data Pegawai</h3>
@@ -48,8 +51,14 @@
                                     <td class="text-center">{{ $employee->hp ?? '-' }}</td>
                                     <td class="text-center">{{ $employee->address ?? '-' }}</td>
                                     <td style="width: 10%" class="text-center">
-                                        <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                                        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        <a href="{{ route('employee.edit', ['id' => $employee->id]) }}">
+                                            <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                                        </a>
+                                        <button
+                                            onclick="confirmDelete('{{ route('employee.destroy', ['id' => $employee->id]) }}')"
+                                            class="btn btn-danger" data-toggle="modal" data-target="#modalDelete"><i
+                                                class="fa fa-trash" data-target="#modalDelete"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty
@@ -81,6 +90,11 @@
 @endsection
 
 @push('scripts')
+    <script>
+        function confirmDelete(url) {
+            $('#deleteForm').attr('action', url)
+        }
+    </script>
     <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
