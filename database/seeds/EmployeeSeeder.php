@@ -66,9 +66,9 @@ class EmployeeSeeder extends Seeder
 
             Employee::create([
                 'user_id' => $user->id,
-                'position_id' => rand(1, 4),
+                'position_id' => rand(1, 3),
                 'nip' => $nip,
-                'full_name' => $faker->name,
+                'full_name' => $user['name'],
             ]);
             $nip++;
         }

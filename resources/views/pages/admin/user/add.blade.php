@@ -30,7 +30,7 @@
 
                             @error('nip')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    {{ $message }}
                                 </span>
                             @enderror
                         </div>
@@ -42,7 +42,7 @@
 
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    {{ $message }}
                                 </span>
                             @enderror
                         </div>
@@ -54,7 +54,7 @@
 
                             @error('username')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    {{ $message }}
                                 </span>
                             @enderror
                         </div>
@@ -66,47 +66,46 @@
 
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    {{ $message }}
                                 </span>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" id="password"
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password"
                                 placeholder="********">
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    {{ $message }}
                                 </span>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="role">Level</label>
-                            <select class="form-control form-control-lg" name="role">
-                                <option>Pilih Level</option>
+                            <select class="form-control form-control-lg @error('role') is-invalid @enderror" name="role">
+                                <option value="">Pilih Level</option>
                                 <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
                                 <option value="staff" {{ old('role') == 'staff' ? 'selected' : '' }}>Staff</option>
                                 <option value="pegawai" {{ old('role') == 'pegawai' ? 'selected' : '' }}>Pegawai</option>
                                 <option value="penilai" {{ old('role') == 'penilai' ? 'selected' : '' }}>Penilai</option>
                             </select>
                             @error('role')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <span class="invalid-feedback" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
                         </div>
-
                         <div class="form-group">
-                            <label for="role">Jabatan</label>
-                            <select class="form-control form-control-lg" name="jabatan">
-                                <option>Pilih Jabatan</option>
+                            <label for="jabatan">Jabatan</label>
+                            <select class="form-control form-control-lg @error('jabatan') is-invalid @enderror" name="jabatan">
+                                <option value="">Pilih Jabatan</option>
                                 @foreach ($jabatan as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
-                            @error('role')
+                            @error('jabatan')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    {{ $message }}
                                 </span>
                             @enderror
                         </div>

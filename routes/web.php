@@ -75,7 +75,7 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
     Route::get('/manajemen-user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::get('/manajemen-user/tambah-user', [UserController::class, 'create'])->name('user.create');
     Route::put('/manajemen-user/{id}', [UserController::class, 'update'])->name('user.update');
-    Route::get('/manajemen-user/tambah-struktur', [UserController::class, 'create'])->name('user.create');
+    Route::get('/manajemen-user/tambah-user', [UserController::class, 'create'])->name('user.create');
     Route::post('/manajemen-user', [UserController::class, 'store'])->name('user.store');
     Route::delete('/manajemen-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 

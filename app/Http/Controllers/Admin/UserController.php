@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all(); 
+        $users = User::all();
         return view('pages.admin.user.index', compact('users'));
     }
 
@@ -40,18 +40,19 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
+    {
         $this->validate($request, [
             'username' => 'required|string|max:255|unique:users',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string',
-            'role' => 'required|string',
-            'jabatan' => 'required|string',
-            'nip' => 'required|string',
+            'role' => 'required|string|in:admin,staff,pegawai,penilai',
+            'jabatan' => 'required|string|exists:positions,id',
+            'nip' => 'required|string|unqiue:employees,nip',
         ]);
 
-       $user = User::create([
+        // insert data ke table users
+        $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
@@ -59,6 +60,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // insert data ke table employees
         Employee::create([
             'user_id' => $user->id,
             'position_id' => $request->jabatan,
@@ -67,18 +69,6 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('user.index')->with('success', 'Data berhasil ditambahkan');
-        
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -88,12 +78,14 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //$user = User::join('employees', 'employees.user_id', '=', 'users.id')->where('users.id','=',$id)
-        //->select('employees.nip','employees.full_name')->first();
-       // return view('pages.admin.user.edit', compact('user','jabatan'));
+    {   
+        // cari user berdasarkan id
+        $user = User::find($id);
 
-        $user = user::find($id);
+        // cek apakah user ada atau tidak
+        if ($user == null) {
+            return redirect()->back()->with('error', 'User tidak ditemukan');
+        }
         return view('pages.admin.user.edit', compact('user'));
     }
 
@@ -106,7 +98,24 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-            //
+        $this->validate($request, [
+            'status' => 'required|string|max:255|in:active,inactive',
+            'role' => 'required|string|max:255|in:admin,staff,pegawai,penilai',
+        ]);
+      
+        $user = User::find($id);
+
+        // cek apakah user ada atau tidak
+        if ($user == null) {
+            return redirect()->back()->with('error', 'User tidak ditemukan');
+        }
+
+        // update data user
+        $user->status = $request->status;
+        $user->role = $request->role;
+        $user->save();
+
+        return redirect()->route('user.index')->with('success', 'User berhasil disimpan.');
     }
 
     /**
@@ -121,7 +130,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         // cek user ada tidak
-        if($user == null) {
+        if ($user == null) {
             return redirect()->back()->with('error', 'User tidak ditemukan');
         }
 
