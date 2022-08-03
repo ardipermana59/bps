@@ -57,8 +57,8 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
     // Halaman Kriteria Penilaian
     Route::get('/kriteria', [KriteriaController::class, 'index'])->name('criteria.index');
     Route::get('/kriteria/edit/{id}', [KriteriaController::class, 'edit'])->name('criteria.edit');
-    Route::put('/kriteria/{id}', [PenilaiPegawaiController::class, 'update'])->name('criteria.update');
-    Route::get('/kriteria/tambah-struktur', [PenilaiPegawaiController::class, 'create'])->name('criteria.create');
+    Route::put('/kriteria/{id}', [KriteriaController::class, 'update'])->name('criteria.update');
+    Route::get('/kriteria/tambah-kriteria', [KriteriaController::class, 'create'])->name('criteria.create');
     Route::post('/kriteria', [KriteriaController::class, 'store'])->name('criteria.store');
     Route::delete('/kriteria/{id}', [KriteriaController::class, 'destroy'])->name('criteria.destroy');
 
@@ -72,7 +72,10 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
 
     // Halaman Manajemen User
     Route::get('/manajemen-user', [UserController::class, 'index'])->name('user.index');
+    Route::get('/manajemen-user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::get('/manajemen-user/tambah-user', [UserController::class, 'create'])->name('user.create');
+    Route::put('/manajemen-user/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::get('/manajemen-user/tambah-struktur', [UserController::class, 'create'])->name('user.create');
     Route::post('/manajemen-user', [UserController::class, 'store'])->name('user.store');
     Route::delete('/manajemen-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 

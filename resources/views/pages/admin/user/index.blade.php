@@ -46,8 +46,9 @@
                                     <td>{{ $user->status == 'active' ? 'Aktif' : 'Tidak Aktif' }}</td>
                                     <td>{{ $user->role }}</td>
                                     <td style="width: 10%" class="text-center">
-                                        <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-
+                                     <a href="{{ route('user.edit', ['id' => $user->id]) }}">
+                                            <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                                        </a>
                                         <button onclick="confirmDelete('{{ route('user.destroy', ['id' => $user->id]) }}')"
                                             class="btn btn-danger" data-toggle="modal" data-target="#modalDelete"><i
                                                 class="fa fa-trash" data-target="#modalDelete"></i></button>

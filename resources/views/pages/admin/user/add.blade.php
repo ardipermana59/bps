@@ -125,9 +125,3 @@
     <!-- /.row -->
     <!-- /.content -->
 @endsection
-
-@push('scripts')
-    @php
-    // dd($errors)
-    @endphp
-@endpush

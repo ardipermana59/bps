@@ -1,56 +1,100 @@
 @extends('layouts.app')
 
+@push('title')
+    Manajemen User
+@endpush
+
+@push('breadcrumb')
+    Manajemen User
+@endpush
+
+
 @section('content')
-@include('pages.user.modal-delete')
     <div class="row">
-        <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">Data User</h3>
+        <!-- left column -->
+        <div class="col-md-6 col-md-offset-3">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Tambah Data User</h3>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th style="width: 1%" class="text-center">No</th>
-                                <th class="text-center">Nama Lengkap</th>
-                                <th class="text-center">Username</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Level</th>
-                                <th class="text-center">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($users as $i => $user)
-                                <tr>
-                                    <td>{{ ++$i }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->username }}</td>
-                                    <td>{{ ($user->status == 'active') ? 'Aktif' : 'Tidak Aktif' }}</td>
-                                    <td>{{ $user->role }}</td>
-                                    <td style="width: 10%" class="text-center">
-                                        <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
-                                        <button onclick="console.log({{ $user->id }})" class="btn btn-danger"><i class="fa fa-trash" data-toggle="modal" data-target="#modalDelete"></i></button>
-                                    </td>
-                                </tr>
-                            @empty
-                            @endforelse
+                <!-- form start -->
+                <form role="form" action="{{ route('user.store') }}" method="post">
+                    @csrf
+                    <div class="box-body">
+                       
 
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th style="width: 1%" class="text-center">No</th>
-                                <th class="text-center">Nama Lengkap</th>
-                                <th class="text-center">Username</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Level</th>
-                                <th class="text-center">Aksi</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <!-- /.box-body -->
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control @error('username') is-invalid @enderror"
+                                value="{{ $user->username }}" id="username" name="username" placeholder="username">
+
+                            @error('username')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                value="{{ $user->email }}" id="email" name="email" aria-describedby="emailHelp"
+                                placeholder="contoh@gmail.com">
+
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="password" id="password"
+                                placeholder="********">
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Level</label>
+                            <select class="form-control form-control-lg" name="role">
+                                <option>Pilih Level</option>
+                                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="staff" {{ old('role') == 'staff' ? 'selected' : '' }}>Staff</option>
+                                <option value="pegawai" {{ old('role') == 'pegawai' ? 'selected' : '' }}>Pegawai</option>
+                                <option value="penilai" {{ old('role') == 'penilai' ? 'selected' : '' }}>Penilai</option>
+                            </select>
+                            @error('role')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role">Jabatan</label>
+                            <select class="form-control form-control-lg" name="jabatan">
+                                <option>Pilih Jabatan</option>
+                                @foreach ($jabatan as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('role')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </div>
+                </form>
             </div>
             <!-- /.box -->
         </div>

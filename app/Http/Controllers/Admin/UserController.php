@@ -89,7 +89,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        //$user = User::join('employees', 'employees.user_id', '=', 'users.id')->where('users.id','=',$id)
+        //->select('employees.nip','employees.full_name')->first();
+       // return view('pages.admin.user.edit', compact('user','jabatan'));
+
+        $user = user::find($id);
+        return view('pages.admin.user.edit', compact('user'));
     }
 
     /**
@@ -101,7 +106,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+            //
     }
 
     /**

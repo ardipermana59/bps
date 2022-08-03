@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @push('title')
     Data Kriteria Penilai
 @endpush
@@ -13,9 +14,12 @@
 @endpush
 
 @section('content')
-   
+   @include('pages.admin.criteria.modal-delete')
     <div class="row">
         <div class="col-xs-12">
+             <a href="{{ route('criteria.create') }}"> 
+                <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Kriteria</button>
+             </a>
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Data Kriteria</h3>
@@ -70,5 +74,28 @@
 @endsection
 
 @push('scripts')
+     <script>
+        function confirmDelete(url) {
+            $('#deleteForm').attr('action', url)
+        }
+    </script>
+    
+    <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <script>
+        $(function() {
+           var t = $('#criteriaTable').DataTable()
+           // create dynamic row number for table
+           t.on('order.dt search.dt', function() {
+                let i = 1;
+                t.cells(null, 0, {
+                    search: 'applied',
+                    order: 'applied'
+                }).every(function(cell) {
+                    this.data(i++);
+                });
+            }).draw();
+        })
+    </script>
     
 @endpush

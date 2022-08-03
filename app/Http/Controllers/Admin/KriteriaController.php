@@ -37,7 +37,17 @@ class KriteriaController extends Controller
      */
     public function store(Request $request)
     {
-      //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+        ]);
+
+       $criteria = Criteria::create([
+            'name' => $request->name,
+
+       ]);
+
+       return redirect()->route('criteria.index')->with('success', 'Data Kriteria Berhasil Ditambahkan');
+
     }
 
     /**
@@ -79,13 +89,13 @@ class KriteriaController extends Controller
         $criteria = Criteria::find($id);
 
         if($criteria == null) {
-            return redirect()->back()->with('error', 'Kriteria tidak ditemukan');
+            return redirect()->back()->with('Error', 'Data Kriteria Tidak Ditemukan');
         }
 
         $criteria->name = $request->name;
         $criteria->save();
         
-        return redirect()->route('criteria.index')->with('success', 'Kriteria berhasil disimpan.');
+        return redirect()->route('criteria.index')->with('Success', 'Data Kriteria Berhasil Disimpan.');
     }
 
     /**
@@ -96,6 +106,17 @@ class KriteriaController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        // cari kriteria berdasarkan id
+        $kriteria = Criteria::find($id);
+
+        // cek kriteria ada tidak
+        if($kriteria == null) {
+            return redirect()->back()->with('error', 'Data Kriteria Tidak Ditemukan');
+        }
+
+        // // hapus user
+        $kriteria->delete();
+        return redirect()->route('criteria.index')->with('success', 'Data Kriteria Berhasil Dihapus');
+    } 
+    
 }
