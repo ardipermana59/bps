@@ -46,7 +46,7 @@ class JabatanController extends Controller
 
         ]);
        
-        return redirect()->route('position.index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('position.index')->with('success', 'Jabatan Berhasil Ditambahkan');
         
     }
 
@@ -78,13 +78,13 @@ class JabatanController extends Controller
         $position = Position::find($id);
 
         if($position == null) {
-            return redirect()->back()->with('error', 'Jabatan tidak ditemukan');
+            return redirect()->back()->with('error', 'Jabatan Tidak Ditemukan');
         }
 
         $position->name = $request->name;
         $position->save();
         
-        return redirect()->route('position.index')->with('success', 'Jabatan berhasil disimpan.');
+        return redirect()->route('position.index')->with('success', 'Jabatan Berhasil Disimpan.');
     }
 
     /**
@@ -100,11 +100,11 @@ class JabatanController extends Controller
 
         // cek user ada tidak
         if($jabatan == null) {
-            return redirect()->back()->with('error', 'jabatan tidak ditemukan');
+            return redirect()->back()->with('error', 'Jabatan Tidak Ditemukan');
         }
 
         // // hapus user
         $jabatan->delete();
-        return redirect()->route('position.index')->with('success', 'Jabatan berhasil dihapus');
+        return redirect()->route('position.index')->with('success', 'Jabatan Berhasil Dihapus');
     }
 }

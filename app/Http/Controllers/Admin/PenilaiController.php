@@ -52,7 +52,7 @@ class PenilaiController extends Controller
             'employee_id' => $request->penilai,
         ]);
        
-        return redirect()->route('penilai.index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('penilai.index')->with('success', 'Data Penilai Berhasil Ditambahkan');
         
     }
 
@@ -84,13 +84,13 @@ class PenilaiController extends Controller
         $penilai = Evaluator::find($id);
 
         if($penilai == null) {
-            return redirect()->back()->with('error', 'kegiatan tidak ditemukan');
+            return redirect()->back()->with('error', 'Data Penilai Tidak Ditemukan');
         }
 
         $penilai->name = $request->name;
         $penilai->save();
         
-        return redirect()->route('activity.index')->with('success', 'Kegiatan berhasil disimpan.');
+        return redirect()->route('activity.index')->with('success', 'Data Penilai Berhasil Disimpan.');
     }
 
     /**
@@ -106,11 +106,11 @@ class PenilaiController extends Controller
 
         // cek user ada tidak
         if($penilai == null) {
-            return redirect()->back()->with('error', 'penilai tidak ditemukan');
+            return redirect()->back()->with('error', 'Data Penilai Tidak Ditemukan');
         }
 
         // // hapus user
         $penilai->delete();
-        return redirect()->route('penilai.index')->with('success', 'penilai berhasil dihapus');
+        return redirect()->route('penilai.index')->with('success', 'Data Penilai Berhasil Dihapus');
     }
 }

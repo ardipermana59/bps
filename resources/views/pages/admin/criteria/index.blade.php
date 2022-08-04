@@ -39,7 +39,7 @@
                             @forelse ($data as $kriteria)
                                 <tr>
                                     <td class="text-center"></td>
-                                    <td>{{ $kriteria->name }}</td>
+                                    <td class="text-center">{{ $kriteria->name }}</td>
                                     <td style="width: 10%">
                                         <a href="{{ route('criteria.edit', ['id' => $kriteria->id]) }}">
                                             <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>

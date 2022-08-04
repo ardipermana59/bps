@@ -42,7 +42,7 @@
                                 <tr>
                                     <td class="text-center"></td>
                                     <td class="text-center">{{ $penilai->nip }}</td>
-                                    <td>{{ $penilai->full_name }}</td>
+                                    <td class="text-center">{{ $penilai->full_name }}</td>
                                     <td class="text-center">{{ $penilai->position }}</td>
                                     <td style="width: 10%" class="text-center">
 

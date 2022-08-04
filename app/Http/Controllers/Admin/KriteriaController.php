@@ -71,7 +71,7 @@ class KriteriaController extends Controller
         $data = Criteria::find($id);
 
         if ($data == null) {
-            return redirect()->back()->with('Error', 'Data Kriteria Tidak Ditemukan');
+            return redirect()->back()->with('error', 'Data Kriteria Tidak Ditemukan');
         }
         
         return view('pages.admin.criteria.edit', compact('data'));
@@ -93,13 +93,13 @@ class KriteriaController extends Controller
         $criteria = Criteria::find($id);
 
         if ($criteria == null) {
-            return redirect()->back()->with('Error', 'Data Kriteria Tidak Ditemukan');
+            return redirect()->back()->with('error', 'Data Kriteria Tidak Ditemukan');
         }
 
         $criteria->name = $request->name;
         $criteria->save();
 
-        return redirect()->route('criteria.index')->with('Success', 'Data Kriteria Berhasil Disimpan.');
+        return redirect()->route('criteria.index')->with('success', 'Data Kriteria Berhasil Disimpan.');
     }
 
     /**
