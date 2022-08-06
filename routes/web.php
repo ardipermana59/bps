@@ -86,7 +86,9 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
     Route::view('/laporan', 'pages.admin.laporan.index')->name('laporan.index');
 });
 
-Route::get('/nilai/pegawai', [NilaiPegawaiController::class, 'index'])->name('nilai.index');
+Route::middleware(['auth','isAdmin:penilai'])->group(function () {
+    Route::get('/nilai/pegawai', [NilaiPegawaiController::class, 'index'])->name('nilai.index');
+});
 
 Route::middleware(['auth','isAdmin:staff'])->group(function () {
    // route buat staff

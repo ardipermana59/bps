@@ -26,33 +26,35 @@
                                 <th class="text-center">No</th>
                                 <th class="text-center">Nama Pegawai</th>
                                 <th class="text-center">Kegiatan</th>
-                                <th class="text-center">Kriteria 1</th>
-                                <th class="text-center">Kriteria 2</th>
-                                <th class="text-center">Kriteria 3</th>
-                                <th class="text-center">Kriteria 4</th>
+                                @foreach ($criterias as $criteria)
+                                    <th class="text-center">{{ $criteria->name }}</th>
+                                @endforeach
                                 <th class="text-center">Hasil</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
+
+                            @foreach ($data as $item)
                             @php
-                                $faker = Faker\Factory::create();
+                                $hasil = 0;
                             @endphp
-                            @for ($i = 1; $i < 30; $i++)
                                 <tr>
                                     <td class="text-center"></td>
-                                    <td>{{ $faker->name }}</td>
-                                    <td>{{ $faker->jobTitle }}</td>
-                                    <td class="text-center">{{ 2.5 * rand(30,40) }}</td>
-                                    <td class="text-center">{{ 2.5 * rand(30,40) }}</td>
-                                    <td class="text-center">{{ 2.5 * rand(30,40) }}</td>
-                                    <td class="text-center">{{ 2.5 * rand(30,40) }}</td>
-                                    <td class="text-center">{{ 1.25 * rand(60,80) }}</td>
+                                    <td>{{ $item['employee_name'] }}</td>
+                                    <td>{{ $item['activity_name'] }}</td>
+                                    @foreach ($item['criterias'] as $criteria)
+                                    <td class="text-center">{{$criteria['nilai'] }}</td>
+                                        @php
+                                            $hasil = $hasil + $criteria['nilai'];
+                                        @endphp
+                                    @endforeach
+                                    <td class="text-center">{{ $hasil }}</td>
                                     <td style="width: 10%" class="text-center">
                                         <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
                                     </td>
                                 </tr>
-                            @endfor
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>

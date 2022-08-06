@@ -53,16 +53,18 @@
                         <span>Struktur</span></a></li>
                 <li class="{{ request()->url() == route('user.index') ? 'active' : '' }}"><a
                         href="{{ route('user.index') }}"><i class="fa-solid fa-user"></i>
-                         <span>Manajemen
+                        <span>Manajemen
                             User</span></a></li>
                 <li class="{{ request()->url() == route('laporan.index') ? 'active' : '' }}"><a
                         href="{{ route('laporan.index') }}"><i class="fa-solid fa-book"></i>
                         <span>laporan</span></a></li>
             @endif
+            @if (auth()->user()->role == 'penilai')
             <li class="header">Penilai</li>
             <li class="{{ request()->url() == route('penilai.index') ? 'active' : '' }}"><a
                     href="{{ route('nilai.index') }}"><i class="fa-solid fa-file"></i>
                     <span>Input Nilai Pegawai</span></a></li>
+            @endif
         </ul>
         <!-- /.sidebar-menu -->
     </section>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AmbilKegiatan;
 use App\Models\Criteria;
 use Illuminate\Http\Request;
 
@@ -40,12 +41,26 @@ class KriteriaController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:255',
         ]);
-
+        
         $criteria = Criteria::create([
             'name' => $request->name,
-
+            
         ]);
+        
+        // ambil data dari database
+        $ambilKegiatans = AmbilKegiatan::all();
 
+        foreach ($ambilKegiatans as $item) {
+
+            if($item->criteria_id == $criteria->id - 1){
+                // insert kriteria baru ke table ambil kegiatan
+                AmbilKegiatan::create([
+                    'employee_id' => $item->employee_id,
+                    'activity_id' => $item->activity_id,
+                    'criteria_id' => $criteria->id,
+                ]);
+            }
+        }
         return redirect()->route('criteria.index')->with('success', 'Data Kriteria Berhasil Ditambahkan');
     }
 
