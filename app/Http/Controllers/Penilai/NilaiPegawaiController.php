@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Penilai;
 use App\Http\Controllers\Controller;
 use App\Models\Nilai;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class NilaiPegawaiController extends Controller
 {
@@ -21,49 +22,6 @@ class NilaiPegawaiController extends Controller
         ->select('employees.full_name', 'activities.name as activity_name' , 'nilais.id', 'nilais.target_realisasi as target', 'nilais.kerjasama', 'nilais.ketepatan_waktu', 'nilais.kualitas')
         ->get();
         return view('pages.penilai.pegawai.index', compact('data'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -98,14 +56,9 @@ class NilaiPegawaiController extends Controller
         return response()->json(['success'=>'Data berhasil disimpan']);;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function exportPdf()
     {
-        //
+        $pdf = Pdf::loadView('pages.penilai.pegawai.pdf-template');
+        return $pdf->stream();
     }
 }

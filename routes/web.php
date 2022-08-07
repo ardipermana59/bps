@@ -80,9 +80,9 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
 
 Route::middleware(['auth','isAdmin:penilai'])->group(function () {
     Route::get('/nilai/pegawai', [NilaiPegawaiController::class, 'index'])->name('nilai.index');
+    Route::get('/nilai/pegawai/export/pdf', [NilaiPegawaiController::class, 'exportPdf'])->name('nilai.pdf');
     Route::put('/nilai/pegawai/{id}', [NilaiPegawaiController::class, 'update'])->name('nilai.update');
 });
-
 Route::middleware(['auth','isAdmin:staff'])->group(function () {
    // route buat staff
 });
