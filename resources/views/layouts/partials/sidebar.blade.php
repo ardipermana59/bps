@@ -30,6 +30,8 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
+            <li class="{{ url('/') }}"><a href=""><i class="fa-solid fa-file"></i>
+                <span>Dashboard</span></a></li>
             @if (auth()->user()->role == 'admin')
                 <li class="header">Admin</li>
                 <!-- Optionally, you can add icons to the links -->
@@ -45,9 +47,6 @@
                 <li class="{{ request()->url() == route('activity.index') ? 'active' : '' }}"><a
                         href="{{ route('activity.index') }}"><i class="fa-solid fa-business-time"></i>
                         <span>Kegiatan</span></a></li>
-                <li class="{{ request()->url() == route('criteria.index') ? 'active' : '' }}"><a
-                        href="{{ route('criteria.index') }}"><i class="fa-solid fa-chart-line"></i>
-                        <span>Kriteria</span></a></li>
                 <li class="{{ request()->url() == route('struktur.index') ? 'active' : '' }}"><a
                         href="{{ route('struktur.index') }}"><i class="fa-solid fa-people-line"></i>
                         <span>Struktur</span></a></li>
@@ -60,11 +59,16 @@
                         <span>laporan</span></a></li>
             @endif
             @if (auth()->user()->role == 'penilai')
-            <li class="header">Penilai</li>
-            <li class="{{ request()->url() == route('penilai.index') ? 'active' : '' }}"><a
-                    href="{{ route('nilai.index') }}"><i class="fa-solid fa-file"></i>
-                    <span>Input Nilai Pegawai</span></a></li>
+                <li class="header">Penilai</li>
+                <li class="{{ request()->url() == route('penilai.index') ? 'active' : '' }}"><a
+                        href="{{ route('nilai.index') }}"><i class="fa-solid fa-file"></i>
+                        <span>Input Nilai Pegawai</span></a></li>
             @endif
+            <li class="header">Pengaturan</li>
+            <li class=""><a href=""><i class="fa-solid fa-file"></i>
+                    <span>Profile</span></a></li>
+                    <li class=""><a href=""><i class="fa-solid fa-file"></i>
+                        <span>Ganti Password</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

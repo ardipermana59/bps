@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\Evaluator;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PenilaiController extends Controller
@@ -18,8 +19,9 @@ class PenilaiController extends Controller
     {
         $data = Evaluator::join('employees', 'employees.id', '=', 'evaluators.employee_id')
             ->join('positions', 'employees.position_id', '=', 'positions.id')
-            ->select('employees.*', 'evaluators.id as id_evaluator','positions.name as position')
+            ->select('employees.*', 'evaluators.id as id_evaluator', 'positions.name as position')
             ->get();
+
         return view('pages.admin.penilai.index', compact('data'));
     }
 
@@ -30,9 +32,9 @@ class PenilaiController extends Controller
      */
     public function create()
     {
-        $employees= Employee::join('positions', 'employees.position_id', '=', 'positions.id')
-        ->select('employees.*', 'positions.name as position')
-        ->get();
+        $employees = Employee::join('positions', 'employees.position_id', '=', 'positions.id')
+            ->select('employees.*', 'positions.name as position')
+            ->get();
         return view('pages.admin.penilai.add', compact('employees'));
     }
 
@@ -47,13 +49,18 @@ class PenilaiController extends Controller
         $this->validate($request, [
             'penilai' => 'required|exists:employees,id',
         ]);
-        
-       $activity = Evaluator::create([
+
+        $evaluator = Evaluator::create([
             'employee_id' => $request->penilai,
         ]);
-       
+
+        // ubah role di table users
+        $employee = Employee::find($evaluator->employee_id);
+        $user = User::find($employee->user_id);
+        $user->role = 'penilai';
+        $user->save();
+
         return redirect()->route('penilai.index')->with('success', 'Data Penilai Berhasil Ditambahkan');
-        
     }
 
     /**
@@ -64,7 +71,7 @@ class PenilaiController extends Controller
      */
     public function edit($id)
     {
-       $data = Evaluator::find($id);
+        $data = Evaluator::find($id);
         return view('pages.admin.penilai.edit', compact('data'));
     }
 
@@ -83,13 +90,13 @@ class PenilaiController extends Controller
 
         $penilai = Evaluator::find($id);
 
-        if($penilai == null) {
+        if ($penilai == null) {
             return redirect()->back()->with('error', 'Data Penilai Tidak Ditemukan');
         }
 
         $penilai->name = $request->name;
         $penilai->save();
-        
+
         return redirect()->route('activity.index')->with('success', 'Data Penilai Berhasil Disimpan.');
     }
 
@@ -105,12 +112,19 @@ class PenilaiController extends Controller
         $penilai = Evaluator::find($id);
 
         // cek user ada tidak
-        if($penilai == null) {
+        if ($penilai == null) {
             return redirect()->back()->with('error', 'Data Penilai Tidak Ditemukan');
         }
 
         // // hapus user
         $penilai->delete();
+
+        // ubah role di table users
+        $employee = Employee::find($penilai->employee_id);
+        $user = User::find($employee->user_id);
+        $user->role = 'staff';
+        $user->save();
+        
         return redirect()->route('penilai.index')->with('success', 'Data Penilai Berhasil Dihapus');
     }
 }

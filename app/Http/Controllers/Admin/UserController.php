@@ -48,7 +48,7 @@ class UserController extends Controller
             'password' => 'required|string',
             'role' => 'required|string|in:admin,staff,pegawai,penilai',
             'jabatan' => 'required|string|exists:positions,id',
-            'nip' => 'required|string|unqiue:employees,nip',
+            'nip' => 'required|string|unique:employees,nip',
         ]);
 
         // insert data ke table users

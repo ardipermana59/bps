@@ -12,6 +12,7 @@
 @endpush
 
 @section('content')
+    @include('pages.penilai.pegawai.add')
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -26,9 +27,10 @@
                                 <th class="text-center">No</th>
                                 <th class="text-center">Nama Pegawai</th>
                                 <th class="text-center">Kegiatan</th>
-                                @foreach ($criterias as $criteria)
-                                    <th class="text-center">{{ $criteria->name }}</th>
-                                @endforeach
+                                <th class="text-center">Target</th>
+                                <th class="text-center">Kerjasama</th>
+                                <th class="text-center">Ketepatan Waktu</th>
+                                <th class="text-center">Kualitas</th>
                                 <th class="text-center">Hasil</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
@@ -36,22 +38,24 @@
                         <tbody>
 
                             @foreach ($data as $item)
-                            @php
-                                $hasil = 0;
-                            @endphp
+                                @php
+                                    $hasil = 0;
+                                @endphp
                                 <tr>
                                     <td class="text-center"></td>
-                                    <td>{{ $item['employee_name'] }}</td>
-                                    <td>{{ $item['activity_name'] }}</td>
-                                    @foreach ($item['criterias'] as $criteria)
-                                    <td class="text-center">{{$criteria['nilai'] }}</td>
-                                        @php
-                                            $hasil = $hasil + $criteria['nilai'];
-                                        @endphp
-                                    @endforeach
-                                    <td class="text-center">{{ $hasil }}</td>
+                                    <td>{{ $item->full_name }}</td>
+                                    <td>{{ $item->activity_name }}</td>
+                                    <td id="target{{ $item->id }}" class="text-center">{{ $item->target }}</td>
+                                    <td id="kerjasama{{ $item->id }}" class="text-center">{{ $item->kerjasama }}</td>
+                                    <td id="ketepatan_waktu{{ $item->id }}" class="text-center">
+                                        {{ $item->ketepatan_waktu }}</td>
+                                    <td id="kualitas{{ $item->id }}" class="text-center">{{ $item->kualitas }}</td>
+                                    <td id="hasil{{ $item->id }}" class="text-center">
+                                        {{ ($item->target * 40) / 100 + ($item->kerjasama * 10) / 100 + ($item->ketepatan_waktu * 40) / 100 + ($item->kualitas * 10) / 100 }}
+                                    </td>
                                     <td style="width: 10%" class="text-center">
-                                        <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                                        <button onclick="editNilai('{{ $item }}')" class="btn btn-warning"><i
+                                                class="fa fa-pencil"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -82,6 +86,115 @@
 @endsection
 
 @push('scripts')
+    <script>
+        function editNilai(data) {
+            var data = JSON.parse(data)
+            $('#idNilai').val(data.id);
+            $('#full_name').val(data.full_name);
+            $('#target').val(data.target);
+            $('#kerjasama').val(data.kerjasama);
+            $('#ketepatan_waktu').val(data.ketepatan_waktu);
+            $('#kualitas').val(data.kualitas);
+            $('#modalAddNilai').modal('show');
+        }
+
+        jQuery(document).ready(function() {
+            $('#updateNilai').click(function(e) {
+                let id = jQuery('#idNilai').val()
+                let target = jQuery('#target').val()
+                let kerjasama = jQuery('#kerjasama').val()
+                let ketepatan_waktu = jQuery('#ketepatan_waktu').val()
+                let kualitas = jQuery('#kualitas').val()
+
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $('#modalAddNilai').modal('hide');
+                Swal.fire({
+                    title: 'Proses...',
+                    allowEscapeKey: false,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    }
+                });
+
+                $("#errorMessage").removeClass("alert alert-danger")
+                $("#errorMessage ul").empty()
+
+                $.ajax({
+                    url: "{{ url('/') }}/nilai/pegawai/1",
+                    method: 'put',
+                    data: {
+                        id: id,
+                        target: target,
+                        kerjasama: kerjasama,
+                        ketepatan_waktu: ketepatan_waktu,
+                        kualitas: kualitas,
+                    },
+                    error: function(result) {
+                        switch (result.status) {
+                            case 404:
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal',
+                                    text: 'Data tidak ditemukan',
+                                })
+                                break;
+                            case 422:
+                                var errors = $.parseJSON(result.responseText);
+                                $("#errorMessage").addClass("alert alert-danger")
+                                $.each(errors.errors, function(key, value) {
+                                    $("#errorMessage ul").append(`<li>${value}</li>`)
+
+                                })
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal',
+                                    text: 'Data gagal disimpan',
+                                })
+                                $('#modalAddNilai').modal('show');
+
+                                break;
+                            case 500:
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal',
+                                    text: 'Internal Server error',
+                                })
+                                break;
+                            default:
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal',
+                                    text: 'Data gagal disimpan. Error code ' + result.status,
+                                })
+                                break;
+                        }
+                    },
+
+                    success: function(result) {
+                        $("#target" + id).text(target)
+                        $("#kerjasama" + id).text(kerjasama)
+                        $("#ketepatan_waktu" + id).text(ketepatan_waktu)
+                        $("#kualitas" + id).text(kualitas)
+                        $("#hasil" + id).text((target * 40 / 100) + (kerjasama * 10 / 100) + (
+                            ketepatan_waktu * 40 / 100) + (kualitas * 10 / 100))
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: result.success,
+                        })
+                    },
+                });
+            });
+        })
+    </script>
     <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>

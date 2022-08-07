@@ -17,9 +17,7 @@ class CreateAmbilKegiatansTable extends Migration
             $table->id();
             $table->foreignId('employee_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('activity_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('criteria_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('target')->default('-');
-            $table->integer('nilai')->default(0);
             $table->timestamps();
         });
     }

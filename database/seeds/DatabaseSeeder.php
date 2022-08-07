@@ -14,11 +14,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PositionSeeder::class,
             ActivitySeeder::class,
-            CriteriaSeeder::class,
             EmployeeSeeder::class,
             AmbilKegiatanSeeder::class,
             PenilaiSeeder::class,
             PenilaiPegawaiSeeder::class,
+            NilaiSeeder::class,
         ]);
     }
 }

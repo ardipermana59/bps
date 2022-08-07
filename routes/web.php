@@ -23,8 +23,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::view('/', 'pages.dashboard')->name('dashboard');
 Route::middleware(['auth','isAdmin:admin'])->group(function () {
-    Route::view('/', 'pages.dashboard')->name('dashboard');
     
     // Halaman Pegawai
     Route::get('/pegawai', [PegawaiController::class, 'index'])->name('employee.index');
@@ -57,14 +57,6 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
     Route::post('/kegiatan', [KegiatanController::class, 'store'])->name('activity.store');
     Route::delete('/kegiatan/{id}', [KegiatanController::class, 'destroy'])->name('activity.destroy');
 
-    // Halaman Kriteria Penilaian
-    Route::get('/kriteria', [KriteriaController::class, 'index'])->name('criteria.index');
-    Route::get('/kriteria/edit/{id}', [KriteriaController::class, 'edit'])->name('criteria.edit');
-    Route::put('/kriteria/{id}', [KriteriaController::class, 'update'])->name('criteria.update');
-    Route::get('/kriteria/tambah-kriteria', [KriteriaController::class, 'create'])->name('criteria.create');
-    Route::post('/kriteria', [KriteriaController::class, 'store'])->name('criteria.store');
-    Route::delete('/kriteria/{id}', [KriteriaController::class, 'destroy'])->name('criteria.destroy');
-
     // Halaman struktur penilai pegawai
     Route::get('/struktur-penilai', [PenilaiPegawaiController::class, 'index'])->name('struktur.index');
     Route::get('/struktur/edit/{id}', [PenilaiPegawaiController::class, 'edit'])->name('struktur.edit');
@@ -88,6 +80,7 @@ Route::middleware(['auth','isAdmin:admin'])->group(function () {
 
 Route::middleware(['auth','isAdmin:penilai'])->group(function () {
     Route::get('/nilai/pegawai', [NilaiPegawaiController::class, 'index'])->name('nilai.index');
+    Route::put('/nilai/pegawai/{id}', [NilaiPegawaiController::class, 'update'])->name('nilai.update');
 });
 
 Route::middleware(['auth','isAdmin:staff'])->group(function () {
