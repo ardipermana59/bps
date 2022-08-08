@@ -67,7 +67,7 @@
             <li class="header">Pengaturan</li>
             <li class=""><a href=""><i class="fa-solid fa-file"></i>
                     <span>Profile</span></a></li>
-                    <li class=""><a href=""><i class="fa-solid fa-file"></i>
+                    <li class=""><a href="{{ route('password.index') }}"><i class="fa-solid fa-file"></i>
                         <span>Ganti Password</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
