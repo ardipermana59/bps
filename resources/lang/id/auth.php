@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Verifikasi ini tidak cocok dengan catatan kami.',
-    'throttle' => 'Terlalu banyak login. Silahkan coba lagi :seconds seconds.',
+    'failed' => 'Identitas tersebut tidak cocok dengan data kami.',
+    'throttle' => 'Terlalu banyak usaha masuk. Silahkan coba lagi dalam :seconds seconds.',
 
 ];
