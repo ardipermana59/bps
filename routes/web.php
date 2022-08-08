@@ -22,8 +22,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::view('/', 'pages.dashboard')->name('dashboard');
+Route::middleware(['auth'])->get('/', function(){
+    return view('pages.dashboard');
+})->name('dashboard');
 Route::middleware(['auth','isAdmin:admin'])->group(function () {
     
     // Halaman Pegawai

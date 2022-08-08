@@ -30,7 +30,7 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="{{ url('/') }}"><a href=""><i class="fa-solid fa-file"></i>
+            <li class=""><a href="{{ route('dashboard') }}"><i class="fa-solid fa-file"></i>
                 <span>Dashboard</span></a></li>
             @if (auth()->user()->role == 'admin')
                 <li class="header">Admin</li>
