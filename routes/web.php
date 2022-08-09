@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\PenilaiPegawaiController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\profileController;
 use App\Http\Controllers\Penilai\NilaiPegawaiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,11 +26,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
 
-
+   
     Route::view('/','pages.dashboard')->name('dashboard');
 
     Route::get('/pengaturan/password/ubah', [ChangePasswordController::class,'index'])->name('password.index');
     Route::post('/pengaturan/password/ubah', [ChangePasswordController::class,'update'])->name('password.change');
+
+    Route::get('/pengaturan/profile/ubah', [profileController::class,'index'])->name('profile.index');
+    Route::post('/pengaturan/profile/ubah', [profileController::class,'update'])->name('profile.change');
+
 
     Route::middleware(['isAdmin:admin'])->group(function () {
         // Halaman Pegawai

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @push('title')
-    Password
+    profile
 @endpush
 
 @push('breadcrumb')
-    Password
+    profile
 @endpush
 
 @section('content')
@@ -15,27 +15,27 @@
         <!-- general form elements -->
         <div class="box box-primary">
            <div class="box-header with-border">
-                    <h3 class="box-title">Ganti Password</h3>
-                </div>
+                    <h3 class="box-title">Ubah Profile</h3>
+            </div>
             <!-- form start -->
-            <form role="form" action="{{ route('password.change') }}" method="post">
+            <form role="form" action="{{ route('profile.change') }}" method="post">
                 @csrf
-                <div  class="box-body">
+                <div class="box-body">
                     <div class="form-group">
-                        <label for="password">Password Baru</label>
-                        <input type="password" class="form-control @error('password') is-invalid @enderror"
-                            value="{{ old('password') }}" id="password" name="password" placeholder="*******" required autocomplete="new-password">
+                        <label for="profile">Nama Baru</label>
+                        <input type="profile" class="form-control @error('profile') is-invalid @enderror"
+                            value="{{ old('profilee') }}" id="profile" name="profile" placeholder="Name" required autocomplete="new-profile">
 
-                        @error('password')
+                        @error('profile')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="password_confirmation">Konfirmasi Password Baru</label>
-                        <input type="password" class="form-control"
-                            value="{{ old('password') }}" id="password_confirmation" name="password_confirmation" placeholder="*******" required autocomplete="new-password">
+                        <label for="profile_confirmation">Konfirmasi Nama Baru</label>
+                        <input type="profile" class="form-control"
+                            value="{{ old('profile') }}" id="profile_confirmation" name="profile_confirmation" placeholder="New Name" required autocomplete="new-profile">
                     </div>
                 </div>
 

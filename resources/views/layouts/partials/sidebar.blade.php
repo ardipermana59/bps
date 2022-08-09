@@ -30,7 +30,7 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class=""><a href="{{ route('dashboard') }}"><i class="fa-solid fa-file"></i>
+            <li class=""><a href="{{ route('dashboard') }}"><i class="fa fa-tachometer"></i>
                 <span>Dashboard</span></a></li>
             @if (auth()->user()->role == 'admin')
                 <li class="header">Admin</li>
@@ -61,13 +61,14 @@
             @if (auth()->user()->role == 'penilai')
                 <li class="header">Penilai</li>
                 <li class="{{ request()->url() == route('penilai.index') ? 'active' : '' }}"><a
-                        href="{{ route('nilai.index') }}"><i class="fa-solid fa-file"></i>
+                        href="{{ route('nilai.index') }}"><i class="fas fa-laptop-code"></i>
                         <span>Input Nilai Pegawai</span></a></li>
             @endif
             <li class="header">Pengaturan</li>
-            <li class=""><a href=""><i class="fa-solid fa-file"></i>
+                    <li class=""{{ request()->url() == route('profile.index') ? 'active' : '' }}">"><a 
+                        href="{{ route('profile.index') }}"><i class="fas fa-user-alt"></i>
                     <span>Profile</span></a></li>
-                    <li class=""><a href="{{ route('password.index') }}"><i class="fa-solid fa-file"></i>
+                    <li class=""><a href="{{ route('password.index') }}"><i class="fas fa-cog"></i>
                         <span>Ganti Password</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
