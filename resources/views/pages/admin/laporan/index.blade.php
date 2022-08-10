@@ -34,10 +34,10 @@
                                 <th class="text-center" rowspan="2">Hasil</th>
                             </tr>
                             <tr>
-                                <th class="text-center">Aksi</th>
-                                <th class="text-center">Aksi</th>
-                                <th class="text-center">Aksi</th>
-                                <th class="text-center">Aksi</th>
+                                <th class="text-center">Target & Realisasi</th>
+                                <th class="text-center">Kerjasama</th>
+                                <th class="text-center">Ketepatan Waktu</th>
+                                <th class="text-center">Kualitas</th>
 
                             </tr>
                         </thead>
