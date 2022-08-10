@@ -59,6 +59,8 @@
                                     <td style="width: 10%" class="text-center">
                                         <button onclick="editNilai('{{ $item }}')" class="btn btn-warning"><i
                                                 class="fa fa-pencil"></i></button>
+                                                <a href="{{ route('nilai.pdf.employee', ['id' => $item->employee_id]) }}" class="btn btn-primary"><i
+                                                    class="fa-solid fa-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
