@@ -3,9 +3,9 @@
         <!-- small box -->
         <div class="small-box bg-blue">
             <div class="inner">
-                <h3 style="font-family: arial" class="text-center">BADAN PUSAT STATISTIK<sup style="font-size: 10px"></sup></h3>
-                <h2 style="font-family: arial" class="text-center">Catatan Kepegawaian</h2>
-                <h2 style="font-family: arial" class="text-center">Subang</h2>
+                <h3 style="font-family: times new roman" class="text-center">BADAN PUSAT STATISTIK</h3>
+                <h2 style="font-family: times new roman" class="text-center">Catatan Kepegawaian</h2>
+                <h2 style="font-family: times new roman" class="text-center">Subang</h2>
     </div>
     </div>
     <!-- ./col -->
@@ -13,7 +13,7 @@
         <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
-                <h3 style="font-family: arial" class="text-center">Nilai Pegawai</h3>
+                <h3 style="font-family: times new roman" class="text-center">Nilai Pegawai</h3>
 
             </div>
             <div class="icon">
@@ -28,7 +28,7 @@
         <!-- small box -->
         <div class="small-box bg-yellow">
             <div class="inner">
-                <h3 style="font-family: arial" class="text-center">New Profile<sup style="font-size: 5px"></sup></h3>
+                <h3 style="font-family: times new roman" class="text-center">New Profile<sup style="font-size: 5px"></sup></h3>
             </div>
             <div class="icon">
                 <i class="ion ion-person-add"></i>
@@ -41,7 +41,7 @@
         <!-- small box -->
         <div class="small-box bg-red">
             <div class="inner">
-                <h3 style="font-family: arial" class="text-center">Ganti Password<sup style="font-size: 5px"></sup></h3>
+                <h3 style="font-family: times new roman" class="text-center">Ganti Password<sup style="font-size: 5px"></sup></h3>
             </div>
             <div class="icon">
                 <i class="ion ion-pie-graph"></i>

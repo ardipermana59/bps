@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('title')
-    profile
+    Catatan Kepegawaian
 @endpush
 
 @push('breadcrumb')
@@ -25,7 +25,6 @@
                         <label for="profile">Nama Baru</label>
                         <input type="profile" class="form-control @error('profile') is-invalid @enderror"
                             value="{{ old('profilee') }}" id="profile" name="profile" placeholder="Name" required autocomplete="new-profile">
-
                         @error('profile')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

@@ -29,15 +29,15 @@
                                     class="text-center" rowspan="2">No</th>
                                 <th class="text-center" rowspan="2">Nama Penilai</th>
                                 <th class="text-center" rowspan="2">Nama Pegawai</th>
-                                <th class="text-center" rowspan="2">Nama Kegiatan</th>
+                                <th class="text-center" rowspan="2">Kegiatan</th>
                                 <th class="text-center" colspan="4">Kriteria</th>
                                 <th class="text-center" rowspan="2">Hasil</th>
                             </tr>
                             <tr>
-                                <th class="text-center">Aksi</th>
-                                <th class="text-center">Aksi</th>
-                                <th class="text-center">Aksi</th>
-                                <th class="text-center">Aksi</th>
+                                <th class="text-center">Target</th>
+                                <th class="text-center">Kerjasama</th>
+                                <th class="text-center">Ketepatan Waktu</th>
+                                <th class="text-center">Kualitas</th>
 
                             </tr>
                         </thead>
@@ -58,11 +58,20 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th style="width: 1%" class="text-center">No</th>
-                                <th class="text-center">Nama Penilai</th>
-                                <th class="text-center">Nama Pegawai</th>
-                                <th class="text-center">Nama Kegiatan</th>
-                                <th class="text-center">Aksi</th>
+                               <th style="width: 1%; text-align: center; justify-content: center;align-content: center;margin: auto"
+                                    class="text-center" rowspan="2">No</th>
+                                <th class="text-center" rowspan="2">Nama Penilai</th>
+                                <th class="text-center" rowspan="2">Nama Pegawai</th>
+                                <th class="text-center" rowspan="2">Kegiatan</th>
+                                <th class="text-center" colspan="4">Kriteria</th>
+                                <th class="text-center" rowspan="2">Hasil</th>
+                            </tr>
+                             <tr>
+                                <th class="text-center">Target</th>
+                                <th class="text-center">Kerjasama</th>
+                                <th class="text-center">Ketepatan Waktu</th>
+                                <th class="text-center">Kualitas</th>
+
                             </tr>
                         </tfoot>
                     </table>

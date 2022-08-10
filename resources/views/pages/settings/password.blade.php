@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('title')
-    Password
+    Catatan Kepagawaian
 @endpush
 
 @push('breadcrumb')
