@@ -23,6 +23,7 @@
             <a href="/nilai/pegawai" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
+    
     <!-- ./col -->
     <div class="col-lg-12 col-xs-12 ">
         <!-- small box -->

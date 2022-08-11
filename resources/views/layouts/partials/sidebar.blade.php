@@ -57,18 +57,29 @@
                 <li class="{{ request()->url() == route('laporan.index') ? 'active' : '' }}"><a
                         href="{{ route('laporan.index') }}"><i class="fa-solid fa-book"></i>
                         <span>laporan</span></a></li>
+
             @endif
-            @if (auth()->user()->role == 'penilai')
+            @if (auth()->user()->role == 'pegawai')
                 <li class="header">Penilai</li>
+                <li class="{{ request()->url() == route('penilai.index') ? 'active' : '' }}"><a
+                        href="{{ route('nilai.index') }}"><i class="fas fa-laptop-code"></i>
+                        <span>Kegiatan</span></a></li>
+
                 <li class="{{ request()->url() == route('penilai.index') ? 'active' : '' }}"><a
                         href="{{ route('nilai.index') }}"><i class="fas fa-laptop-code"></i>
                         <span>Input Nilai Pegawai</span></a></li>
             @endif
+            @if (auth()->user()->role == 'penilai')
+                <li class="header">Penilai</li>
+                <li class="{{ request()->url() == route('nilai.index') ? 'active' : '' }}"><a
+                        href="{{ route('nilai.index') }}"><i class="fas fa-laptop-code"></i>
+                        <span>Input Nilai Pegawai</span></a></li>
+            @endif
             <li class="header">Pengaturan</li>
-                    <li class=""{{ request()->url() == route('profile.index') ? 'active' : '' }}">"><a 
+                    <li class="{{ request()->url() == route('profile.index') ? 'active' : '' }}"><a 
                         href="{{ route('profile.index') }}"><i class="fas fa-user-alt"></i>
                     <span>Profile</span></a></li>
-                    <li class=""><a href="{{ route('password.index') }}"><i class="fas fa-cog"></i>
+                    <li class="{{ request()->url() == route('password.index') ? 'active' : '' }}"><a href="{{ route('password.index') }}"><i class="fas fa-cog"></i>
                         <span>Ganti Password</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->

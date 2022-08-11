@@ -11,7 +11,7 @@
             font-size: 0.9em;
             font-family: sans-serif;
             min-width: 400px;
-            border: 1px solid #dddddd;
+            border: 2px solid #dddddd;
         }
 
         .styled-table thead tr {

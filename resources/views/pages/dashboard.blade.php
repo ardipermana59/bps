@@ -11,8 +11,10 @@
 @section('content')
     @if (auth()->user()->role == 'admin')
         @include('pages.admin.dashboard')
-    @else
+    @elseif (auth()->user()->role == 'pegawai')
         @include('pages.pegawai.dashboard')
+    @else
+        @include('pages.penilai.dashboard')
     @endif
 @endsection
 
