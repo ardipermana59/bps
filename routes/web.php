@@ -95,6 +95,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['isAdmin:penilai'])->group(function () {
         Route::get('/nilai/pegawai', [NilaiPegawaiController::class, 'index'])->name('nilai.index');
+        Route::get('/nilai/tambah-nilai', [NilaiPegawaiController::class, 'create'])->name('nilai.create');
         Route::get('/nilai/pegawai/export/pdf', [NilaiPegawaiController::class, 'exportPdf'])->name('nilai.pdf');
         Route::get('/nilai/pegawai/export/pdf/{id}', [NilaiPegawaiController::class, 'exportPdfEmployee'])->name('nilai.pdf.employee');
         Route::put('/nilai/pegawai/{id}', [NilaiPegawaiController::class, 'update'])->name('nilai.update');

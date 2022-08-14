@@ -10,20 +10,7 @@
     </div>
 
     <!-- ./col -->
-    <div class="col-lg-12 col-xs-12 ">
-        <!-- small box -->
-        <div class="small-box bg-green">
-            <div class="inner">
-                <h2 style="font-family: calibri" class="text-center">Kegiatan</h2>
-
-            </div>
-            <div class="icon">
-              <i class="fas fa-laptop-code"></i>  
-            </div>
-            <a href="/nilai/pegawai" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-    
+    <!-- ./col -->
     <!-- ./col -->
     <div class="col-lg-12 col-xs-12 ">
         <!-- small box -->

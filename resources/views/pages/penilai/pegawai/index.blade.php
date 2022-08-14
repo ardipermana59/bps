@@ -18,6 +18,9 @@
             <a href="{{ route('nilai.pdf') }}">
                 <button class="btn btn-primary"><i class="fa-solid fa-file-arrow-down"></i> PDF</button>
             </a>
+            <a href="{{ route('nilai.create') }}">
+                <button class="btn btn-primary"><i class="fa-solid fa-file-arrow-down"></i> Tambah Data</button>
+            </a>
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Data Pegawai</h3>
