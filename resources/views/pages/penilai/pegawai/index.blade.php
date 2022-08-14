@@ -132,7 +132,7 @@
                 $("#errorMessage ul").empty()
 
                 $.ajax({
-                    url: "{{ url('/') }}/nilai/pegawai/1",
+                    url: "{{ url('/') }}/nilai/pegawai/" + id,
                     method: 'put',
                     data: {
                         id: id,

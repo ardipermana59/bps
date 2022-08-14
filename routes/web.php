@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\KegiatanController;
 use App\Http\Controllers\Admin\PenilaiController;
 use App\Http\Controllers\Admin\PegawaiController;
 use App\Http\Controllers\Admin\JabatanController;
+use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PenilaiPegawaiController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ChangePasswordController;
@@ -86,7 +87,10 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/manajemen-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
         // Halaman Laporan
-        Route::view('/laporan', 'pages.admin.laporan.index')->name('laporan.index');
+        Route::get('/laporan', [LaporanController::class,'index'])->name('laporan.index');
+        Route::get('/laporan/nilai/pegawai/export/pdf', [LaporanController::class, 'exportPdf'])->name('laporan.pdf');
+        Route::get('/laporan/nilai/pegawai/export/pdf/{id}', [LaporanController::class, 'exportPdfEmployee'])->name('laporan.pdf.employee');
+        Route::put('/laporan/nilai/pegawai/{id}', [LaporanController::class, 'update'])->name('laporan.update');
     });
 
     Route::middleware(['isAdmin:penilai'])->group(function () {
