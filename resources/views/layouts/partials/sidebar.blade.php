@@ -76,7 +76,7 @@
                         <span>Input Nilai Pegawai</span></a></li>
             @endif
             <li class="header">Pengaturan</li>
-                    <li class="{{ request()->url() == route('profile.index') ? 'active' : '' }}"><a 
+                    <li class="{{ request()->url() == route('profile.index') ? 'active' : '' }}">   <a 
                         href="{{ route('profile.index') }}"><i class="fas fa-user-alt"></i>
                     <span>Profile</span></a></li>
                     <li class="{{ request()->url() == route('password.index') ? 'active' : '' }}"><a href="{{ route('password.index') }}"><i class="fas fa-cog"></i>

@@ -31,6 +31,16 @@ class NilaiPegawaiController extends Controller
         return view('pages.penilai.pegawai.index', compact('data'));
     }
 
+     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('pages.penilai.pegawai.add');
+    }
+
     /**
      * Update the specified resource in storage.
      *
