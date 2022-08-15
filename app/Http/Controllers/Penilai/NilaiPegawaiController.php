@@ -26,7 +26,7 @@ class NilaiPegawaiController extends Controller
             ->join('evaluators', 'evaluators.id', 'penilai_pegawais.evaluator_id')
             ->join('employees as pengawas', 'pengawas.id', 'evaluators.employee_id')
             ->where('evaluators.employee_id', $evaluator->id)
-            ->select('employees.full_name', 'employees.id as employee_id', 'activities.name as activity_name', 'nilais.id', 'nilais.target_realisasi as target', 'nilais.kerjasama', 'nilais.ketepatan_waktu', 'nilais.kualitas')
+            ->select('ambil_kegiatans.url_file','employees.full_name', 'employees.id as employee_id', 'activities.name as activity_name', 'nilais.id', 'nilais.target_realisasi as target', 'nilais.kerjasama', 'nilais.ketepatan_waktu', 'nilais.kualitas')
             ->get();
         return view('pages.penilai.pegawai.index', compact('data'));
     }

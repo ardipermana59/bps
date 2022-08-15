@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\KriteriaController;
 use App\Http\Controllers\Admin\KegiatanController;
 use App\Http\Controllers\Admin\PenilaiController;
 use App\Http\Controllers\Admin\PegawaiController;
@@ -9,6 +8,7 @@ use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PenilaiPegawaiController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\Pegawai\KegiatanPegawaiController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\Penilai\NilaiPegawaiController;
 use Illuminate\Support\Facades\Auth;
@@ -91,6 +91,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/laporan/nilai/pegawai/export/pdf', [LaporanController::class, 'exportPdf'])->name('laporan.pdf');
         Route::get('/laporan/nilai/pegawai/export/pdf/{id}', [LaporanController::class, 'exportPdfEmployee'])->name('laporan.pdf.employee');
         Route::put('/laporan/nilai/pegawai/{id}', [LaporanController::class, 'update'])->name('laporan.update');
+    }); 
+    
+    Route::middleware(['isAdmin:pegawai'])->prefix('pegawai')->group(function () {
+        Route::get('/kegiatan', [KegiatanPegawaiController::class, 'index'])->name('pegawai.kegiatan.index');
+        Route::put('/kegiatan/upload/{id}', [KegiatanPegawaiController::class, 'uploadFile'])->name('pegawai.kegiatan.uploadFile');
+        Route::get('/laporan', 'Pegawai\LaporanKegiatanPegawaiController')->name('pegawai.kegiatan.laporan');
     });
 
     Route::middleware(['isAdmin:penilai'])->group(function () {

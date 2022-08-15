@@ -30,6 +30,7 @@
                                 <th class="text-center">No</th>
                                 <th class="text-center">Nama Pegawai</th>
                                 <th class="text-center">Kegiatan</th>
+                                <th class="text-center">File</th>
                                 <th class="text-center">Target</th>
                                 <th class="text-center">Kerjasama</th>
                                 <th class="text-center">Ketepatan Waktu</th>
@@ -48,6 +49,13 @@
                                     <td class="text-center"></td>
                                     <td>{{ $item->full_name }}</td>
                                     <td>{{ $item->activity_name }}</td>
+                                    <td class="text-center">
+                                        @if ($item->url_file != null)
+                                            <a href="{{ asset('file_kegiatan/'. $item->url_file) }}">Download</a>
+                                        @else
+                                        <span>-</span>
+                                        @endif
+                                    </td>
                                     <td id="target{{ $item->id }}" class="text-center">{{ $item->target }}</td>
                                     <td id="kerjasama{{ $item->id }}" class="text-center">{{ $item->kerjasama }}</td>
                                     <td id="ketepatan_waktu{{ $item->id }}" class="text-center">
@@ -71,10 +79,11 @@
                                 <th class="text-center">No</th>
                                 <th class="text-center">Pegawai</th>
                                 <th class="text-center">Nama Kegiatan</th>
-                                <th class="text-center">Kriteria 1</th>
-                                <th class="text-center">Kriteria 2</th>
-                                <th class="text-center">Kriteria 3</th>
-                                <th class="text-center">Kriteria 4</th>
+                                <th class="text-center">File</th>
+                                <th class="text-center">Target</th>
+                                <th class="text-center">Kerjasama</th>
+                                <th class="text-center">Ketepatan Waktu</th>
+                                <th class="text-center">Kualitas</th>
                                 <th class="text-center">Hasil</th>
                                 <th class="text-center">Aksi</th>
                             </tr>

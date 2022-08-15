@@ -31,7 +31,7 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class=""><a href="{{ route('dashboard') }}"><i class="fa fa-tachometer"></i>
-                <span>Dashboard</span></a></li>
+                    <span>Dashboard</span></a></li>
             @if (auth()->user()->role == 'admin')
                 <li class="header">Admin</li>
                 <!-- Optionally, you can add icons to the links -->
@@ -57,17 +57,15 @@
                 <li class="{{ request()->url() == route('laporan.index') ? 'active' : '' }}"><a
                         href="{{ route('laporan.index') }}"><i class="fa-solid fa-book"></i>
                         <span>laporan</span></a></li>
-
             @endif
             @if (auth()->user()->role == 'pegawai')
-                <li class="header">Penilai</li>
-                <li class="{{ request()->url() == route('penilai.index') ? 'active' : '' }}"><a
-                        href="{{ route('nilai.index') }}"><i class="fas fa-laptop-code"></i>
-                        <span>Kegiatan</span></a></li>
-
-                <li class="{{ request()->url() == route('penilai.index') ? 'active' : '' }}"><a
-                        href="{{ route('nilai.index') }}"><i class="fas fa-laptop-code"></i>
-                        <span>Input Nilai Pegawai</span></a></li>
+                <li class="header">Pegawai</li>
+                <li class="{{ request()->url() == route('pegawai.kegiatan.index') ? 'active' : '' }}"><a
+                        href="{{ route('pegawai.kegiatan.index') }}"><i class="fas fa-laptop-code"></i>
+                        <span>Daftar Kegiatan</span></a></li>
+                <li class="{{ request()->url() == route('pegawai.kegiatan.laporan') ? 'active' : '' }}"><a
+                        href="{{ route('pegawai.kegiatan.laporan') }}"><i class="fas fa-laptop-code"></i>
+                        <span>Laporan Kegiatan</span></a></li>
             @endif
             @if (auth()->user()->role == 'penilai')
                 <li class="header">Penilai</li>
@@ -76,11 +74,12 @@
                         <span>Input Nilai Pegawai</span></a></li>
             @endif
             <li class="header">Pengaturan</li>
-                    <li class="{{ request()->url() == route('profile.index') ? 'active' : '' }}">   <a 
-                        href="{{ route('profile.index') }}"><i class="fas fa-user-alt"></i>
+            <li class="{{ request()->url() == route('profile.index') ? 'active' : '' }}"> <a
+                    href="{{ route('profile.index') }}"><i class="fas fa-user-alt"></i>
                     <span>Profile</span></a></li>
-                    <li class="{{ request()->url() == route('password.index') ? 'active' : '' }}"><a href="{{ route('password.index') }}"><i class="fas fa-cog"></i>
-                        <span>Ganti Password</span></a></li>
+            <li class="{{ request()->url() == route('password.index') ? 'active' : '' }}"><a
+                    href="{{ route('password.index') }}"><i class="fas fa-cog"></i>
+                    <span>Ganti Password</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>
