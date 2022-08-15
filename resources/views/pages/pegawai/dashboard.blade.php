@@ -18,7 +18,7 @@
 
             </div>
             <div class="icon">
-              <i class="fas fa-laptop-code"></i>  
+              <i class="fa-solid fa-business-time"></i>  
             </div>
             <a href="{{ route('pegawai.kegiatan.index') }}" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
         </div>

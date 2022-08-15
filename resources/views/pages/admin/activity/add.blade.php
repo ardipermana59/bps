@@ -34,8 +34,7 @@
                             @enderror
                         </div>
                     </div>
-                    <!-- /.box-body -->
-
+        
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </div>

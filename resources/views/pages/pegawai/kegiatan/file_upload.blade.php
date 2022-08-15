@@ -6,10 +6,63 @@
             @method('put')
             <div class="modal-content">
                 <!-- header-->
+
                 <div class="modal-header">
                     <button class="close" data-dismiss="modal"><span>&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Nilai Pegawai</h4>
                 </div>
+                <!--body-->
+                <div class="box-body">
+                        <div class="form-group">
+                            <label for="name">Nama Kegiatan</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                value="{{ old('name') }}" id="name" name="name" placeholder="Nama Kegiatan">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                     <div class="box-body">
+                        <div class="form-group">
+                            <label for="name">Nama Penilai</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                value="{{ old('name') }}" id="name" name="name" placeholder="Nama Kegiatan">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                     <div class="box-body">
+                        <div class="form-group">
+                            <label for="name">Mulai Kegiatan</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                value="{{ old('name') }}" id="name" name="name" placeholder="Nama Kegiatan">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                     <div class="box-body">
+                        <div class="form-group">
+                            <label for="name">Selesai Kegiatan</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                value="{{ old('name') }}" id="name" name="name" placeholder="Nama Kegiatan">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                 <!--body-->
                 <div class="modal-body">
                     <div id="errorMessage" role="alert">

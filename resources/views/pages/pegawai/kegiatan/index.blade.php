@@ -29,6 +29,9 @@
                             <tr>
                                 <th class="text-center" style="width: 1%">No</th>
                                 <th class="text-center">Nama Kegiatan</th>
+                                <th class="text-center">Nama Penilai</th>
+                                <th class="text-center">Mulai Kegiatan</th>
+                                <th class="text-center">Selesai Kegiatan</th>
                                 <th class="text-center" style="width: 10%">Upload Hasil</th>
                             </tr>
                         </thead>
@@ -55,6 +58,9 @@
                             <tr>
                                 <th class="text-center">No</th>
                                 <th class="text-center">Nama Kegiatan</th>
+                                <th class="text-center">Nama Penilai</th>
+                                <th class="text-center">Mulai Kegiatan</th>
+                                <th class="text-center">Selesai Kegiatan</th>
                                 <th class="text-center">Upload Hasil</th>
                             </tr>
                         </tfoot>

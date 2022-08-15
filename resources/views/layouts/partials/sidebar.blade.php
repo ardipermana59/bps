@@ -61,7 +61,7 @@
             @if (auth()->user()->role == 'pegawai')
                 <li class="header">Pegawai</li>
                 <li class="{{ request()->url() == route('pegawai.kegiatan.index') ? 'active' : '' }}"><a
-                        href="{{ route('pegawai.kegiatan.index') }}"><i class="fas fa-laptop-code"></i>
+                        href="{{ route('pegawai.kegiatan.index') }}"><i class="fa-solid fa-business-time"></i>
                         <span>Daftar Kegiatan</span></a></li>
                 <li class="{{ request()->url() == route('pegawai.kegiatan.laporan') ? 'active' : '' }}"><a
                         href="{{ route('pegawai.kegiatan.laporan') }}"><i class="fas fa-laptop-code"></i>
