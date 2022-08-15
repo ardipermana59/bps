@@ -3,13 +3,15 @@
 
 <head>
     <style>
+        body {
+            font-family: sans-serif;
+        }
         .styled-table {
             text-align: center;
             width: 100%;
             border-collapse: collapse;
             margin: 25px 0;
             font-size: 0.9em;
-            font-family: sans-serif;
             min-width: 400px;
             border: 2px solid #dddddd;
         }

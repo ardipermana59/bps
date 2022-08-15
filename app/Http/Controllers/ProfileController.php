@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +13,8 @@ class profileController extends Controller
 
     public function index()
     {
-        return view('pages.settings.profile');
+        $data = Employee::where('user_id', auth()->user()->id)->first();
+        return view('pages.settings.profile', compact('data'));
     }
     /**
      * Handle the incoming request.
@@ -22,27 +24,43 @@ class profileController extends Controller
      */
     public function update(Request $request)
     {
+       
         $this->validator($request->all())->validate();
 
-        // cari user di database
-        $user =  User::find(auth()->user()->id);
-
-        // cek user ada atau tidak
-        if ($user == null) {
+        // cari user didatabase
+        $user = User::find(auth()->user()->id);
+        if($user == null){
             return redirect()->back()->with('error', 'User Tidak Ditemukan');
         }
-
-        // update password
-        $user->name = Hash::make($request->name);
+        
+        // update data user
+        $user->name = $request->name;
+        $user->email = $request->email;
         $user->save();
 
-        return redirect()->route('profile.index')->with('success', 'profile berhasil diubah');
+        // cari data pegawai
+        $employee = Employee::where('user_id', auth()->user()->id)->first();
+
+        if($employee == null){
+            return redirect()->back()->with('error', 'Pegawai Tidak Ditemukan');
+        }
+
+        $employee->full_name = $request->name;
+        $employee->gender = $request->gender;
+        $employee->hp = $request->hp;
+        $employee->address = $request->address;
+        $employee->save();
+        return redirect()->route('profile.index')->with('success', 'Profile berhasil diubah');
     }
 
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'profile' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => ['required', 'string', 'max:255'],
+            'hp' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string'],
+            'gender' => ['required', 'string','in:Laki-laki,Perempuan'],
+            'email' => ['required', 'email'],
         ]);
     }
 }
