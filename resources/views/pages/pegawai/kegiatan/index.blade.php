@@ -41,6 +41,9 @@
                                 <tr>
                                     <td class="text-center"></td>
                                     <td>{{ $item->activity_name }}</td>
+                                    <td>{{ $item->panilai_name }}</td>
+                                    <td>{{ $item->kegiatan_mulai_kegiatan }}</td>
+                                    <td>{{ $item->kegiatan_selesai_kegiatan }}</td>
                                     <td class="text-center">
                                         @if ($item->url_file != null)
                                             <a href="{{ asset('file_kegiatan/'.$item->url_file) }}">Download</a>|
