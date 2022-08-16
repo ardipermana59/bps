@@ -12,7 +12,7 @@
     <!-- ./col -->
     <div class="col-lg-12 col-xs-12 ">
         <!-- small box -->
-        <div class="small-box bg-green">
+        <div class="small-box bg-yellow">
             <div class="inner">
                 <h2 style="font-family: calibri" class="text-center">Kegiatan</h2>
 

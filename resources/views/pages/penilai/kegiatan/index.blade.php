@@ -12,7 +12,7 @@
 @endpush
 
 @section('content')
-    @include('pages.pegawai.kegiatan.file_upload')
+    @include('pages.penilai.kegiatan.file_upload')
     <div class="row">
         <div class="col-xs-12">
             <a href="{{ route('pegawai.kegiatan.laporan') }}">
