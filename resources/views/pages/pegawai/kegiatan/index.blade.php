@@ -18,7 +18,7 @@
             <a href="{{ route('pegawai.kegiatan.laporan') }}">
                 <button class="btn btn-primary"><i class="fa-solid fa-file-arrow-down"></i> PDF</button>
             </a>
-            <a href="{{ route('pegawai.kegiatan.laporan') }}">
+            <a href="{{ route('pegawai.kegiatan.create') }}">
                 <button class="btn btn-primary"><i class="fa-solid fa-file-arrow-down"></i> Upload</button>
             </a>
             <div class="box">

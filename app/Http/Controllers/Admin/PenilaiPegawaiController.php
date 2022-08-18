@@ -38,7 +38,7 @@ class PenilaiPegawaiController extends Controller
         $evaluators = $this->getEvaluators();
 
         // mengambil seluruh data pegawai yang bukan penilai
-        $employees = $this->getEmployees();
+        $employees = $this->ge[]tEmployees();
 
         return view('pages.admin.struktur.add', compact('employees', 'evaluators'));
     }

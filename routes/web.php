@@ -98,6 +98,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/kegiatan', [KegiatanPegawaiController::class, 'index'])->name('pegawai.kegiatan.index');
         Route::put('/kegiatan/upload/{id}', [KegiatanPegawaiController::class, 'uploadFile'])->name('pegawai.kegiatan.uploadFile');
         Route::get('/laporan', 'Pegawai\LaporanKegiatanPegawaiController')->name('pegawai.kegiatan.laporan');
+        Route::get('/pegawai/kegiatan/upload', [KegiatanPegawaiController::class, 'create'])->name('pegawai.kegiatan.create');
     });
 
     Route::middleware(['isAdmin:penilai'])->group(function () {

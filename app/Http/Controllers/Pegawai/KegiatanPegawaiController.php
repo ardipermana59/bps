@@ -39,4 +39,12 @@ class KegiatanPegawaiController extends Controller
         return redirect()->route('pegawai.kegiatan.index')->with('success', 'File berhasil diupload');
     }
 
+     public function create()
+    {
+        $employees = Employee::join('positions', 'employees.position_id', '=', 'positions.id')
+            ->select('employees.*', 'positions.name as position')
+            ->get();
+        return view('pages.pegawai.kegiatan.add', compact('employees'));
+    }
+
 }
