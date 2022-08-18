@@ -36,7 +36,6 @@
                                 <th class="text-center">Realisasi</th>
                                 <th class="text-center">Mulai Kegiatan</th>
                                 <th class="text-center">Selesai Kegiatan</th>
-                                <th class="text-center" style="width: 10%">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,7 +48,6 @@
                                     <td>{{ $item->realisasi }}</td>
                                     <td>{{ $item->kegiatan_mulai_kegiatan }}</td>
                                     <td>{{ $item->kegiatan_selesai_kegiatan }}</td>
-                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -61,8 +59,7 @@
                                 <th class="text-center">Realisasi</th>
                                 <th class="text-center">Mulai Kegiatan</th>
                                 <th class="text-center">Selesai Kegiatan</th>
-                                <th class="text-center" style="width: 10%">Aksi</th>
-                            </tr>
+                                </tr>
                         </tfoot>
                     </table>
                 </div>

@@ -73,8 +73,8 @@
                         href="{{ route('nilai.index') }}"><i class="fas fa-laptop-code"></i>
                         <span>Input Nilai Pegawai</span></a></li>
 
-                <li class="{{ request()->url() == route('nilai.index') ? 'active' : '' }}"><a
-                        href="{{ route('nilai.index') }}"><i class="fa-solid fa-business-time"></i>
+                <li class="{{ request()->url() == route('penilai.kegiatan.index') ? 'active' : '' }}"><a
+                        href="{{ route('penilai.kegiatan.index') }}"><i class="fa-solid fa-business-time"></i>
                         <span>Daftar Kegiatan</span></a></li>
             @endif
             <li class="header">Pengaturan</li>

@@ -38,7 +38,7 @@ class NilaiPegawaiController extends Controller
      */
     public function create()
     {
-        return view('pages.penilai.pegawai.add');
+        return view('pages.penilai.kegiatan.add');
     }
 
     /**

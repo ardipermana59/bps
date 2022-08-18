@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PenilaiPegawaiController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\Pegawai\KegiatanPegawaiController;
+use App\Http\Controllers\Penilai\KegiatanPenilaiController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\Penilai\NilaiPegawaiController;
 use Illuminate\Support\Facades\Auth;
@@ -100,11 +101,15 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware(['isAdmin:penilai'])->group(function () {
+        // Halaman Pegawai
         Route::get('/nilai/pegawai', [NilaiPegawaiController::class, 'index'])->name('nilai.index');
         Route::get('/nilai/tambah-nilai', [NilaiPegawaiController::class, 'create'])->name('nilai.create');
         Route::get('/nilai/pegawai/export/pdf', [NilaiPegawaiController::class, 'exportPdf'])->name('nilai.pdf');
         Route::get('/nilai/pegawai/export/pdf/{id}', [NilaiPegawaiController::class, 'exportPdfEmployee'])->name('nilai.pdf.employee');
         Route::put('/nilai/pegawai/{id}', [NilaiPegawaiController::class, 'update'])->name('nilai.update');
+
+        //Halaman Kegiatan
+         Route::get('/nilai/kegiatan', [KegiatanPenilaiController::class, 'index'])->name('penilai.kegiatan.index');
     });
 });
 

@@ -12,13 +12,13 @@
 @endpush
 
 @section('content')
-    @include('pages.penilai.kegiatan.file_upload')
+    @include('pages.penilai.kegiatan.index')
     <div class="row">
         <div class="col-xs-12">
-            <a href="{{ route('pegawai.kegiatan.laporan') }}">
+            <a href="{{ route('niai.pdf') }}">
                 <button class="btn btn-primary"><i class="fa-solid fa-file-arrow-down"></i> PDF</button>
             </a>
-            <a href="{{ route('pegawai.kegiatan.laporan') }}">
+            <a href="{{ route('nilai.create') }}">
                 <button class="btn btn-primary"><i class="fa-solid fa-file-arrow-down"></i> Upload</button>
             </a>
             <div class="box">
@@ -36,7 +36,6 @@
                                 <th class="text-center">Realisasi</th>
                                 <th class="text-center">Mulai Kegiatan</th>
                                 <th class="text-center">Selesai Kegiatan</th>
-                                <th class="text-center" style="width: 10%">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,7 +48,6 @@
                                     <td>{{ $item->realisasi }}</td>
                                     <td>{{ $item->kegiatan_mulai_kegiatan }}</td>
                                     <td>{{ $item->kegiatan_selesai_kegiatan }}</td>
-                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -61,7 +59,6 @@
                                 <th class="text-center">Realisasi</th>
                                 <th class="text-center">Mulai Kegiatan</th>
                                 <th class="text-center">Selesai Kegiatan</th>
-                                <th class="text-center" style="width: 10%">Aksi</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -82,7 +79,7 @@
             $('#modalAddFileKegiatan form').show
         @endif
         function confirmUpload(id) {
-            $('#modalAddFileKegiatan form').attr('action', "{{ url('/') }}/pegawai/kegiatan/upload/" + id)
+            $('#modalAddFileKegiatan form').attr('action', "{{ url('/') }}/penilai/kegiatan/upload/" + id)
         }
     </script>
     <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
