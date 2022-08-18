@@ -25,9 +25,9 @@
 
                      <div class="box-body">
                     <div class="form-group">
-                            <label for="name">Nama Kegiatan</label> 
+                            <label for="name">Nama Penilai</label> 
                             <select class="form-control select2" name="penilai" style="width: 100%;">
-                                <option value="">Pilih Kegiatan</option>
+                                <option value="">Pilih Penilai</option>
                                 @foreach ($employees as $employee)
                                     <option value="{{ $employee->id }}" {{ old('penilai') ? 'selected' : '' }}>
                                         {{ $employee->full_name }} - ({{ $employee->position }})</option>
@@ -43,9 +43,9 @@
 
                     <div class="box-body">
                     <div class="form-group">
-                            <label for="name">Nama Penilai</label>
+                            <label for="name">Nama Kegiatan</label>
                             <select class="form-control select2" name="penilai" style="width: 100%;">
-                                <option value="">Pilih Penilai</option>
+                                <option value="">Pilih Kegiatan</option>
                                 @foreach ($employees as $employee)
                                     <option value="{{ $employee->id }}" {{ old('penilai') ? 'selected' : '' }}>
                                         {{ $employee->full_name }} - ({{ $employee->position }})</option>
@@ -92,6 +92,7 @@
                                 value="{{ old('name') }}" id="name" name="name" placeholder="Nama Kegiatan">
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
+
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror

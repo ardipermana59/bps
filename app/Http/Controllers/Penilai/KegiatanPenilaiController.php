@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class KegiatanPenilaiController extends Controller
 {
+
     public function index(Request $request)
     {
         $employee = Employee::where('user_id', auth()->user()->id)->first();
