@@ -31,8 +31,8 @@
                         <thead>
                             <tr>
                                 <th class="text-center" style="width: 1%">No</th>
-                                <th class="text-center">Nama Penilai</th>
                                 <th class="text-center">Nama Kegiatan</th>
+                                <th class="text-center">Nama Penilai</th>
                                 <th class="text-center">Target</th>
                                 <th class="text-center">Realisasi</th>
                                 <th class="text-center">Mulai Kegiatan</th>
@@ -55,8 +55,8 @@
                         <tfoot>
                             <tr>
                                 <th class="text-center">No</th>
-                                <th class="text-center">Nama Penilai</th>
                                 <th class="text-center">Nama Kegiatan</th>
+                                <th class="text-center">Nama Penilai</th>
                                <th class="text-center">Target</th>
                                 <th class="text-center">Realisasi</th>
                                 <th class="text-center">Mulai Kegiatan</th>

@@ -22,11 +22,12 @@
                 <!-- form start -->
                 <form role="form" action="{{ route('penilai.store') }}" method="post">
                     @csrf
-                    <div class="box-body">
+
+                     <div class="box-body">
                     <div class="form-group">
-                            <label for="name">Nama Kegiatan</label> 
+                            <label for="name">Nama Penilai</label> 
                             <select class="form-control select2" name="penilai" style="width: 100%;">
-                                <option value="">Pilih Kegiatan</option>
+                                <option value="">Pilih Penilai</option>
                                 @foreach ($employees as $employee)
                                     <option value="{{ $employee->id }}" {{ old('penilai') ? 'selected' : '' }}>
                                         {{ $employee->full_name }} - ({{ $employee->position }})</option>
@@ -42,9 +43,9 @@
 
                     <div class="box-body">
                     <div class="form-group">
-                            <label for="name">Nama Penilai</label>
-                            <select class="form-control select2" name="Nama Kegiatan" style="width: 100%;">
-                                <option value="">Pilih Penilai</option>
+                            <label for="name">Nama Kegiatan</label>
+                            <select class="form-control select2" name="penilai" style="width: 100%;">
+                                <option value="">Pilih Kegiatan</option>
                                 @foreach ($employees as $employee)
                                     <option value="{{ $employee->id }}" {{ old('penilai') ? 'selected' : '' }}>
                                         {{ $employee->full_name }} - ({{ $employee->position }})</option>
@@ -61,14 +62,8 @@
                      <div class="box-body">
                         <div class="form-group">
                             <label for="name">Target</label>
-                            <select class="form-control select2 name="Target" style="width: 100%;">
-                                <option value="1">-Pilih Target-</option>
-                                <option value="1">1</option>
-                                <option value="1">2</option>
-                                <option value="1">3</option>
-                                <option value="1">4</option>
-                                <option value="1">5</option>
-                            </select>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                value="{{ old('name') }}" id="name" name="name" placeholder="Nama Kegiatan">
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -80,14 +75,8 @@
                      <div class="box-body">
                         <div class="form-group">
                             <label for="name">Realisasi</label>
-                            <select class="form-control select2 name="Target" style="width: 100%;">
-                                <option value="1">-Pilih Realisasi-</option>
-                                <option value="1">1</option>
-                                <option value="1">2</option>
-                                <option value="1">3</option>
-                                <option value="1">4</option>
-                                <option value="1">5</option>
-                            </select>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                value="{{ old('name') }}" id="name" name="name" placeholder="Nama Kegiatan">
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -99,7 +88,7 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="name">Mulai Kegiatan</label>
-                            <input type="datetime-local"  class="form-control @error('name') is-invalid @enderror"
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
                                 value="{{ old('name') }}" id="name" name="name" placeholder="Nama Kegiatan">
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -113,7 +102,7 @@
                      <div class="box-body">
                         <div class="form-group">
                             <label for="name">Selesai Kegiatan</label>
-                            <input type="datetime-local" class="form-control @error('name') is-invalid @enderror"
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
                                 value="{{ old('name') }}" id="name" name="name" placeholder="Nama Kegiatan">
                             @error('name')
                                 <span class="invalid-feedback" role="alert">

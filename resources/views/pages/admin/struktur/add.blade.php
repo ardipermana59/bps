@@ -45,7 +45,7 @@
                         <div class="form-group">
                             <label for="name">Nama Pegawai</label>
                             <select class="form-control select2" name="pegawai" style="width: 100%;">
-                                <option value="" {{ old('pegawai') ? '' : 'selected' }}>Pilih Penilai</option>
+                                <option value="" {{ old('pegawai') ? '' : 'selected' }}>Pilih Pegawai</option>
                                 @foreach ($employees as $employee)
                                     <option value="{{ $employee->id }}" {{ old('pegawai') ? 'selected' : '' }}>{{ $employee->employee_name }} -
                                         ({{ $employee->position_name }})</option>
