@@ -32,6 +32,9 @@
         .invalid-feedback {
             color: red !important;
         }
+        .box {
+            overflow: auto;
+        }
     </style>
     <!-- Styles -->
     @stack('style')

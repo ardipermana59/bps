@@ -99,6 +99,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/kegiatan/upload/{id}', [KegiatanPegawaiController::class, 'uploadFile'])->name('pegawai.kegiatan.uploadFile');
         Route::get('/laporan', 'Pegawai\LaporanKegiatanPegawaiController')->name('pegawai.kegiatan.laporan');
         Route::get('/pegawai/kegiatan/upload', [KegiatanPegawaiController::class, 'create'])->name('pegawai.kegiatan.create');
+        Route::post('/pegawai/kegiatan/upload', [KegiatanPegawaiController::class, 'store'])->name('pegawai.kegiatan.store');
     });
 
     Route::middleware(['isAdmin:penilai'])->group(function () {

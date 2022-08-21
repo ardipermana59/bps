@@ -30,8 +30,11 @@
                                 <th class="text-center">No</th>
                                 <th class="text-center">Nama Pegawai</th>
                                 <th class="text-center">Kegiatan</th>
-                                <th class="text-center">File</th>
                                 <th class="text-center">Target</th>
+                                <th class="text-center">Realisasi</th>
+                                <th class="text-center">Mulai Kegiatan</th>
+                                <th class="text-center">Selesai Kegiatan</th>
+                                <th class="text-center">Nilai Target</th>
                                 <th class="text-center">Kerjasama</th>
                                 <th class="text-center">Ketepatan Waktu</th>
                                 <th class="text-center">Kualitas</th>
@@ -49,13 +52,10 @@
                                     <td class="text-center"></td>
                                     <td>{{ $item->full_name }}</td>
                                     <td>{{ $item->activity_name }}</td>
-                                    <td class="text-center">
-                                        @if ($item->url_file != null)
-                                            <a href="{{ asset('file_kegiatan/'. $item->url_file) }}">Download</a>
-                                        @else
-                                        <span>-</span>
-                                        @endif
-                                    </td>
+                                    <td id="target_kegiatan{{ $item->id }}" class="text-center">{{ $item->target_kegiatan ?? '-' }}</td>
+                                    <td id="realisasi{{ $item->id }}" class="text-center">{{ $item->realisasi ?? '-' }}</td>
+                                    <td id="mulai_kegiatan{{ $item->id }}" class="text-center">{{ $item->mulai_kegiatan ?? '-' }}</td>
+                                    <td id="selesai_kegiatan{{ $item->id }}" class="text-center">{{ $item->selesai_kegiatan ?? '-' }}</td>
                                     <td id="target{{ $item->id }}" class="text-center">{{ $item->target }}</td>
                                     <td id="kerjasama{{ $item->id }}" class="text-center">{{ $item->kerjasama }}</td>
                                     <td id="ketepatan_waktu{{ $item->id }}" class="text-center">
@@ -77,10 +77,13 @@
                         <tfoot>
                             <tr>
                                 <th class="text-center">No</th>
-                                <th class="text-center">Pegawai</th>
-                                <th class="text-center">Nama Kegiatan</th>
-                                <th class="text-center">File</th>
+                                <th class="text-center">Nama Pegawai</th>
+                                <th class="text-center">Kegiatan</th>
                                 <th class="text-center">Target</th>
+                                <th class="text-center">Realisasi</th>
+                                <th class="text-center">Mulai Kegiatan</th>
+                                <th class="text-center">Selesai Kegiatan</th>
+                                <th class="text-center">Nilai Target</th>
                                 <th class="text-center">Kerjasama</th>
                                 <th class="text-center">Ketepatan Waktu</th>
                                 <th class="text-center">Kualitas</th>
@@ -110,6 +113,11 @@
             $('#kerjasama').val(data.kerjasama);
             $('#ketepatan_waktu').val(data.ketepatan_waktu);
             $('#kualitas').val(data.kualitas);
+
+            $('#target_kegiatan').val(data.target_kegiatan ?? '');
+            $('#realisasi').val(data.realisasi ?? '');
+            $('#mulai_kegiatan').val(data.mulai_kegiatan ?? '');
+            $('#selesai_kegiatan').val(data.selesai_kegiatan ?? '');
             $('#modalAddNilai').modal('show');
         }
 
@@ -120,6 +128,10 @@
                 let kerjasama = jQuery('#kerjasama').val()
                 let ketepatan_waktu = jQuery('#ketepatan_waktu').val()
                 let kualitas = jQuery('#kualitas').val()
+                let target_kegiatan = jQuery('#target_kegiatan').val()
+                let realisasi = jQuery('#realisasi').val()
+                let mulai_kegiatan = jQuery('#mulai_kegiatan').val()
+                let selesai_kegiatan = jQuery('#selesai_kegiatan').val()
 
                 e.preventDefault();
                 $.ajaxSetup({
@@ -150,6 +162,10 @@
                         kerjasama: kerjasama,
                         ketepatan_waktu: ketepatan_waktu,
                         kualitas: kualitas,
+                        target_kegiatan: target_kegiatan,
+                        realisasi: realisasi,
+                        mulai_kegiatan: mulai_kegiatan,
+                        selesai_kegiatan: selesai_kegiatan,
                     },
                     error: function(result) {
                         switch (result.status) {
@@ -194,6 +210,10 @@
                     },
 
                     success: function(result) {
+                        $("#target_kegiatan" + id).text(target_kegiatan)
+                        $("#realisasi" + id).text(realisasi)
+                        $("#mulai_kegiatan" + id).text(mulai_kegiatan)
+                        $("#selesai_kegiatan" + id).text(selesai_kegiatan)
                         $("#target" + id).text(target)
                         $("#kerjasama" + id).text(kerjasama)
                         $("#ketepatan_waktu" + id).text(ketepatan_waktu)

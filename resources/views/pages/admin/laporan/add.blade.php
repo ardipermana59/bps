@@ -22,6 +22,66 @@
                             placeholder="Nama Pegawai" readonly>
                     </div>
                     <div class="form-group">
+                        <label for="target_kegiatan">Target</label>
+                        <select id="target_kegiatan" class="form-control select2 @error('target_kegiatan') is-invalid @enderror"
+                            name="target_kegiatan" style="width: 100%;" required>
+                            <option value="">-Pilih Target-</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        @error('target_kegiatan')
+                            <span class="invalid-feedback" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="realisasi">Realisasi</label>
+                        <select id="realisasi" class="form-control select2 @error('realisasi') is-invalid @enderror"
+                            name="realisasi" style="width: 100%;" required>
+                            <option value="">-Pilih Realisasi-</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        @error('realisasi')
+                            <span class="invalid-feedback" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mulai_kegiatan">Mulai Kegiatan</label>
+                        <input type="date" class="form-control @error('mulai_kegiatan') is-invalid @enderror"
+                            value="{{ old('mulai_kegiatan') }}" id="mulai_kegiatan" name="mulai_kegiatan"
+                            placeholder="Mulai Kegiatan" required>
+
+                        @error('mulai_kegiatan')
+                            <span class="invalid-feedback" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="selesai_kegiatan">Selesai Kegiatan</label>
+                        <input id="selesai_kegiatan" type="date"
+                            class="form-control @error('selesai_kegiatan') is-invalid @enderror"
+                            value="{{ old('selesai_kegiatan') }}" id="selesai_kegiatan" name="selesai_kegiatan"
+                            placeholder="Waktu Selesai Kegiatan" required>
+                        @error('selesai_kegiatan')
+                            <span class="invalid-feedback" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="target">Target</label>
                         <input type="number" class="form-control" value="" id="target" name="target" max="100"
                             placeholder="Target" required>

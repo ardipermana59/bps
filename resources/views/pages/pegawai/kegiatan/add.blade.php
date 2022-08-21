@@ -20,112 +20,95 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="{{ route('penilai.store') }}" method="post">
+                <form role="form" action="{{ route('pegawai.kegiatan.store') }}" method="post">
                     @csrf
                     <div class="box-body">
-                    <div class="form-group">
-                            <label for="name">Nama Kegiatan</label> 
-                            <select class="form-control select2" name="penilai" style="width: 100%;">
-                                <option value="">Pilih Kegiatan</option>
-                                @foreach ($employees as $employee)
-                                    <option value="{{ $employee->id }}" {{ old('penilai') ? 'selected' : '' }}>
-                                        {{ $employee->full_name }} - ({{ $employee->position }})</option>
-                                @endforeach
-                            </select>
-                            @error('penilai')
-                                <span class="invalid-feedback" role="alert">
-                                    {{ $message }}
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="box-body">
-                    <div class="form-group">
+                        <div class="form-group">
                             <label for="name">Nama Penilai</label>
-                            <select class="form-control select2" name="Nama Kegiatan" style="width: 100%;">
-                                <option value="">Pilih Penilai</option>
-                                @foreach ($employees as $employee)
-                                    <option value="{{ $employee->id }}" {{ old('penilai') ? 'selected' : '' }}>
-                                        {{ $employee->full_name }} - ({{ $employee->position }})</option>
+                            <input type="text" class="form-control" value="{{ $penilai->name }}" id="penilai"
+                                name="penilai" placeholder="Nama Penilai" readonly required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="kegiatan">Nama Kegiatan</label>
+                            <select id="kegiatan" class="form-control select2 @error('kegiatan') is-invalid @enderror"
+                                name="kegiatan" style="width: 100%;" required>
+                                <option value="">Pilih Kegiatan</option>
+                                @foreach ($activities as $activity)
+                                    <option value="{{ $activity->id }}" {{ old('kegiatan') ? 'selected' : '' }}>
+                                        {{ $activity->name }}</option>
                                 @endforeach
                             </select>
-                            @error('penilai')
+                            @error('kegiatan')
+                                <span class="invalid-feedback" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Target">Target</label>
+                            <select id="target" class="form-control select2 @error('target') is-invalid @enderror"
+                                name="target" style="width: 100%;" required>
+                                <option value="">-Pilih Target-</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            @error('target')
+                                <span class="invalid-feedback" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="realisasi">Realisasi</label>
+                            <select id="realisasi" class="form-control select2 @error('realisasi') is-invalid @enderror"
+                                name="realisasi" style="width: 100%;" required>
+                                <option value="">-Pilih Realisasi-</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            @error('realisasi')
+                                <span class="invalid-feedback" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mulai_kegiatan">Mulai Kegiatan</label>
+                            <input type="date" class="form-control @error('mulai_kegiatan') is-invalid @enderror"
+                                value="{{ old('mulai_kegiatan') }}" id="mulai_kegiatan" name="mulai_kegiatan"
+                                placeholder="Mulai Kegiatan" required>
+
+                            @error('mulai_kegiatan')
+                                <span class="invalid-feedback" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="selesai_kegiatan">Selesai Kegiatan</label>
+                            <input id="selesai_kegiatan" type="date"
+                                class="form-control @error('selesai_kegiatan') is-invalid @enderror"
+                                value="{{ old('selesai_kegiatan') }}" id="selesai_kegiatan" name="selesai_kegiatan"
+                                placeholder="Waktu Selesai Kegiatan" required>
+                            @error('selesai_kegiatan')
                                 <span class="invalid-feedback" role="alert">
                                     {{ $message }}
                                 </span>
                             @enderror
                         </div>
                     </div>
-
-                     <div class="box-body">
-                        <div class="form-group">
-                            <label for="name">Target</label>
-                            <select class="form-control select2 name="Target" style="width: 100%;">
-                                <option value="1">-Pilih Target-</option>
-                                <option value="1">1</option>
-                                <option value="1">2</option>
-                                <option value="1">3</option>
-                                <option value="1">4</option>
-                                <option value="1">5</option>
-                            </select>
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                     <div class="box-body">
-                        <div class="form-group">
-                            <label for="name">Realisasi</label>
-                            <select class="form-control select2 name="Target" style="width: 100%;">
-                                <option value="1">-Pilih Realisasi-</option>
-                                <option value="1">1</option>
-                                <option value="1">2</option>
-                                <option value="1">3</option>
-                                <option value="1">4</option>
-                                <option value="1">5</option>
-                            </select>
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="box-body">
-                        <div class="form-group">
-                            <label for="name">Mulai Kegiatan</label>
-                            <input type="datetime-local"  class="form-control @error('name') is-invalid @enderror"
-                                value="{{ old('name') }}" id="name" name="name" placeholder="Nama Kegiatan">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                     <div class="box-body">
-                        <div class="form-group">
-                            <label for="name">Selesai Kegiatan</label>
-                            <input type="datetime-local" class="form-control @error('name') is-invalid @enderror"
-                                value="{{ old('name') }}" id="name" name="name" placeholder="Nama Kegiatan">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <!-- /.box-body -->
-
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>

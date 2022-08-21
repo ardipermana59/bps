@@ -19,7 +19,7 @@ class AmbilKegiatanSeeder extends Seeder
             $ambilKegiatan = AmbilKegiatan::create([
                 'employee_id' => $i,
                 'activity_id' => $idKegiatan,
-                'target' => 5 * rand(1, 20) . 'Lembar',
+                'target' => rand(1, 5),
             ]);
             Nilai::create([
                 'ambil_kegiatan_id' => $ambilKegiatan->id,

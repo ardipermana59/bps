@@ -42,13 +42,14 @@
                         <tbody>
 
                             @foreach ($data as $item)
-                                <tr>
-                                    <td class="text-center"></td>
+                                <tr class="text-center">
+                                    <td></td>
                                     <td>{{ $item->activity_name }}</td>
-                                    <td>{{ $item->target }}</td>
-                                    <td>{{ $item->realisasi }}</td>
-                                    <td>{{ $item->kegiatan_mulai_kegiatan }}</td>
-                                    <td>{{ $item->kegiatan_selesai_kegiatan }}</td>
+                                    <td>{{ $penilai->full_name }}</td>
+                                    <td>{{ $item->target ?? '-' }}</td>
+                                    <td>{{ $item->realisasi  ?? '-'}}</td>
+                                    <td>{{ $item->mulai_kegiatan  ?? '-'}}</td>
+                                    <td>{{ $item->selesai_kegiatan  ?? '-'}}</td>
                                 </tr>
                             @endforeach
                         </tbody>

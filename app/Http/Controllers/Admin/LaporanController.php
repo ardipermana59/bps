@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AmbilKegiatan;
 use App\Models\Employee;
 use App\Models\Nilai;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -23,7 +24,7 @@ class LaporanController extends Controller
             ->join('penilai_pegawais', 'penilai_pegawais.employee_id', 'employees.id')
             ->join('evaluators', 'evaluators.id', 'penilai_pegawais.evaluator_id')
             ->join('employees as pengawas', 'pengawas.id', 'evaluators.employee_id')
-            ->select('ambil_kegiatans.url_file','employees.full_name', 'employees.id as employee_id', 'activities.name as activity_name', 'nilais.id', 'nilais.target_realisasi as target', 'nilais.kerjasama', 'nilais.ketepatan_waktu', 'nilais.kualitas')
+            ->select('ambil_kegiatans.target as target_kegiatan', 'ambil_kegiatans.realisasi', 'ambil_kegiatans.mulai_kegiatan','ambil_kegiatans.selesai_kegiatan','employees.full_name', 'employees.id as employee_id', 'activities.name as activity_name', 'nilais.id', 'nilais.target_realisasi as target', 'nilais.kerjasama', 'nilais.ketepatan_waktu', 'nilais.kualitas')
             ->get();
         return view('pages.admin.laporan.index', compact('data'));
     }
@@ -36,6 +37,10 @@ class LaporanController extends Controller
             'kerjasama' => 'required|integer|min:1|max:100',
             'ketepatan_waktu' => 'required|integer|min:1|max:100',
             'kualitas' => 'required|integer|min:1|max:100',
+            'target_kegiatan' => 'required|integer|min:1|max:5',
+            'realisasi' => 'required|integer|min:1|max:5',
+            'mulai_kegiatan' => 'required|date',
+            'selesai_kegiatan' => 'required|date',
         ]);
 
         $nilai = Nilai::find($request->id);
@@ -44,6 +49,18 @@ class LaporanController extends Controller
             return response()->json(['message' => 'Data tidak ditemukan'], 404);
         }
 
+        $kegiatan = AmbilKegiatan::find($nilai->ambil_kegiatan_id);
+
+        if ($kegiatan == null) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+        // update Kegiatan
+        $kegiatan->target = $request->target_kegiatan;
+        $kegiatan->realisasi = $request->realisasi;
+        $kegiatan->mulai_kegiatan = $request->mulai_kegiatan;
+        $kegiatan->selesai_kegiatan = $request->selesai_kegiatan;
+        $kegiatan->save();
+        
         $nilai->target_realisasi = $request->target;
         $nilai->kerjasama = $request->kerjasama;
         $nilai->ketepatan_waktu = $request->ketepatan_waktu;
