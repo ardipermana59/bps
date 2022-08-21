@@ -87,7 +87,7 @@ class EmployeeSeeder extends Seeder
                 'user_id' => $user->id,
                 'position_id' => 4,
                 'nip' => $nip,
-                'full_name' => $faker->name,
+                'full_name' => $user->name,
             ]);
             $nip++;
         }
