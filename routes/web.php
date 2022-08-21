@@ -111,6 +111,9 @@ Route::middleware(['auth'])->group(function () {
 
         //Halaman Kegiatan
          Route::get('/nilai/kegiatan', [KegiatanPenilaiController::class, 'index'])->name('penilai.kegiatan.index');
+         Route::put('/nilai/kegiatan/{id}', [KegiatanPenilaiController::class, 'update'])->name('penilai.kegiatan.update');
+         Route::get('/nilai/kegiatan/tambah-kegiatan', [KegiatanPenilaiController::class, 'create'])->name('penilai.kegiatan.create');
+
     });
 });
 

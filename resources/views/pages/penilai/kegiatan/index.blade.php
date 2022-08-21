@@ -12,15 +12,9 @@
 @endpush
 
 @section('content')
-    @include('pages.penilai.kegiatan.index')
+    @include('pages.pegawai.kegiatan.file_upload')
     <div class="row">
         <div class="col-xs-12">
-            <a href="{{ route('niai.pdf') }}">
-                <button class="btn btn-primary"><i class="fa-solid fa-file-arrow-down"></i> PDF</button>
-            </a>
-            <a href="{{ route('nilai.create') }}">
-                <button class="btn btn-primary"><i class="fa-solid fa-file-arrow-down"></i> Upload</button>
-            </a>
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Data Pegawai</h3>
@@ -32,10 +26,12 @@
                             <tr>
                                 <th class="text-center" style="width: 1%">No</th>
                                 <th class="text-center">Nama Kegiatan</th>
+                                <th class="text-center">Nama Penilai</th>
                                 <th class="text-center">Target</th>
                                 <th class="text-center">Realisasi</th>
                                 <th class="text-center">Mulai Kegiatan</th>
                                 <th class="text-center">Selesai Kegiatan</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,11 +51,13 @@
                             <tr>
                                 <th class="text-center">No</th>
                                 <th class="text-center">Nama Kegiatan</th>
+                                <th class="text-center">Nama Penilai</th>
                                <th class="text-center">Target</th>
                                 <th class="text-center">Realisasi</th>
                                 <th class="text-center">Mulai Kegiatan</th>
                                 <th class="text-center">Selesai Kegiatan</th>
-                            </tr>
+                                <th class="text-center">Aksi</th>
+                                </tr>
                         </tfoot>
                     </table>
                 </div>
@@ -79,7 +77,7 @@
             $('#modalAddFileKegiatan form').show
         @endif
         function confirmUpload(id) {
-            $('#modalAddFileKegiatan form').attr('action', "{{ url('/') }}/penilai/kegiatan/upload/" + id)
+            $('#modalAddFileKegiatan form').attr('action', "{{ url('/') }}/pegawai/kegiatan/upload/" + id)
         }
     </script>
     <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
