@@ -38,7 +38,7 @@
                                 <tr>
                                     <td class="text-center"></td>
                                     <td>{{ $kegiatan->name }}</td>
-                                     <td style="width: 10%">
+                                     <td style="width: 10%" class="text-center">
                                          <a href="{{ route('activity.edit', ['id' => $kegiatan->id]) }}">
                                             <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
                                         </a>

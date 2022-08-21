@@ -14,7 +14,7 @@
     <!-- ./col -->
     <div class="col-lg-12 col-xs-12 ">
         <!-- small box -->
-        <div class="small-box bg-green">
+        <div class="small-box bg-purple">
             <div class="inner">
                 <h2 style="font-family: calibri" class="text-center">Nilai Pegawai</h2>
 
@@ -27,26 +27,11 @@
     </div>
 
     <!-- ./col -->
-    <div class="col-lg-12 col-xs-12 ">
-        <!-- small box -->
-        <div class="small-box bg-yellow">
-            <div class="inner">
-                <h2 style="font-family: calibri" class="text-center">Kegiatan</h2>
-
-            </div>
-            <div class="icon">
-              <i class="fa-solid fa-business-time"></i>  
-            </div>
-            <a href="{{ route('penilai.kegiatan.index') }}" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-    </div>
-
-    <!-- ./col -->
     <div class="col-lg-4 col-xs-6 col-sm-offset-2 ">
         <!-- small box -->
-        <div class="small-box bg-yellow">
+        <div class="small-box bg-teal">
             <div class="inner">
-                <h2 style="font-family: calibri" class="text-center">New Profil</h2>
+                <h2 style="font-family: calibri" class="text-center">Profil</h2>
 
             </div>
             <div class="icon">
@@ -61,7 +46,7 @@
     <!-- ./col -->
     <div class="col-lg-4 col-xs-6 col-sm-offset-0">
         <!-- small box -->
-        <div class="small-box bg-red">
+        <div class="small-box bg-maroon">
             <div class="inner">
                 <h2 style="font-family: calibri" class="text-center">Ganti Password</h2>
 

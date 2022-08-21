@@ -6,7 +6,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                <img src="{{ asset('assets/dist/img/user (2).png') }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>{{ auth()->user()->name }}</p>
@@ -33,7 +33,6 @@
             <li class=""><a href="{{ route('dashboard') }}"><i class="fa fa-tachometer"></i>
                     <span>Dashboard</span></a></li>
             @if (auth()->user()->role == 'admin')
-                <li class="header">Admin</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li class="{{ request()->url() == route('employee.index') ? 'active' : '' }}"><a
                         href="{{ route('employee.index') }}"><i class="fa-solid fa-person-chalkboard"></i>
@@ -59,7 +58,6 @@
                         <span>laporan</span></a></li>
             @endif
             @if (auth()->user()->role == 'pegawai')
-                <li class="header">Pegawai</li>
                 <li class="{{ request()->url() == route('pegawai.kegiatan.index') ? 'active' : '' }}"><a
                         href="{{ route('pegawai.kegiatan.index') }}"><i class="fa-solid fa-business-time"></i>
                         <span>Daftar Kegiatan</span></a></li>
@@ -68,16 +66,11 @@
                         <span>Laporan Kegiatan</span></a></li>
             @endif
             @if (auth()->user()->role == 'penilai')
-                <li class="header">Penilai</li>
                 <li class="{{ request()->url() == route('nilai.index') ? 'active' : '' }}"><a
                         href="{{ route('nilai.index') }}"><i class="fas fa-laptop-code"></i>
                         <span>Input Nilai Pegawai</span></a></li>
 
-                <li class="{{ request()->url() == route('penilai.kegiatan.index') ? 'active' : '' }}"><a
-                        href="{{ route('penilai.kegiatan.index') }}"><i class="fa-solid fa-business-time"></i>
-                        <span>Daftar Kegiatan</span></a></li>
             @endif
-            <li class="header">Pengaturan</li>
             <li class="{{ request()->url() == route('profile.index') ? 'active' : '' }}"> <a
                     href="{{ route('profile.index') }}"><i class="fas fa-user-alt"></i>
                     <span>Profile</span></a></li>

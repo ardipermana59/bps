@@ -12,7 +12,7 @@
     <!-- ./col -->
     <div class="col-lg-6 col-xs-12 ">
         <!-- small box -->
-        <div class="small-box bg-green">
+        <div class="small-box bg-maroon">
             <div class="inner">
                 <h2 style="font-family: calibri" class="text-center">Data Pegawai</h2>
 
@@ -46,7 +46,7 @@
     <!-- ./col -->
     <div class="col-lg-6 col-xs-12 ">
         <!-- small box -->
-        <div class="small-box bg-blue">
+        <div class="small-box bg-olive">
             <div class="inner">
                 <h2 style="font-family: calibri" class="text-center">Data Jabatan</h2>
 
@@ -80,7 +80,7 @@
     <!-- ./col -->
     <div class="col-lg-6 col-xs-12 ">
         <!-- small box -->
-        <div class="small-box bg-green">
+        <div class="small-box bg-purple">
             <div class="inner">
                 <h2 style="font-family: calibri" class="text-center">Struktur Penilaian</h2>
 
@@ -97,7 +97,7 @@
     <!-- ./col -->
     <div class="col-lg-6 col-xs-12 ">
         <!-- small box -->
-        <div class="small-box bg-orange">
+        <div class="small-box bg-lime">
             <div class="inner">
                 <h2 style="font-family: calibri" class="text-center">Manajemen User</h2>
 
@@ -114,7 +114,7 @@
     <!-- ./col -->
     <div class="col-lg-4 col-xs-6 ">
         <!-- small box -->
-        <div class="small-box bg-green">
+        <div class="small-box bg-teal">
             <div class="inner">
                 <h2 style="font-family: calibri" class="text-center">Laporan</h2>
 
@@ -131,9 +131,9 @@
      <!-- ./col -->
     <div class="col-lg-4 col-xs-6 ">
         <!-- small box -->
-        <div class="small-box bg-yellow">
+        <div class="small-box bg-maroon">
             <div class="inner">
-                <h2 style="font-family: calibri" class="text-center">New Profile<sup style="font-size: 5px"></sup></h2>
+                <h2 style="font-family: calibri" class="text-center">Profile<sup style="font-size: 5px"></sup></h2>
             </div>
             <div class="icon">
                 <i class="fas fa-user-alt"></i>
@@ -144,7 +144,7 @@
     <!-- ./col -->
     <div class="col-lg-4 col-xs-6">
         <!-- small box -->
-        <div class="small-box bg-red">
+        <div class="small-box bg-orange">
             <div class="inner">
                 <h2 style="font-family: calibri" class="text-center">Ganti Password<sup style="font-size: 5px"></sup></h2>
             </div>
@@ -154,9 +154,5 @@
             <a href="/pengaturan/password/ubah" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
-    <!-- ./col -->
-
-
-
-   
+    <!-- ./col --> 
 </div>
