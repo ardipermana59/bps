@@ -58,10 +58,14 @@ class PenilaiPegawaiController extends Controller
     {
         // mengambil seluruh data penilai
         $evaluators = $this->getEvaluators();
+
+         //mengambil seluruh data kegiatan
+        $activities = $this->getActivies();
+
         // mengambil seluruh data pegawai yang bukan penilai
         // $employees = $this->getEmployees();
         $employees = $this->getEmployees();
-        return view('pages.admin.struktur.add', compact('employees', 'evaluators'));
+        return view('pages.admin.struktur.add', compact('employees', 'evaluators', 'activities'));
     }
 
 
@@ -78,11 +82,15 @@ class PenilaiPegawaiController extends Controller
             'pegawai' => 'required|exists:employees,id',
             // cek apakah data yang diinputkan ada di table evaluators atau tidak
             'penilai' => 'required|exists:evaluators,id',
+            // cek apakah data yang diinputkan ada table activity
+            'kegiatan' => 'required|exists:activities,id',
+
         ]);
 
         PenilaiPegawai::create([
             'employee_id' => $request->pegawai,
             'evaluator_id' => $request->penilai,
+            'activity_id' => $request->kegiatan,
         ]);
 
         return redirect()->route('struktur.index')->with('success', 'Berhasil menambahkan struktur baru');
@@ -98,6 +106,9 @@ class PenilaiPegawaiController extends Controller
     {  // mengambil seluruh data penilai
         $evaluators = $this->getEvaluators();
 
+        //mengambil seluruh data kegiatan
+        $activities = $this->getActivies();
+
         // mengambil seluruh data pegawai yang bukan penilai
         $employees = $this->getEmployees();
         $struktur = PenilaiPegawai::find($id);
@@ -106,7 +117,7 @@ class PenilaiPegawaiController extends Controller
             return redirect()->route('struktur.index')->with('error', 'Data tidak ditemukan');
         }
 
-        return view('pages.admin.struktur.edit', compact('employees', 'evaluators', 'struktur'));
+        return view('pages.admin.struktur.edit', compact('employees', 'evaluators', 'activities', 'struktur'));
     }
 
     /**
@@ -123,6 +134,8 @@ class PenilaiPegawaiController extends Controller
             'pegawai' => 'required|exists:employees,id',
             // cek apakah data yang diinputkan ada di table evaluators atau tidak
             'penilai' => 'required|exists:evaluators,id',
+
+            'kegiatan' => 'required|exists:activities,id',
         ]);
         $struktur = PenilaiPegawai::find($id);
 
@@ -133,6 +146,7 @@ class PenilaiPegawaiController extends Controller
         $struktur->update([
             'employee_id' => $request->pegawai,
             'evaluator_id' => $request->penilai,
+            'activity_id' => $request->kegiatan,
         ]);
 
         return redirect()->route('struktur.index')->with('success', 'Berhasil mengubah struktur baru');
@@ -176,8 +190,10 @@ class PenilaiPegawaiController extends Controller
      * Get all employees except evaluators.
      */
 
-    private function getKegiatan() {
-        return Activity::select('name')->get();
+    private function getActivies() {
+        return Activity::select('activities.name as nama_kegiatan')->get();
+
+
     }
 
     private function getEmployees()

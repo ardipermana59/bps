@@ -43,6 +43,22 @@
                             @enderror
                         </div>
 
+                         <div class="form-group">
+                            <label for="name">Nama Kegiatan</label>
+                            <select class="form-control select2" name="kegiatan" style="width: 100%;">
+                                <option value="" {{ old('kegiatan') ? '' : 'selected' }}>Pilih Kegiatan</option>
+                                @foreach ($activities as $activity)
+                                    <option value="{{ $activity->id }}" {{ old('kegiatan') ? 'selected' : '' }}>
+                                        {{ $activity->nama_kegiatan }}</option>
+                                @endforeach
+                            </select>
+                            @error('kegiatan')
+                                <span class="invalid-feedback" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+
                         <div class="form-group">
                             <label for="name">Nama Pegawai</label>
                             <select class="form-control select2" name="pegawai" style="width: 100%;">
