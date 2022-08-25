@@ -28,6 +28,7 @@ class PenilaiPegawaiController extends Controller
 
         
         // SYNTAX CMD
+<<<<<<< HEAD
             // SELECT 
             //     penilai_pegawais.id, 
             //     act.name, 
@@ -56,6 +57,24 @@ class PenilaiPegawaiController extends Controller
             // Ambil Kegiatans dan Employee
             // ->select('penilai_pegawais.id', 'employees.full_name as employee_name', 'positions.name as evaluator_position', 'e.full_name as evaluator_name')
             ->select('penilai_pegawais.id', 'act.name as kegiatan','employees.full_name as employee_name' , 'positions.name as evaluator_position', 'e.full_name as evaluator_name')
+=======
+        // SELECT penilai_pegawais.id, activities.name FROM employees 
+        //     JOIN penilai_pegawais ON penilai_pegawais.employee_id = employees.id 
+        //     JOIN evaluators ON penilai_pegawais.evaluator_id = evaluators.id 
+        //     JOIN positions ON positions.id = employees.position_id 
+        //     JOIN ambil_kegiatans ON employees.id = ambil_kegiatans.employee_id 
+        //     JOIN activities ON activities.id = ambil_kegiatans.activity_id
+
+        $data = PenilaiPegawai::join('employees', 'penilai_pegawais.employee_id', '=', 'employees.id')
+            ->join('evaluators',        'penilai_pegawais.evaluator_id', '=', 'evaluators.id')
+            ->join('positions',         'employees.position_id',         '=', 'positions.id')            
+            ->join('ambil_kegiatans',   'employees.id',                  '=', 'ambil_kegiatans.employee_id')            
+            ->join('activities',        'activities.id',                 '=', 'ambil_kegiatans.activity_id')            
+            ->join('employees as e',    'evaluators.employee_id',        '=', 'e.id')
+            // Ambil Kegiatans dan Employee
+            // ->select('penilai_pegawais.id', 'employees.full_name as employee_name', 'positions.name as evaluator_position', 'e.full_name as evaluator_name')
+            ->select('penilai_pegawais.id', 'activities.name as kegiatan','employees.full_name as employee_name' , 'positions.name as evaluator_position', 'e.full_name as evaluator_name')
+>>>>>>> ddaa5ea8259672cb062263b53cfd1a0055c35f64
             ->orderBy('kegiatan')
             ->get();
         return view('pages.admin.struktur.index', compact('data'));
@@ -70,10 +89,20 @@ class PenilaiPegawaiController extends Controller
     {
         // mengambil seluruh data penilai
         $evaluators = $this->getEvaluators();
+<<<<<<< HEAD
         // mengambil seluruh data pegawai yang bukan penilai
         // $employees = $this->getEmployees();
         $employees  = $this->getEmployees();
         $activities = $this->getActivities();
+=======
+
+         //mengambil seluruh data kegiatan
+        $activities = $this->getActivies();
+
+        // mengambil seluruh data pegawai yang bukan penilai
+        // $employees = $this->getEmployees();
+        $employees = $this->getEmployees();
+>>>>>>> ddaa5ea8259672cb062263b53cfd1a0055c35f64
         return view('pages.admin.struktur.add', compact('employees', 'evaluators', 'activities'));
     }
 
@@ -89,7 +118,13 @@ class PenilaiPegawaiController extends Controller
         $this->validate($request, [
             'pegawai' => 'required|exists:employees,id',
             'penilai' => 'required|exists:evaluators,id',
+<<<<<<< HEAD
             'kegiatan' => 'required|exists:activities,id',
+=======
+            // cek apakah data yang diinputkan ada table activity
+            'kegiatan' => 'required|exists:activities,id',
+
+>>>>>>> ddaa5ea8259672cb062263b53cfd1a0055c35f64
         ]);
         PenilaiPegawai::create([
             'employee_id' => $request->pegawai,
@@ -110,6 +145,9 @@ class PenilaiPegawaiController extends Controller
     {  // mengambil seluruh data penilai
         $evaluators = $this->getEvaluators();
 
+        //mengambil seluruh data kegiatan
+        $activities = $this->getActivies();
+
         // mengambil seluruh data pegawai yang bukan penilai
         $employees = $this->getEmployees();
         $struktur = PenilaiPegawai::find($id);
@@ -118,7 +156,7 @@ class PenilaiPegawaiController extends Controller
             return redirect()->route('struktur.index')->with('error', 'Data tidak ditemukan');
         }
 
-        return view('pages.admin.struktur.edit', compact('employees', 'evaluators', 'struktur'));
+        return view('pages.admin.struktur.edit', compact('employees', 'evaluators', 'activities', 'struktur'));
     }
 
     /**
@@ -135,6 +173,8 @@ class PenilaiPegawaiController extends Controller
             'pegawai' => 'required|exists:employees,id',
             // cek apakah data yang diinputkan ada di table evaluators atau tidak
             'penilai' => 'required|exists:evaluators,id',
+
+            'kegiatan' => 'required|exists:activities,id',
         ]);
         $struktur = PenilaiPegawai::find($id);
 
@@ -145,6 +185,7 @@ class PenilaiPegawaiController extends Controller
         $struktur->update([
             'employee_id' => $request->pegawai,
             'evaluator_id' => $request->penilai,
+            'activity_id' => $request->kegiatan,
         ]);
 
         return redirect()->route('struktur.index')->with('success', 'Berhasil mengubah struktur baru');
@@ -187,8 +228,16 @@ class PenilaiPegawaiController extends Controller
     /**
      * Get all employees except evaluators.
      */
+<<<<<<< HEAD
     private function getActivities() {
         return Activity::select('id', 'name')->get();
+=======
+
+    private function getActivies() {
+        return Activity::select('activities.name as nama_kegiatan')->get();
+
+
+>>>>>>> ddaa5ea8259672cb062263b53cfd1a0055c35f64
     }
 
     private function getEmployees()

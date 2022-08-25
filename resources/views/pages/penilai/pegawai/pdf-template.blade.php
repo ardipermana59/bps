@@ -68,7 +68,7 @@
 <body>
     @foreach ($data as $index => $item)
         <div>
-            <h1 class="text-center mb-2">Laporan Hasil Kegiatan</h1>
+            <h1 class="text-center mb-2">Capaian Kinerja Pegawai</h1>
             <table>
                 <tr>
                     <td>Nama Pegawai</td>
@@ -89,7 +89,7 @@
             <table class="styled-table">
                 <tr>
                     <th>Kegiatan</th>
-                    <th>Target</th>
+                    <th>Capai Target</th>
                     <th>Kerjasama</th>
                     <th>Ketepatan Waktu</th>
                     <th>Kualitas</th>
@@ -121,7 +121,7 @@
                     <td>{{ $total / count($item['activities']) }}</td>
                 </tr>
                 <tr>
-                    <td colspan="5">Total</td>
+                    <td colspan="5">Capai Target</td>
                     <td>{{ $total }}</td>
                 </tr>
             </table>
