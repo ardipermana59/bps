@@ -161,6 +161,31 @@
         </script>
     @endif
     @stack('scripts')
+
+    <script>
+
+        
+        const ambil_kegiatan = document.querySelector('.ambil_kegiatan');
+        const ambil_penilai  = document.querySelector('.ambil_penilai');
+        // Jquery
+        // var option = $('option:selected', this).attr('npenilai');
+
+        // DOM Biasa
+        // var option   = document.querySelector('option:checked');
+        // var getNilai = option.getAttribute('npenilai');
+        // console.log(getNilai);
+
+        // DOM ALL
+        // var option = document.querySelectorAll('option.getnilai:checked');
+        //     option.forEach(item => {
+        //         console.log(item);
+        // })
+            
+        ambil_kegiatan.addEventListener('change', function(e) {
+            var option = $('option:selected', this).attr('npenilai');
+            ambil_penilai.value = option;
+        })
+    </script>
 </body>
 
 </html>

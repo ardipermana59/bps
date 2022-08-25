@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
+use App\Models\Activity;
 use App\Models\Evaluator;
 use App\Models\PenilaiPegawai;
 use Illuminate\Http\Request;
@@ -17,12 +18,45 @@ class PenilaiPegawaiController extends Controller
      */
     public function index()
     {
+        // $data = PenilaiPegawai::join('employees', 'penilai_pegawais.employee_id', '=', 'employees.id') // penilai_pegawais join employees
+        //     ->join('evaluators', 'penilai_pegawais.evaluator_id', '=', 'evaluators.id')                // penilai_pegawais join evaluators
+        //     ->join('employees as penilai', 'evaluators.employee_id', '=', 'penilai.id')                // evaluators join employees
+        //     ->join('positions', 'positions.id', '=', 'penilai.position_id')                            // employees  join positions
+        //     ->select('penilai_pegawais.id', 'employees.full_name as employee_name', 'positions.name as evaluator_position', 'penilai.full_name as evaluator_name')
+        //     ->orderBy('evaluator_name')
+        //     ->get();
+
+        
+        // SYNTAX CMD
+            // SELECT 
+            //     penilai_pegawais.id, 
+            //     act.name, 
+            //     employees.full_name as employee_name, 
+            //     positions.name as evaluator_position, 
+            //     e.full_name as evaluator_name 
+            // FROM 
+            //     employees 
+            // JOIN 
+            //     penilai_pegawais ON penilai_pegawais.employee_id = employees.id 
+            // JOIN 
+            //     evaluators ON penilai_pegawais.evaluator_id = evaluators.id 
+            // JOIN 
+            //     activities as act ON penilai_pegawais.activity_id = act.id
+            // JOIN 
+            //     positions ON positions.id = employees.position_id
+            // JOIN 
+            //     employees as e ON evaluators.employee_id = e.id
+            // WHERE employees.id = 12;
+
         $data = PenilaiPegawai::join('employees', 'penilai_pegawais.employee_id', '=', 'employees.id')
-            ->join('evaluators', 'penilai_pegawais.evaluator_id', '=', 'evaluators.id')
-            ->join('employees as penilai', 'evaluators.employee_id', '=', 'penilai.id')
-            ->join('positions', 'positions.id', '=', 'penilai.position_id')
-            ->select('penilai_pegawais.id', 'employees.full_name as employee_name', 'positions.name as evaluator_position', 'penilai.full_name as evaluator_name')
-            ->orderBy('evaluator_name')
+            ->join('evaluators',        'penilai_pegawais.evaluator_id', '=', 'evaluators.id')
+            ->join('activities as act', 'penilai_pegawais.activity_id', '=', 'act.id')
+            ->join('positions',         'employees.position_id',         '=', 'positions.id')            
+            ->join('employees as e',    'evaluators.employee_id',        '=', 'e.id')
+            // Ambil Kegiatans dan Employee
+            // ->select('penilai_pegawais.id', 'employees.full_name as employee_name', 'positions.name as evaluator_position', 'e.full_name as evaluator_name')
+            ->select('penilai_pegawais.id', 'act.name as kegiatan','employees.full_name as employee_name' , 'positions.name as evaluator_position', 'e.full_name as evaluator_name')
+            ->orderBy('kegiatan')
             ->get();
         return view('pages.admin.struktur.index', compact('data'));
     }
@@ -36,11 +70,11 @@ class PenilaiPegawaiController extends Controller
     {
         // mengambil seluruh data penilai
         $evaluators = $this->getEvaluators();
-
         // mengambil seluruh data pegawai yang bukan penilai
-        $employees = $this->getEmployees();
-
-        return view('pages.admin.struktur.add', compact('employees', 'evaluators'));
+        // $employees = $this->getEmployees();
+        $employees  = $this->getEmployees();
+        $activities = $this->getActivities();
+        return view('pages.admin.struktur.add', compact('employees', 'evaluators', 'activities'));
     }
 
 
@@ -53,15 +87,14 @@ class PenilaiPegawaiController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            // cek apakah data yang diinputkan ada di table employees atau tidak
             'pegawai' => 'required|exists:employees,id',
-            // cek apakah data yang diinputkan ada di table evaluators atau tidak
             'penilai' => 'required|exists:evaluators,id',
+            'kegiatan' => 'required|exists:activities,id',
         ]);
-
         PenilaiPegawai::create([
             'employee_id' => $request->pegawai,
             'evaluator_id' => $request->penilai,
+            'activity_id' => $request->kegiatan,
         ]);
 
         return redirect()->route('struktur.index')->with('success', 'Berhasil menambahkan struktur baru');
@@ -150,9 +183,14 @@ class PenilaiPegawaiController extends Controller
             ->get();
     }
 
+
     /**
      * Get all employees except evaluators.
      */
+    private function getActivities() {
+        return Activity::select('id', 'name')->get();
+    }
+
     private function getEmployees()
     {
         return Employee::join('positions', 'positions.id', '=', 'employees.position_id')

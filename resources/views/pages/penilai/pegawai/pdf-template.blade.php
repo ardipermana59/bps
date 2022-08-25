@@ -137,8 +137,7 @@
                         <td class="w-50">
                             <p>Subang, {{ \Carbon\Carbon::now()->isoFormat('D MMMM Y') }}</p>
                             <p style="margin-top: -15px">Yang bertanda tangan</p>
-                            <img src="https://paragram.id/upload/media/entries/2019-07/31/9317-1-7454c0792fd0bc375015427933ee39c4.jpg"
-                                width="100px">
+                            <img src="{{ asset('assets/dist/img/ttd(1).png') }}" class="img-circle" alt="User Image">
 
                             <p>Arbrian Abdul Jamal</p>
                         </td>

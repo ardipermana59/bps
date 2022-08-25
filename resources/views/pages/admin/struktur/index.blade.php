@@ -30,7 +30,8 @@
                             <tr>
                                 <th style="width: 1%" class="text-center">No</th>
                                 <th class="text-center">Nama Penilai</th>
-                                <th class="text-center">Nama Pegawai</th>
+                                <th class="text-center">Nama Kegiatan</th>
+                                <th class="text-center">Nama Karyawan</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -38,8 +39,16 @@
                             @foreach ($data as $item)
                                 <tr>
                                     <td class="text-center"></td>
+                                    <!-- Penilai 1 - Position -->
                                     <td>{{ $item->evaluator_name }} ({{ $item->evaluator_position }}) </td>
+                                    <!-- Kegiatan -->
+                                    <td>{{ $item->kegiatan }}</td>
+
                                     <td>{{ $item->employee_name }}</td>
+                                    
+
+
+
                                     <td style="width: 10%" class="text-center">
                                         <a href="{{ route('struktur.edit', ['id' => $item->id]) }}">
                                             <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
@@ -56,6 +65,7 @@
                             <tr>
                                 <th style="width: 1%" class="text-center">No</th>
                                 <th class="text-center">Nama Penilai</th>
+                                <th class="text-center">Nama Kegiatan</th>
                                 <th class="text-center">Nama Pegawai</th>
                                 <th class="text-center">Aksi</th>
                             </tr>

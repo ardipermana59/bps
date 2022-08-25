@@ -25,18 +25,20 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="name">Nama Penilai</label>
-                            <input type="text" class="form-control" value="{{ $penilai->name }}" id="penilai"
+                            <input type="text" class="form-control ambil_penilai" value="" id="penilai"
                                 name="penilai" placeholder="Nama Penilai" readonly required>
                         </div>
 
+                        
                         <div class="form-group">
                             <label for="kegiatan">Nama Kegiatan</label>
-                            <select id="kegiatan" class="form-control select2 @error('kegiatan') is-invalid @enderror"
+                            <select id="kegiatan" class="form-control select2 @error('kegiatan') is-invalid @enderror ambil_kegiatan"
                                 name="kegiatan" style="width: 100%;" required>
                                 <option value="">Pilih Kegiatan</option>
                                 @foreach ($activities as $activity)
-                                    <option value="{{ $activity->id }}" {{ old('kegiatan') ? 'selected' : '' }}>
-                                        {{ $activity->name }}</option>
+                                    <option class="getnilai" npenilai="{{$activity->full_name }}"value="{{ $activity->id }}" {{ old('kegiatan') ? 'selected' : '' }}>
+                                        {{ $activity->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('kegiatan')
@@ -125,3 +127,7 @@
     // dd($errors)
     @endphp
 @endpush
+
+<script>
+    
+</script>
