@@ -50,7 +50,7 @@
             <div class="icon">
               <i class="fas fa-user-alt"></i>  
             </div>
-            <a href="/pengaturan/profile/ubah" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('profile.index') }}" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 
@@ -67,7 +67,7 @@
             <div class="icon">
               <i class="fas fa-cog"></i>  
             </div>
-            <a href="/pengaturan/password/ubah" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('password.index') }}" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 

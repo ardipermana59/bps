@@ -65,6 +65,7 @@
                             </span>
                         @enderror
                     </div>
+                   
                     <div class="form-group">
                         <label for="target">Target</label>
                         <input type="number" class="form-control" value="" id="target" name="target" max="100"

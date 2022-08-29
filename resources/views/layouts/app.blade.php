@@ -161,6 +161,49 @@
         </script>
     @endif
     @stack('scripts')
+
+    <script>
+        // Jquery
+        // var option = $('option:selected', this).attr('npenilai');
+
+        // DOM Biasa
+        // var option   = document.querySelector('option:checked');
+        // var getNilai = option.getAttribute('npenilai');
+        // console.log(getNilai);
+
+        // DOM ALL
+        // var option = document.querySelectorAll('option.getnilai:checked');
+        //     option.forEach(item => {
+        //         console.log(item);
+        // })
+
+        const judul_halaman  = document.querySelector('.judul_halaman');
+
+        // Ambil Nama Penilai Otomatis Dari Nama Kegiatan Di Menu Upload Kegiatan
+        if(judul_halaman.innerText == 'Upload Kegiatan') {
+            const ambil_kegiatan = document.querySelector('.ambil_kegiatan');
+            const ambil_penilai  = document.querySelector('.ambil_penilai');    
+            ambil_kegiatan.addEventListener('change', function(e) {
+                var option = $('option:selected', this).attr('npenilai');
+                ambil_penilai.value = option;
+            });    
+        } else if(judul_halaman.innerText == 'Upload Nilai') {
+            const ambil_kegiatans          = document.querySelector('.ambil_kegiatans');
+            const ambil_kegiatan_id_nilai  = document.querySelector('.ambil_kegiatan_id_nilai');    
+            const ambil_Pegawai  = document.querySelector('.ambil_Pegawai');    
+            ambil_kegiatans.addEventListener('change', function() {
+                var option1 = $('option:selected', this).attr('nambilkegiatanid');
+                var option2 = $('option:selected', this).attr('nambilfullname');
+                ambil_kegiatan_id_nilai.value = option1;    
+                ambil_Pegawai.value = option2;   
+            })            
+        }
+
+
+        
+        
+
+    </script>
 </body>
 
 </html>

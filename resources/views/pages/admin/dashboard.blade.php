@@ -20,7 +20,7 @@
             <div class="icon">
                <i class="fa-solid fa-person-chalkboard"></i>
             </div>
-            <a href="/pegawai" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('employee.index') }}" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 
@@ -37,7 +37,7 @@
             <div class="icon">
                 <i class="fa-solid fa-list-check"></i>
             </div>
-            <a href="/penilai" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('penilai.index') }}" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 
@@ -54,7 +54,7 @@
             <div class="icon">
               <i class="fa-solid fa-user-doctor"></i>  
             </div>
-            <a href="/jabatan" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('position.index') }}" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 
@@ -71,7 +71,7 @@
             <div class="icon">
               <i class="fa-solid fa-business-time"></i>
             </div>
-            <a href="/kegiatan" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('activity.index') }}" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 
@@ -88,7 +88,7 @@
             <div class="icon">
                 <i class="fa-solid fa-people-line"></i>
             </div>
-            <a href="/struktur-penilai" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('struktur.index') }}" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 
@@ -105,7 +105,7 @@
             <div class="icon">
                 <i class="fa-solid fa-user"></i>
             </div>
-            <a href="/manajemen-user" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('user.index') }}" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 
@@ -122,7 +122,7 @@
             <div class="icon">
                 <i class="fa-solid fa-book"></i>
             </div>
-            <a href="/laporan" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('laporan.index') }}" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 
@@ -138,7 +138,7 @@
             <div class="icon">
                 <i class="fas fa-user-alt"></i>
             </div>
-            <a href="/pengaturan/profile/ubah" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('profile.index') }}" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->
@@ -151,7 +151,7 @@
             <div class="icon">
                 <i class="fas fa-cog"></i>
             </div>
-            <a href="/pengaturan/password/ubah" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('password.index') }}" class="small-box-footer">Klik Disini <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col --> 

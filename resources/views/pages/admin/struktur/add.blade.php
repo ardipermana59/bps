@@ -57,6 +57,23 @@
                                 </span>
                             @enderror
                         </div>
+
+                        <div class="form-group">
+                            <label for="name">Nama Kegiatan</label>
+                            <select class="form-control select2" name="kegiatan" style="width: 100%;">
+                                <option value="" {{ old('kegiatan') ? '' : 'selected' }}>kegiatan</option>
+                                @foreach ($activities as $act)
+                                    <option value="{{ $act->id }}" {{ old('kegiatan') ? 'selected' : '' }}>
+                                        {{ $act->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('kegiatan')
+                                <span class="invalid-feedback" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+
                     </div>
                     <!-- /.box-body -->
 

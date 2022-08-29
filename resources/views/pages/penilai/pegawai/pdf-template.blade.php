@@ -80,14 +80,17 @@
                     <td>:</td>
                     <td>{{ $item['nip'] }}</td>
                 </tr>
-                <tr>
+
+                <!-- <tr>
                     <td>Nama Penilai</td>
                     <td>:</td>
-                    <td>{{ $item['evaluator_name'] }}</td>
-                </tr>
+                    <td>{ $item['evaluator_name'] }</td>
+                    <td>Cecep dan Solihin</td> 
+                </tr> -->
             </table>
             <table class="styled-table">
                 <tr>
+                    <th>Nama Penilai</th>
                     <th>Kegiatan</th>
                     <th>Target</th>
                     <th>Kerjasama</th>
@@ -105,6 +108,8 @@
                         $total += $hasil;
                     @endphp
                     <tr>
+                        
+                        <td>{{ $activity['penilai'] }}</td>
                         <td class="text-left">{{ $activity['activity_name'] }}</td>
                         <td>{{ $activity['target'] }}</td>
                         <td>{{ $activity['kerjasama'] }}</td>
@@ -117,11 +122,11 @@
                     @endphp
                 @endforeach
                 <tr>
-                    <td colspan="5">Rata-rata</td>
+                    <td colspan="6">Rata-rata</td>
                     <td>{{ $total / count($item['activities']) }}</td>
                 </tr>
                 <tr>
-                    <td colspan="5">Total</td>
+                    <td colspan="6">Total</td>
                     <td>{{ $total }}</td>
                 </tr>
             </table>
@@ -137,17 +142,18 @@
                         <td class="w-50">
                             <p>Subang, {{ \Carbon\Carbon::now()->isoFormat('D MMMM Y') }}</p>
                             <p style="margin-top: -15px">Yang bertanda tangan</p>
-                            <img src="https://paragram.id/upload/media/entries/2019-07/31/9317-1-7454c0792fd0bc375015427933ee39c4.jpg"
-                                width="100px">
-
-                            <p>Arbrian Abdul Jamal</p>
+                            <div class="box" style="width:100px; height:100px; background-color:white;"></div>
+                            <!-- <p>{{$data[0]['evaluator_name']}}</p> -->
+                            <p>Cecep Muhram Mubarok, S.SI., M.M <br> (Kepala Sub Bagian Umum)</p>
+                            
                         </td>
                         <td class="w-50">
                             <p>&nbsp;</p>
                             <p style="margin-top: -15px">Yang bertanda tangan</p>
-                            <img src="https://paragram.id/upload/media/entries/2019-07/31/9317-1-7454c0792fd0bc375015427933ee39c4.jpg"
-                                width="100px">
-                            <p>Arbrian Abdul Jamal</p>
+                            <!-- <img src="https://paragram.id/upload/media/entries/2019-07/31/9317-1-7454c0792fd0bc375015427933ee39c4.jpg"
+                                width="100px"> -->
+                            <div class="box" style="width:100px; height:100px; background-color:white;"></div>
+                            <p>{{ $item['employee_name'] }}</p>
                         </td>
                     </tr>
                 </table>

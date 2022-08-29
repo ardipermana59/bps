@@ -40,12 +40,11 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             @foreach ($data as $item)
                                 <tr class="text-center">
                                     <td></td>
                                     <td>{{ $item->activity_name }}</td>
-                                    <td>{{ $penilai->full_name }}</td>
+                                    <td>{{ $item->full_name }}</td>
                                     <td>{{ $item->target ?? '-' }}</td>
                                     <td>{{ $item->realisasi  ?? '-'}}</td>
                                     <td>{{ $item->mulai_kegiatan  ?? '-'}}</td>

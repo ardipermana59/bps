@@ -100,6 +100,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/laporan', 'Pegawai\LaporanKegiatanPegawaiController')->name('pegawai.kegiatan.laporan');
         Route::get('/pegawai/kegiatan/upload', [KegiatanPegawaiController::class, 'create'])->name('pegawai.kegiatan.create');
         Route::post('/pegawai/kegiatan/upload', [KegiatanPegawaiController::class, 'store'])->name('pegawai.kegiatan.store');
+
+        // PDF NYA 
+        // Route::get('/laporan/nilai/pegawai/export/pdf', [KegiatanPegawaiController::class, 'exportPdf'])->name('pegawai.kegiatan.laporan.pdf');
     });
 
     Route::middleware(['isAdmin:penilai'])->group(function () {
@@ -109,6 +112,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/nilai/pegawai/export/pdf', [NilaiPegawaiController::class, 'exportPdf'])->name('nilai.pdf');
         Route::get('/nilai/pegawai/export/pdf/{id}', [NilaiPegawaiController::class, 'exportPdfEmployee'])->name('nilai.pdf.employee');
         Route::put('/nilai/pegawai/{id}', [NilaiPegawaiController::class, 'update'])->name('nilai.update');
+        Route::post('/nilai/pegawai/upload', [NilaiPegawaiController::class, 'store'])->name('nilai.store');
+    
 
         //Halaman Kegiatan
          Route::get('/nilai/kegiatan', [KegiatanPenilaiController::class, 'index'])->name('penilai.kegiatan.index');

@@ -21,10 +21,7 @@ class LaporanController extends Controller
         $data = Nilai::join('ambil_kegiatans', 'ambil_kegiatans.id', 'nilais.ambil_kegiatan_id')
             ->join('activities', 'activities.id', 'ambil_kegiatans.activity_id')
             ->join('employees', 'employees.id', 'ambil_kegiatans.employee_id')
-            ->join('penilai_pegawais', 'penilai_pegawais.employee_id', 'employees.id')
-            ->join('evaluators', 'evaluators.id', 'penilai_pegawais.evaluator_id')
-            ->join('employees as pengawas', 'pengawas.id', 'evaluators.employee_id')
-            ->select('ambil_kegiatans.target as target_kegiatan', 'ambil_kegiatans.realisasi', 'ambil_kegiatans.mulai_kegiatan','ambil_kegiatans.selesai_kegiatan','employees.full_name', 'employees.id as employee_id', 'activities.name as activity_name', 'nilais.id', 'nilais.target_realisasi as target', 'nilais.kerjasama', 'nilais.ketepatan_waktu', 'nilais.kualitas')
+            ->select('ambil_kegiatans.id as print_id','ambil_kegiatans.nama_penilai','employees.full_name', 'employees.id as employee_id', 'activities.name as activity_name','ambil_kegiatans.target as target_kegiatan','ambil_kegiatans.realisasi', 'ambil_kegiatans.mulai_kegiatan', 'ambil_kegiatans.selesai_kegiatan', 'nilais.id', 'nilais.target_realisasi as target', 'nilais.kerjasama', 'nilais.ketepatan_waktu', 'nilais.kualitas')
             ->get();
         return view('pages.admin.laporan.index', compact('data'));
     }
@@ -37,8 +34,8 @@ class LaporanController extends Controller
             'kerjasama' => 'required|integer|min:1|max:100',
             'ketepatan_waktu' => 'required|integer|min:1|max:100',
             'kualitas' => 'required|integer|min:1|max:100',
-            'target_kegiatan' => 'required|integer|min:1|max:5',
-            'realisasi' => 'required|integer|min:1|max:5',
+            'target_kegiatan' => 'required|integer|min:1|max:50',
+            'realisasi' => 'required|integer|min:1|max:50',
             'mulai_kegiatan' => 'required|date',
             'selesai_kegiatan' => 'required|date',
         ]);
@@ -75,10 +72,7 @@ class LaporanController extends Controller
         $response = Nilai::join('ambil_kegiatans', 'ambil_kegiatans.id', 'nilais.ambil_kegiatan_id')
             ->join('activities', 'activities.id', 'ambil_kegiatans.activity_id')
             ->join('employees', 'employees.id', 'ambil_kegiatans.employee_id')
-            ->join('penilai_pegawais', 'penilai_pegawais.employee_id', 'employees.id')
-            ->join('evaluators', 'evaluators.id', 'penilai_pegawais.evaluator_id')
-            ->join('employees as pengawas', 'pengawas.id', 'evaluators.employee_id')
-            ->select('pengawas.full_name as evaluator_name', 'employees.full_name', 'employees.nip', 'activities.name as activity_name', 'nilais.id', 'nilais.target_realisasi as target', 'nilais.kerjasama', 'nilais.ketepatan_waktu', 'nilais.kualitas')
+            ->select('ambil_kegiatans.nama_penilai as evaluator_name','employees.full_name', 'employees.nip', 'activities.name as activity_name', 'nilais.id', 'nilais.target_realisasi as target', 'nilais.kerjasama', 'nilais.ketepatan_waktu', 'nilais.kualitas') 
             ->orderBy('full_name')
             ->get();
 
@@ -89,23 +83,6 @@ class LaporanController extends Controller
 
         $data = [];
         foreach ($response as $key => $value) {
-
-            /**
-             * Buat data seperti ini
-             *   [
-             *     'employee_name' =>
-             *     'nip' =>
-             *     'evaluator_name' =>
-             *     'kegiatans' => [
-             *                    [
-             *                      'activity_name' =>
-             *                      'target' =>
-             *                      'kerjasama' =>
-             *                      'ketepatan_waktu' =>
-             *                      'kualitas' =>
-             *                    ] 
-             *   ] 
-             */
             if (count($data) == 0) {
                 $data[]['employee_name'] = $value->full_name;
                 $dataIndex = count($data) - 1;
@@ -113,25 +90,40 @@ class LaporanController extends Controller
                 $data[$dataIndex]['evaluator_name'] = $value->evaluator_name;
                 $data[$dataIndex]['activities'][]['activity_name'] = $value->activity_name;
                 $kegiatanIndex = count($data[$dataIndex]['activities']) - 1;
+                $data[$dataIndex]['activities'][$kegiatanIndex]['karyawan'] = $value->full_name;
+                $data[$dataIndex]['activities'][$kegiatanIndex]['penilai'] = $value->evaluator_name;
                 $data[$dataIndex]['activities'][$kegiatanIndex]['target'] = $value->target;
                 $data[$dataIndex]['activities'][$kegiatanIndex]['kerjasama'] = $value->kerjasama;
                 $data[$dataIndex]['activities'][$kegiatanIndex]['ketepatan_waktu'] = $value->ketepatan_waktu;
                 $data[$dataIndex]['activities'][$kegiatanIndex]['kualitas'] = $value->kualitas;
             } else {
+                
                 if ($value->nip == $response[$key - 1]->nip) {
+                    // Kode tambahan
+                    // -----------------------------------------------------------
+                    $data[$key - 1]['employee_name'] = $value->full_name;
+                    $data[$key - 1]['nip'] = $value->nip;
+                    $data[$key - 1]['evaluator_name'] = $value->evaluator_name;
+                    // -----------------------------------------------------------
+                    
                     $data[$key - 1]['activities'][]['activity_name'] = $value->activity_name;
                     $kegiatanIndex = count($data[$key - 1]['activities']) - 1;
+                    $data[$key - 1]['activities'][$kegiatanIndex]['karyawan'] = $value->full_name;
+                    $data[$key - 1]['activities'][$kegiatanIndex]['penilai'] = $value->evaluator_name;
                     $data[$key - 1]['activities'][$kegiatanIndex]['target'] = $value->target;
                     $data[$key - 1]['activities'][$kegiatanIndex]['kerjasama'] = $value->kerjasama;
                     $data[$key - 1]['activities'][$kegiatanIndex]['ketepatan_waktu'] = $value->ketepatan_waktu;
                     $data[$key - 1]['activities'][$kegiatanIndex]['kualitas'] = $value->kualitas;
                 } else {
+                    
                     $data[]['employee_name'] = $value->full_name;
                     $dataIndex = count($data) - 1;
                     $data[$dataIndex]['nip'] = $value->nip;
                     $data[$dataIndex]['evaluator_name'] = $value->evaluator_name;
                     $data[$dataIndex]['activities'][]['activity_name'] = $value->activity_name;
                     $kegiatanIndex = count($data[$dataIndex]['activities']) - 1;
+                    $data[$dataIndex]['activities'][$kegiatanIndex]['karyawan'] = $value->full_name;
+                    $data[$dataIndex]['activities'][$kegiatanIndex]['penilai'] = $value->evaluator_name;
                     $data[$dataIndex]['activities'][$kegiatanIndex]['target'] = $value->target;
                     $data[$dataIndex]['activities'][$kegiatanIndex]['kerjasama'] = $value->kerjasama;
                     $data[$dataIndex]['activities'][$kegiatanIndex]['ketepatan_waktu'] = $value->ketepatan_waktu;
@@ -140,6 +132,8 @@ class LaporanController extends Controller
             }
         }
 
+        
+
         $pdf = Pdf::loadView('pages.penilai.pegawai.pdf-template', compact('data'));
         return $pdf->stream('laporan-nilai-pegawai.pdf');
     }
@@ -147,16 +141,15 @@ class LaporanController extends Controller
 
     public function exportPdfEmployee(Request $request, $id)
     {
+        
+        // ambil_kegiatans.id
         $response = Nilai::join('ambil_kegiatans', 'ambil_kegiatans.id', 'nilais.ambil_kegiatan_id')
             ->join('activities', 'activities.id', 'ambil_kegiatans.activity_id')
             ->join('employees', 'employees.id', 'ambil_kegiatans.employee_id')
-            ->join('penilai_pegawais', 'penilai_pegawais.employee_id', 'employees.id')
-            ->join('evaluators', 'evaluators.id', 'penilai_pegawais.evaluator_id')
-            ->join('employees as pengawas', 'pengawas.id', 'evaluators.employee_id')
-            ->where('employees.id', '=', $id)
-            ->select('pengawas.full_name as evaluator_name', 'employees.full_name', 'employees.nip', 'activities.name as activity_name', 'nilais.id', 'nilais.target_realisasi as target', 'nilais.kerjasama', 'nilais.ketepatan_waktu', 'nilais.kualitas')
-            ->orderBy('full_name')
-            ->get();
+            ->where('ambil_kegiatans.id', '=', $id)
+            ->select('ambil_kegiatans.nama_penilai as evaluator_name','employees.full_name', 'employees.nip', 'activities.name as activity_name', 'nilais.id', 'nilais.target_realisasi as target', 'nilais.kerjasama', 'nilais.ketepatan_waktu', 'nilais.kualitas') 
+        ->get();
+
 
         // cek datanya ada atau tidak
         if (count($response) == 0) {
@@ -165,6 +158,7 @@ class LaporanController extends Controller
 
         $data = [];
         foreach ($response as $key => $value) {
+            
 
             /**
              * Buat data seperti ini
@@ -189,6 +183,7 @@ class LaporanController extends Controller
                 $data[$dataIndex]['evaluator_name'] = $value->evaluator_name;
                 $data[$dataIndex]['activities'][]['activity_name'] = $value->activity_name;
                 $kegiatanIndex = count($data[$dataIndex]['activities']) - 1;
+                $data[$dataIndex]['activities'][$kegiatanIndex]['penilai'] = $value->evaluator_name;
                 $data[$dataIndex]['activities'][$kegiatanIndex]['target'] = $value->target;
                 $data[$dataIndex]['activities'][$kegiatanIndex]['kerjasama'] = $value->kerjasama;
                 $data[$dataIndex]['activities'][$kegiatanIndex]['ketepatan_waktu'] = $value->ketepatan_waktu;
@@ -197,6 +192,7 @@ class LaporanController extends Controller
                 if ($value->nip == $response[$key - 1]->nip) {
                     $data[$key - 1]['activities'][]['activity_name'] = $value->activity_name;
                     $kegiatanIndex = count($data[$key - 1]['activities']) - 1;
+                    $data[$key - 1]['activities'][$kegiatanIndex]['penilai'] = $value->evaluator_name;
                     $data[$key - 1]['activities'][$kegiatanIndex]['target'] = $value->target;
                     $data[$key - 1]['activities'][$kegiatanIndex]['kerjasama'] = $value->kerjasama;
                     $data[$key - 1]['activities'][$kegiatanIndex]['ketepatan_waktu'] = $value->ketepatan_waktu;
@@ -208,6 +204,7 @@ class LaporanController extends Controller
                     $data[$dataIndex]['evaluator_name'] = $value->evaluator_name;
                     $data[$dataIndex]['activities'][]['activity_name'] = $value->activity_name;
                     $kegiatanIndex = count($data[$dataIndex]['activities']) - 1;
+                    $data[$dataIndex]['activities'][$kegiatanIndex]['penilai'] = $value->evaluator_name;
                     $data[$dataIndex]['activities'][$kegiatanIndex]['target'] = $value->target;
                     $data[$dataIndex]['activities'][$kegiatanIndex]['kerjasama'] = $value->kerjasama;
                     $data[$dataIndex]['activities'][$kegiatanIndex]['ketepatan_waktu'] = $value->ketepatan_waktu;

@@ -48,8 +48,8 @@
                             <select class="form-control select2" name="pegawai" style="width: 100%;">
                                 <option value="" {{ old('pegawai') ? '' : 'selected' }}>Pilih Penilai</option>
                                 @foreach ($employees as $employee)
-                                    <option value="{{ $employee->id }}" {{ $struktur->employee_id == $employee->id ? 'selected' : '' }}>{{ $employee->employee_name }} -
-                                        ({{ $employee->position_name }})</option>
+                                    <option value="{{ $employee->id }}" {{ $struktur->employee_id == $employee->id ? 'selected' : '' }}>
+                                        {{ $employee->employee_name }} - ({{ $employee->position_name }})</option>
                                 @endforeach
                             </select>
                             @error('pegawai')
@@ -58,6 +58,25 @@
                                 </span>
                             @enderror
                         </div>
+
+                        <div class="form-group">
+                            <label for="name">Nama Kegiatan</label>
+                            <select class="form-control select2" name="kegiatan" style="width: 100%;">
+                                <option value="" {{ old('kegiatan') ? '' : 'selected' }}>kegiatan</option>
+                                @foreach ($activities as $act)
+                                    <option value="{{ $act->id }}" {{ $struktur->activity_id === $act->id ? 'selected' : '' }}>
+                                        {{ $act->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('kegiatan')
+                                <span class="invalid-feedback" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+
+
+
                     </div>
                     <!-- /.box-body -->
 

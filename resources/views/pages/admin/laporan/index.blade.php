@@ -64,11 +64,12 @@
                                     <td id="hasil{{ $item->id }}" class="text-center">
                                         {{ ($item->target * 40) / 100 + ($item->kerjasama * 10) / 100 + ($item->ketepatan_waktu * 40) / 100 + ($item->kualitas * 10) / 100 }}
                                     </td>
+                                    
                                     <td style="width: 15%" class="text-center">
                                         <button onclick="editNilai('{{ $item }}')" class="btn btn-warning"><i
                                                 class="fa fa-pencil"></i></button>
                                                 
-                                        <a href="{{ route('laporan.pdf.employee', ['id' => $item->employee_id]) }}"
+                                        <a href="{{ route('laporan.pdf.employee', ['id' => $item->print_id]) }}"
                                             class="btn btn-primary "><i class="fa-solid fa-eye"></i></a>
                                     </td>
                                 </tr>

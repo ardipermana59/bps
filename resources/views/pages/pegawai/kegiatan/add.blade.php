@@ -16,27 +16,28 @@
             <!-- general form elements -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Upload Kegiatan</h3>
+                    <h3 class="box-title judul_halaman">Upload Kegiatan</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
                 <form role="form" action="{{ route('pegawai.kegiatan.store') }}" method="post">
-                    @csrf
+                    @csrf                    
                     <div class="box-body">
                         <div class="form-group">
                             <label for="name">Nama Penilai</label>
-                            <input type="text" class="form-control" value="{{ $penilai->name }}" id="penilai"
+                            <input type="text" class="form-control ambil_penilai" value="" id="penilai"
                                 name="penilai" placeholder="Nama Penilai" readonly required>
                         </div>
 
                         <div class="form-group">
                             <label for="kegiatan">Nama Kegiatan</label>
-                            <select id="kegiatan" class="form-control select2 @error('kegiatan') is-invalid @enderror"
+                            <select id="kegiatan" class="form-control select2 @error('kegiatan') is-invalid @enderror ambil_kegiatan"
                                 name="kegiatan" style="width: 100%;" required>
                                 <option value="">Pilih Kegiatan</option>
                                 @foreach ($activities as $activity)
-                                    <option value="{{ $activity->id }}" {{ old('kegiatan') ? 'selected' : '' }}>
-                                        {{ $activity->name }}</option>
+                                    <option class="getnilai" npenilai="{{$activity->full_name }}"value="{{ $activity->id }}" {{ old('kegiatan') ? 'selected' : '' }}>
+                                        {{ $activity->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('kegiatan')
@@ -48,32 +49,18 @@
 
                         <div class="form-group">
                             <label for="Target">Target</label>
-                            <select id="target" class="form-control select2 @error('target') is-invalid @enderror"
-                                name="target" style="width: 100%;" required>
-                                <option value="">-Pilih Target-</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
+                            <input type="number" name="target" id="target" class="form-control select2 @error('target') is-invalid @enderror" placeholder="Masukan Target" required>
                             @error('target')
                                 <span class="invalid-feedback" role="alert">
                                     {{ $message }}
                                 </span>
                             @enderror
                         </div>
+
+
                         <div class="form-group">
                             <label for="realisasi">Realisasi</label>
-                            <select id="realisasi" class="form-control select2 @error('realisasi') is-invalid @enderror"
-                                name="realisasi" style="width: 100%;" required>
-                                <option value="">-Pilih Realisasi-</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
+                            <input type="number" name="realisasi" id="realisasi" class="form-control select2 @error('realisasi') is-invalid @enderror" placeholder="Masukan Realisasi" required>
                             @error('realisasi')
                                 <span class="invalid-feedback" role="alert">
                                     {{ $message }}
@@ -125,3 +112,7 @@
     // dd($errors)
     @endphp
 @endpush
+
+<script>
+    
+</script>

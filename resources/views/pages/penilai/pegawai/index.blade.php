@@ -12,12 +12,17 @@
 @endpush
 
 @section('content')
-    @include('pages.penilai.pegawai.add')
+    @include('pages.penilai.pegawai.edit')
     <div class="row">
         <div class="col-xs-12">
             <a href="{{ route('nilai.pdf') }}">
                 <button class="btn btn-primary"><i class="fa-solid fa-file-arrow-down"></i> PDF</button>
             </a>
+            <a href="{{ route('nilai.create') }}">
+                <button class="btn btn-success"><i class="fa-solid fa-file-arrow-down"></i> Upload Nilai Kegiatan</button>
+            </a>
+
+            
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Data Pegawai</h3>
@@ -28,6 +33,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center">No</th>
+                                <th class="text-center">Nama penilai</th>
                                 <th class="text-center">Nama Pegawai</th>
                                 <th class="text-center">Kegiatan</th>
                                 <th class="text-center">Target</th>
@@ -50,6 +56,7 @@
                                 @endphp
                                 <tr>
                                     <td class="text-center"></td>
+                                    <td>{{ $item->nama_penilai }}</td>
                                     <td>{{ $item->full_name }}</td>
                                     <td>{{ $item->activity_name }}</td>
                                     <td id="target_kegiatan{{ $item->id }}" class="text-center">{{ $item->target_kegiatan ?? '-' }}</td>
@@ -67,7 +74,7 @@
                                     <td style="width: 10%" class="text-center">
                                         <button onclick="editNilai('{{ $item }}')" class="btn btn-warning"><i
                                                 class="fa fa-pencil"></i></button>
-                                        <a href="{{ route('nilai.pdf.employee', ['id' => $item->employee_id]) }}"
+                                        <a href="{{ route('nilai.pdf.employee', ['id' => $item->print_pdf]) }}"
                                             class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
                                     </td>
                                 </tr>

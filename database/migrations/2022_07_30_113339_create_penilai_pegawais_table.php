@@ -17,6 +17,7 @@ class CreatePenilaiPegawaisTable extends Migration
             $table->id();
             $table->foreignId('employee_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('evaluator_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            
             $table->timestamps();
         });
     }
