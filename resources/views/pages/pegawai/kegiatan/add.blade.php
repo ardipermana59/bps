@@ -29,6 +29,7 @@
                                 name="penilai" placeholder="Nama Penilai" readonly required>
                         </div>
 
+                        
                         <div class="form-group">
                             <label for="kegiatan">Nama Kegiatan</label>
                             <select id="kegiatan" class="form-control select2 @error('kegiatan') is-invalid @enderror ambil_kegiatan"

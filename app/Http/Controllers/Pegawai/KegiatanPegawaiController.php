@@ -39,7 +39,11 @@ class KegiatanPegawaiController extends Controller
             ->join('evaluators', 'penilai_pegawais.evaluator_id', '=', 'evaluators.id')
             ->join('employees as e', 'evaluators.employee_id','=','e.id')
             ->distinct()
+<<<<<<< HEAD
             ->select('ambil_kegiatans.id', 'activities.name as activity_name', 'ambil_kegiatans.nama_penilai as full_name', 'ambil_kegiatans.target', 'ambil_kegiatans.realisasi', 'ambil_kegiatans.target', 'ambil_kegiatans.mulai_kegiatan', 'ambil_kegiatans.selesai_kegiatan')
+=======
+            ->select('activities.name as activity_name', 'ambil_kegiatans.nama_penilai as full_name', 'ambil_kegiatans.target', 'ambil_kegiatans.realisasi', 'ambil_kegiatans.target', 'ambil_kegiatans.mulai_kegiatan', 'ambil_kegiatans.selesai_kegiatan')
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
             ->get();
 
 
@@ -111,6 +115,10 @@ class KegiatanPegawaiController extends Controller
         ->join('employees as penilai',    'evaluators.employee_id',        '=', 'penilai.id')
         ->select('penilai.id as id', 'penilai.full_name as name')    
         ->first();
+<<<<<<< HEAD
+=======
+
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
 
         return view('pages.pegawai.kegiatan.add', compact('activities', 'penilai'));
     }
@@ -139,7 +147,10 @@ class KegiatanPegawaiController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
         
+=======
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
         // Ambil Inputan User
         $request->validate([
             'penilai' => 'required',
@@ -152,7 +163,10 @@ class KegiatanPegawaiController extends Controller
 
         // Ambil User ID 
         $pegawai = Employee::where('user_id', auth()->user()->id)->first();
+<<<<<<< HEAD
         
+=======
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
 
         // ORM
         // $kegiatan =  AmbilKegiatan::where('ambil_kegiatans.employee_id', $pegawai->id)
@@ -178,6 +192,7 @@ class KegiatanPegawaiController extends Controller
                       
         // Jika Kegiatannya Sudah ada,
         if($act == true) {
+<<<<<<< HEAD
             // Ambil ID Collectionnya
             $ambil_kegiatan = DB::table('ambil_kegiatans')->where(['activity_id' => $request->kegiatan, 'employee_id' => $pegawai->user_id])->get()->first();
             DB::table('ambil_kegiatans')
@@ -190,6 +205,9 @@ class KegiatanPegawaiController extends Controller
                         ]);
             // return redirect()->back()->with('error', 'Kegiatan Sudah Ada');
             return redirect()->route('pegawai.kegiatan.index')->with('success', 'Data berhasil Diupdate');
+=======
+            return redirect()->back()->with('error', 'Kegiatan Sudah Ada');
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
         } 
         // Jika Belum Ada Tambahkan Ke Database
         else {

@@ -163,6 +163,13 @@
     @stack('scripts')
 
     <script>
+<<<<<<< HEAD
+=======
+
+        
+        const ambil_kegiatan = document.querySelector('.ambil_kegiatan');
+        const ambil_penilai  = document.querySelector('.ambil_penilai');
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
         // Jquery
         // var option = $('option:selected', this).attr('npenilai');
 
@@ -176,6 +183,7 @@
         //     option.forEach(item => {
         //         console.log(item);
         // })
+<<<<<<< HEAD
 
         const judul_halaman  = document.querySelector('.judul_halaman');
 
@@ -203,6 +211,13 @@
         
         
 
+=======
+            
+        ambil_kegiatan.addEventListener('change', function(e) {
+            var option = $('option:selected', this).attr('npenilai');
+            ambil_penilai.value = option;
+        })
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
     </script>
 </body>
 

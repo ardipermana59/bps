@@ -29,6 +29,10 @@ class PenilaiPegawaiController extends Controller
 
         
         // SYNTAX CMD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
             // SELECT 
             //     penilai_pegawais.id, 
             //     act.name, 
@@ -57,7 +61,29 @@ class PenilaiPegawaiController extends Controller
             // Ambil Kegiatans dan Employee
             // ->select('penilai_pegawais.id', 'employees.full_name as employee_name', 'positions.name as evaluator_position', 'e.full_name as evaluator_name')
             ->select('penilai_pegawais.id', 'act.name as kegiatan','employees.full_name as employee_name' , 'positions.name as evaluator_position', 'e.full_name as evaluator_name')
+<<<<<<< HEAD
             ->orderBy('evaluator_name')
+=======
+=======
+        // SELECT penilai_pegawais.id, activities.name FROM employees 
+        //     JOIN penilai_pegawais ON penilai_pegawais.employee_id = employees.id 
+        //     JOIN evaluators ON penilai_pegawais.evaluator_id = evaluators.id 
+        //     JOIN positions ON positions.id = employees.position_id 
+        //     JOIN ambil_kegiatans ON employees.id = ambil_kegiatans.employee_id 
+        //     JOIN activities ON activities.id = ambil_kegiatans.activity_id
+
+        $data = PenilaiPegawai::join('employees', 'penilai_pegawais.employee_id', '=', 'employees.id')
+            ->join('evaluators',        'penilai_pegawais.evaluator_id', '=', 'evaluators.id')
+            ->join('positions',         'employees.position_id',         '=', 'positions.id')            
+            ->join('ambil_kegiatans',   'employees.id',                  '=', 'ambil_kegiatans.employee_id')            
+            ->join('activities',        'activities.id',                 '=', 'ambil_kegiatans.activity_id')            
+            ->join('employees as e',    'evaluators.employee_id',        '=', 'e.id')
+            // Ambil Kegiatans dan Employee
+            // ->select('penilai_pegawais.id', 'employees.full_name as employee_name', 'positions.name as evaluator_position', 'e.full_name as evaluator_name')
+            ->select('penilai_pegawais.id', 'activities.name as kegiatan','employees.full_name as employee_name' , 'positions.name as evaluator_position', 'e.full_name as evaluator_name')
+>>>>>>> ddaa5ea8259672cb062263b53cfd1a0055c35f64
+            ->orderBy('kegiatan')
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
             ->get();
         return view('pages.admin.struktur.index', compact('data'));
     }
@@ -70,8 +96,25 @@ class PenilaiPegawaiController extends Controller
     public function create()
     {
         $evaluators = $this->getEvaluators();
+<<<<<<< HEAD
         $employees  = $this->getEmployees();
         $activities = $this->getActivities();
+=======
+<<<<<<< HEAD
+        // mengambil seluruh data pegawai yang bukan penilai
+        // $employees = $this->getEmployees();
+        $employees  = $this->getEmployees();
+        $activities = $this->getActivities();
+=======
+
+         //mengambil seluruh data kegiatan
+        $activities = $this->getActivies();
+
+        // mengambil seluruh data pegawai yang bukan penilai
+        // $employees = $this->getEmployees();
+        $employees = $this->getEmployees();
+>>>>>>> ddaa5ea8259672cb062263b53cfd1a0055c35f64
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
         return view('pages.admin.struktur.add', compact('employees', 'evaluators', 'activities'));
     }
 
@@ -87,7 +130,17 @@ class PenilaiPegawaiController extends Controller
         $this->validate($request, [
             'pegawai' => 'required|exists:employees,id',
             'penilai' => 'required|exists:evaluators,id',
+<<<<<<< HEAD
             'kegiatan' => 'required|exists:activities,id',
+=======
+<<<<<<< HEAD
+            'kegiatan' => 'required|exists:activities,id',
+=======
+            // cek apakah data yang diinputkan ada table activity
+            'kegiatan' => 'required|exists:activities,id',
+
+>>>>>>> ddaa5ea8259672cb062263b53cfd1a0055c35f64
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
         ]);
         PenilaiPegawai::create([
             'employee_id' => $request->pegawai,
@@ -107,6 +160,13 @@ class PenilaiPegawaiController extends Controller
     public function edit($id)
     {  // mengambil seluruh data penilai
         $evaluators = $this->getEvaluators();
+<<<<<<< HEAD
+=======
+
+        //mengambil seluruh data kegiatan
+        $activities = $this->getActivies();
+
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
         // mengambil seluruh data pegawai yang bukan penilai
         $employees = $this->getEmployees();
         // mengambil seluruh data kegiatan
@@ -120,7 +180,11 @@ class PenilaiPegawaiController extends Controller
             return redirect()->route('struktur.index')->with('error', 'Data tidak ditemukan');
         }
 
+<<<<<<< HEAD
         return view('pages.admin.struktur.edit', compact('employees', 'evaluators', 'struktur', 'activities'));
+=======
+        return view('pages.admin.struktur.edit', compact('employees', 'evaluators', 'activities', 'struktur'));
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
     }
 
     /**
@@ -135,6 +199,10 @@ class PenilaiPegawaiController extends Controller
         $this->validate($request, [
             'pegawai' => 'required|exists:employees,id',
             'penilai' => 'required|exists:evaluators,id',
+<<<<<<< HEAD
+=======
+
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
             'kegiatan' => 'required|exists:activities,id',
         ]);
     
@@ -237,8 +305,21 @@ class PenilaiPegawaiController extends Controller
     /**
      * Get all employees except evaluators.
      */
+<<<<<<< HEAD
     private function getActivities() {
         return Activity::select('id', 'name')->get();
+=======
+<<<<<<< HEAD
+    private function getActivities() {
+        return Activity::select('id', 'name')->get();
+=======
+
+    private function getActivies() {
+        return Activity::select('activities.name as nama_kegiatan')->get();
+
+
+>>>>>>> ddaa5ea8259672cb062263b53cfd1a0055c35f64
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
     }
 
     private function getEmployees()

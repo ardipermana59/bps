@@ -68,7 +68,7 @@
 <body>
     @foreach ($data as $index => $item)
         <div>
-            <h1 class="text-center mb-2">Laporan Hasil Kegiatan</h1>
+            <h1 class="text-center mb-2">Capaian Kinerja Pegawai</h1>
             <table>
                 <tr>
                     <td>Nama Pegawai</td>
@@ -92,7 +92,7 @@
                 <tr>
                     <th>Nama Penilai</th>
                     <th>Kegiatan</th>
-                    <th>Target</th>
+                    <th>Capai Target</th>
                     <th>Kerjasama</th>
                     <th>Ketepatan Waktu</th>
                     <th>Kualitas</th>
@@ -126,7 +126,11 @@
                     <td>{{ $total / count($item['activities']) }}</td>
                 </tr>
                 <tr>
+<<<<<<< HEAD
                     <td colspan="6">Total</td>
+=======
+                    <td colspan="5">Capai Target</td>
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
                     <td>{{ $total }}</td>
                 </tr>
             </table>
@@ -142,10 +146,16 @@
                         <td class="w-50">
                             <p>Subang, {{ \Carbon\Carbon::now()->isoFormat('D MMMM Y') }}</p>
                             <p style="margin-top: -15px">Yang bertanda tangan</p>
+<<<<<<< HEAD
                             <div class="box" style="width:100px; height:100px; background-color:white;"></div>
                             <!-- <p>{{$data[0]['evaluator_name']}}</p> -->
                             <p>Cecep Muhram Mubarok, S.SI., M.M <br> (Kepala Sub Bagian Umum)</p>
                             
+=======
+                            <img src="{{ asset('assets/dist/img/ttd(1).png') }}" class="img-circle" alt="User Image">
+
+                            <p>Arbrian Abdul Jamal</p>
+>>>>>>> b0ba0ead89f38dc2e6c790a0867345eecf1a471e
                         </td>
                         <td class="w-50">
                             <p>&nbsp;</p>
